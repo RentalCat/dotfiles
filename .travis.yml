@@ -2,13 +2,28 @@ sudo: required
 
 language: bash
 
+matrix:
+    include:
+      - os: linux
+        env: DOCKER_REPO=rentalcat/dotfile-ci-ubuntu-17.10:latest
+      - os: linux
+        env: DOCKER_REPO=rentalcat/dotfile-ci-centos-7:latest
+      - os: osx
+        osx_image: xcode8
+      - os: osx
+        osx_image: xcode8.3
+
 services:
   - docker
 
 before_install:
-  - docker pull rentalcat/dotfile-ci-ubuntu-17.10:latest
-  - docker pull rentalcat/dotfile-ci-centos-7:latest
+  - if [[ -n "$DOCKER_REPO" ]]; then
+        docker pull "$DOCKER_REPO"
+    fi
 
 script:
-  - docker run rentalcat/dotfile-ci-ubuntu-17.10:latest bash -c "$(curl -L https://git.io/vbXku)"
-  - docker run rentalcat/dotfile-ci-centos-7:latest bash -c "$(curl -L https://git.io/vbXku)"
+  - if [[ -n "$DOCKER_REPO" ]]; then
+        docker run "$DOCKER_REPO" bash -c "$(curl -L https://git.io/vbXku)"
+    else
+        bash -c "$(curl -L https://git.io/vbXku)"
+    fi

@@ -10,7 +10,7 @@
 #### in ubuntu (Debian)
 `apt-get update && apt-get install -y build-essential curl git`
 
-#### in CentOS
+#### in CentOS (Red Hat Linux)
 `yum install -y curl git make`
 
 #### in MacOS
