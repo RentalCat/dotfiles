@@ -5,7 +5,7 @@ _AUTHOR="RentalCat"
 _REPOSITORY="dotfiles"
 _BRANCH="master"
 
-if [[ -z "${DOTPATH:-}" ]]; then export DOTPATH=~/.dotfiles; fi
+if [ -z "${DOTPATH:-}" ]; then export DOTPATH=~/.dotfiles; fi
 export DOTFILES_GITHUB="https://github.com/$_AUTHOR/$_REPOSITORY.git"
 
 
@@ -15,7 +15,7 @@ is_exists() {
 }
 
 dotfiles_download() {
-    if [[ -d "$DOTPATH" ]]; then
+    if [ -d "$DOTPATH" ]; then
         echo "$DOTPATH: already exists"
         exit 1
     fi
@@ -31,22 +31,22 @@ dotfiles_download() {
 
 dotfiles_deploy() {
     local dotabs="$(cd $DOTPATH && pwd)"
-    if [[ ! -d "$dotabs" ]]; then
+    if [ ! -d "$dotabs" ]; then
         echo "$dotabs: not found"
         exit 1
     fi
-    if [[ "$(pwd)" != "$dotabs" ]]; then cd "$dotabs"; fi
+    if [ "$(pwd)" != "$dotabs" ]; then cd "$dotabs"; fi
     make deploy
     echo "deploy done"
 }
 
 dotfiles_initialize() {
     local dotabs="$(cd $DOTPATH && pwd)"
-    if [[ ! -d "$dotabs" ]]; then
+    if [ ! -d "$dotabs" ]; then
         echo "$dotabs: not found"
         exit 1
     fi
-    if [[ "$(pwd)" != "$dotabs" ]]; then cd "$dotabs"; fi
+    if [ "$(pwd)" != "$dotabs" ]; then cd "$dotabs"; fi
     make init
     echo "initialize done"
 }
