@@ -1,5 +1,5 @@
 #!/bin/sh
-set -eux
+set -eu
 
 _AUTHOR="RentalCat"
 _REPOSITORY="dotfiles"

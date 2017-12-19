@@ -12,10 +12,10 @@ echo-env:  ## Echo makefile env
 	@echo $(DOTFILES)
 
 deploy: ## Create symlink to home directory
-	# @DOTPATH=$(DOTPATH) sh $(DOTPATH)/etc/deploy.sh
+	@DOTPATH=$(DOTPATH) sh $(DOTPATH)/etc/startup/deploy.sh
 
 init:  ## Setup environment settings
-	# @DOTPATH=$(DOTPATH) sh $(DOTPATH)/etc/init.sh
+	@DOTPATH=$(DOTPATH) sh $(DOTPATH)/etc/startup/init.sh
 
 help:  ## Print usage
 	@echo 'Commands:'
