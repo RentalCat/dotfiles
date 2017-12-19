@@ -35,7 +35,7 @@ dotfiles_deploy() {
         echo "$dotabs: not found"
         exit 1
     fi
-    if [ "$(pwd)" = "$dotabs" ]; then cd "$dotabs"; fi
+    if [ "$(pwd)" != "$dotabs" ]; then cd "$dotabs"; fi
     make deploy
     echo "deploy done"
 }
@@ -46,7 +46,7 @@ dotfiles_initialize() {
         echo "$dotabs: not found"
         exit 1
     fi
-    if [ "$(pwd)" = "$dotabs" ]; then cd "$dotabs"; fi
+    if [ "$(pwd)" != "$dotabs" ]; then cd "$dotabs"; fi
     make init
     echo "initialize done"
 }
