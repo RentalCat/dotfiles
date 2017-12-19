@@ -25,7 +25,7 @@ is_ios() {
 
 
 if $(is_exists 'brew'); then
-    if is_ios; thne
+    if is_ios; then
         # install Homebrew
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     else
