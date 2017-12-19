@@ -19,4 +19,4 @@ maybe installed
 ## install
 execute this code ONLY, that's all! (not clone this repo. that is will be executed in below)
 
-`bash -c"$(curl -L https://git.io/vbXku)"`
+`bash -c"$(curl -fsSL https://git.io/vbXku)"`
