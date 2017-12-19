@@ -7,6 +7,8 @@ services:
 
 before_install:
   - docker pull rentalcat/dotfile-ci-ubuntu-17.10:latest
+  - docker pull rentalcat/dotfile-ci-centos-7:latest
 
 script:
   - docker run rentalcat/dotfile-ci-ubuntu-17.10:latest bash -c "$(curl -L https://git.io/vbXku)"
+  - docker run rentalcat/dotfile-ci-centos-7:latest bash -c "$(curl -L https://git.io/vbXku)"
