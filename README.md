@@ -1,4 +1,6 @@
 # dotfiles
+[![Build Status](https://travis-ci.org/RentalCat/dotfiles.svg?branch=master)](https://travis-ci.org/RentalCat/dotfiles)
+
 ## required
 * `curl`: for download `install.sh`
 * `git`: for install this repository
