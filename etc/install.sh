@@ -1,11 +1,11 @@
 #!/bin/sh
-set -eu
+set -eux
 
 _AUTHOR="RentalCat"
 _REPOSITORY="dotfiles"
 _BRANCH="master"
 
-if [ -z "${DOTPATH:-}"]; then DOTPATH=~/.dotfiles; fi && export DOTPATH="`cd $DOTPATH && pwd`"
+if [ -z "${DOTPATH:-}" ]; then DOTPATH=~/.dotfiles; fi && export DOTPATH="`cd $DOTPATH && pwd`"
 export DOTFILES_GITHUB="git@github.com:$_AUTHOR/$_REPOSITORY.git"
 
 
