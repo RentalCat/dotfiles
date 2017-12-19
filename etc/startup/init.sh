@@ -24,8 +24,8 @@ is_ios() {
 }
 
 
-if [[ "$(is_exists 'brew'; echo $?)" != 0 ]]; then
-    if [[ "$(is_ios; echo $?)" == 0 ]; thne
+if $(is_exists 'brew'); then
+    if is_ios; thne
         # install Homebrew
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     else
