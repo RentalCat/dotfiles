@@ -1,5 +1,6 @@
 #!/bin/sh
 set -eux
+export USER=${USER:-$(whoami)}
 
 get_os() {
     if [ "$(uname)" == 'Darwin' ]; then
