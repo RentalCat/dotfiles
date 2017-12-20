@@ -1,6 +1,5 @@
 #!/bin/bash
 set -eux
-export USER=${USER:-$(whoami)}
 
 get_os() {
     if [[ "$(uname)" == 'Darwin' ]]; then
@@ -31,6 +30,6 @@ if ! $(is_exists 'brew'); then
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     else
         # install Linuxbrew
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+        printf "\n" | USER=${USER:-$(whoami)} sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
     fi
 fi
