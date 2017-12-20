@@ -1,13 +1,13 @@
-#!/bin/sh
+#!/bin/bash
 set -eux
 export USER=${USER:-$(whoami)}
 
 get_os() {
-    if [ "$(uname)" == 'Darwin' ]; then
+    if [[ "$(uname)" == 'Darwin' ]]; then
         echo "ios"
-    elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
+    elif [[ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]]; then
         echo "linux"
-    elif [ "$(expr substr $(uname -s) 1 10)" == 'MINGW32_NT' ]; then
+    elif [[ "$(expr substr $(uname -s) 1 10)" == 'MINGW32_NT' ]]; then
         echo cygwin
     else
         echo "unknown"
@@ -20,13 +20,13 @@ is_exists() {
 }
 
 is_ios() {
-    [ "$(get_os)" == "ios" ]
+    [[ "$(get_os)" == "ios" ]]
     return $?
 }
 
 
-if [ ! $(is_exists 'brew') ]; then
-    if [ is_ios ]; then
+if ! $(is_exists 'brew'); then
+    if is_ios; then
         # install Homebrew
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     else
