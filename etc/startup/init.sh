@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eux
+set -eu
 
 get_os() {
     if [[ "$(uname)" == 'Darwin' ]]; then
