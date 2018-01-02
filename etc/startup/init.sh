@@ -32,7 +32,7 @@ is_ios() {
 }
 
 safe_install() {
-    print_header "Install $1"
+    printf "\033[37;1m%s\033[m\n" "Install: $1"
     if $(is_exists $1); then
         printf "\033[1;33m$1 is already existed. overriding...\033[m\n"
         brew install $1 || true
@@ -61,8 +61,10 @@ print_header "Install gcc"
 safe_install gcc
 print_header "Install git"
 safe_install git
+print_header "Install missing packages"
+brew missing | awk '{print $2}' | while read pkg; do safe_install $pkg; done
 print_header "Brew doctor"
-brew doctor
+brew doctor || true
 # env PATH=${PATH//:\/bin} brew doctor  # FIXME
 print_header "Debug: echo PATH"
 echo $PATH
