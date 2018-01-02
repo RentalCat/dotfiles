@@ -10,8 +10,9 @@ export DOTFILES_GITHUB="https://github.com/$_AUTHOR/$_REPOSITORY.git"
 
 
 print_header() {
+    local _cols=$(tput cols 2> /dev/null || true)
     local str="== $* =="
-    local hr=`for i in $(seq  0 $(expr $(tput cols) - ${#str} - 1)); do printf "="; done`
+    local hr=`for i in $(seq  0 $(expr ${_cols:-80} - ${#str} - 1)); do printf "="; done`
     printf "\033[37;1m%s\033[m\n" "$str$hr"
 }
 
