@@ -43,5 +43,7 @@ if ! $(is_exists 'brew'); then
         printf "\n" | USER=${USER:-$(whoami)} sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
     fi
 fi
+
+print_header "Brew doctor"
 brew doctor
 #export TERM=xterm-256color
