@@ -7,9 +7,7 @@ language: bash
 matrix:
     include:
       - os: linux
-        env:
-          - DOCKER_REPO=rentalcat/dotfile-ci-ubuntu-17.10:latest
-          - TERM=xterm-256color
+        env: DOCKER_REPO=rentalcat/dotfile-ci-ubuntu-17.10:latest
       - os: linux
         env: DOCKER_REPO=rentalcat/dotfile-ci-centos-7:latest
       - os: osx
