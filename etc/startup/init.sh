@@ -36,10 +36,10 @@ print_header "Install brew"
 if ! $(is_exists 'brew'); then
     if is_ios; then
         # install Homebrew
-        export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     else
         # install Linuxbrew
+        export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
         printf "\n" | USER=${USER:-$(whoami)} sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
     fi
 fi
