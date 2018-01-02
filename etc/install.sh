@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -eu
 
 _AUTHOR="RentalCat"
@@ -10,7 +10,9 @@ export DOTFILES_GITHUB="https://github.com/$_AUTHOR/$_REPOSITORY.git"
 
 
 print_header() {
-    printf " \033[37;1m%s\033[m\n" "$*"
+    local str="== $* =="
+    local hr=`for i in $(seq  0 $(expr $(tput cols) - ${#str} - 1)); do printf "="; done`
+    printf "\033[37;1m%s\033[m\n" "$str$hr"
 }
 
 is_exists() {
