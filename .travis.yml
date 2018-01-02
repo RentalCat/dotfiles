@@ -1,16 +1,15 @@
 sudo: required
 
+dist: trusty
+group: deprecated-2017Q4
+
 language: bash
 
 matrix:
     include:
       - os: linux
-        dist: trusty
-        group: deprecated-2017Q4
         env: DOCKER_REPO=rentalcat/dotfile-ci-ubuntu-17.10:latest
       - os: linux
-        dist: trusty
-        group: deprecated-2017Q4
         env: DOCKER_REPO=rentalcat/dotfile-ci-centos-7:latest
       - os: osx
         osx_image: xcode8.1
