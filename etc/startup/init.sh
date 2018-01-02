@@ -34,7 +34,7 @@ is_ios() {
 safe_install() {
     print_header "Install $1"
     if $(is_exists $1); then
-        printf "\033[1;33m$1 is already existed. overriding...\033[m"
+        printf "\033[1;33m$1 is already existed. overriding...\033[m\n"
         brew install $1 || true
         brew link --overwrite $1
     else
