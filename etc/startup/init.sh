@@ -1,6 +1,5 @@
 #!/bin/bash
 set -eu
-export TERM=xterm-256color
 
 
 print_header() {
@@ -33,11 +32,6 @@ is_ios() {
 }
 
 
-print_header "Debug: echo env"
-env
-print_header "Debug: infocmp"
-infocmp
-
 print_header "Install brew"
 if ! $(is_exists 'brew'); then
     if is_ios; then
@@ -48,3 +42,4 @@ if ! $(is_exists 'brew'); then
         printf "\n" | USER=${USER:-$(whoami)} sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
     fi
 fi
+#export TERM=xterm-256color

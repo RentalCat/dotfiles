@@ -26,7 +26,7 @@ before_install:
 
 script:
   - if [[ -n "$DOCKER_REPO" ]]; then
-        docker run "$DOCKER_REPO" bash -c "$(curl -fsSL https://git.io/vbXku)";
+        docker run -t --rm "$DOCKER_REPO" bash -c "$(curl -fsSL https://git.io/vbXku)";
     else
         bash -c "$(curl -fsSL https://git.io/vbXku)";
     fi
