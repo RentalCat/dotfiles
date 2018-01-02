@@ -1,6 +1,14 @@
 #!/bin/bash
 set -eu
 
+
+print_header() {
+    local _cols=$(tput cols 2> /dev/null || true)
+    local str="-- $* --"
+    local hr=`for i in $(seq  0 $(expr ${_cols:-80} - ${#str} - 1)); do printf "-"; done`
+    printf "\n\033[37;1m%s\033[m\n" "$str$hr"
+}
+
 get_os() {
     if [[ "$(uname)" == 'Darwin' ]]; then
         echo "ios"
@@ -24,6 +32,10 @@ is_ios() {
 }
 
 
+print_header "Debug: echo env"
+env
+
+print_header "Install brew"
 if ! $(is_exists 'brew'); then
     if is_ios; then
         # install Homebrew
