@@ -43,6 +43,10 @@ safe_install() {
 }
 
 
+export TERM=xterm-256color
+export LANG=ja_JP.utf-8
+export LC_ALL=ja_JP.utf-8
+
 print_header "Install brew"
 if ! $(is_exists 'brew'); then
     if is_ios; then
@@ -61,11 +65,10 @@ print_header "Install gcc"
 safe_install gcc
 print_header "Install git"
 safe_install git
+
 print_header "Install missing packages"
 brew missing | awk '{print $2}' | while read pkg; do safe_install $pkg; done
 print_header "Brew doctor"
 brew doctor || true
-# env PATH=${PATH//:\/bin} brew doctor  # FIXME
 print_header "Debug: echo PATH"
 echo $PATH
-#export TERM=xterm-256color
