@@ -39,11 +39,17 @@ if ! $(is_exists 'brew'); then
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     else
         # install Linuxbrew
-        export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
+        export PATH=/home/linuxbrew/.linuxbrew/sbin:/home/linuxbrew/.linuxbrew/bin:$PATH
         printf "\n" | USER=${USER:-$(whoami)} sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
     fi
 fi
 
+print_header "Install gcc"
+brew install gcc
+print_header "Install git"
+brew install git
 print_header "Brew doctor"
-brew doctor
+env PATH=${PATH//:\/bin} brew doctor  # FIXME
+print_header "Debug: echo PATH"
+echo $PATH
 #export TERM=xterm-256color
