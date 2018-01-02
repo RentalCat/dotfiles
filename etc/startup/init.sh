@@ -34,6 +34,8 @@ is_ios() {
 
 print_header "Debug: echo env"
 env
+print_header "Debug: infocmp"
+infocmp
 
 print_header "Install brew"
 if ! $(is_exists 'brew'); then
