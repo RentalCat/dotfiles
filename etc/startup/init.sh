@@ -1,6 +1,6 @@
 #!/bin/bash
 set -eu
-export TREM=xterm-256color
+export TERM=xterm-256color
 
 
 print_header() {
