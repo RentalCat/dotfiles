@@ -13,7 +13,7 @@ print_header() {
     local _cols=$(tput cols 2> /dev/null || true)
     local str="== $* =="
     local hr=`for i in $(seq  0 $(expr ${_cols:-80} - ${#str} - 1)); do printf "="; done`
-    printf "\033[37;1m%s\033[m\n" "$str$hr"
+    printf "\n\033[37;1m%s\033[m\n" "$str$hr"
 }
 
 is_exists() {
