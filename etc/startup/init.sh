@@ -44,7 +44,10 @@ if ! $(is_exists 'brew'); then
     fi
 fi
 
+print_header "Update brew"
+brew update
 print_header "Install gcc"
+if $(is_exists gcc); then brew link --overwrite gcc; fi
 brew install gcc
 print_header "Install git"
 brew install git
