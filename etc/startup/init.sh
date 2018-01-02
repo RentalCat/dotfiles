@@ -31,6 +31,17 @@ is_ios() {
     return $?
 }
 
+safe_install() {
+    print_header "Install $1"
+    if $(is_exists $1); then
+        echo "$1 is already existed. overriding..."
+        brew install $1 || true
+        brew link --overwrite $1
+    else
+        brew install $1
+    fi
+}
+
 
 print_header "Install brew"
 if ! $(is_exists 'brew'); then
@@ -47,12 +58,12 @@ fi
 print_header "Update brew"
 brew update
 print_header "Install gcc"
-if $(is_exists gcc); then brew link --overwrite gcc; fi
-brew install gcc
+safe_install gcc
 print_header "Install git"
-brew install git
+safe_install git
 print_header "Brew doctor"
-env PATH=${PATH//:\/bin} brew doctor  # FIXME
+brew doctor
+# env PATH=${PATH//:\/bin} brew doctor  # FIXME
 print_header "Debug: echo PATH"
 echo $PATH
 #export TERM=xterm-256color
