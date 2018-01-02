@@ -9,12 +9,17 @@ if [ -z "${DOTPATH:-}" ]; then export DOTPATH=~/.dotfiles; fi
 export DOTFILES_GITHUB="https://github.com/$_AUTHOR/$_REPOSITORY.git"
 
 
+print_header() {
+    printf " \033[37;1m%s\033[m\n" "$*"
+}
+
 is_exists() {
     type "$1" > /dev/null 2>&1
     return $?
 }
 
 dotfiles_download() {
+    print_header "Download dotfiles"
     if [ -d "$DOTPATH" ]; then
         echo "$DOTPATH: already exists"
         exit 1
@@ -30,6 +35,7 @@ dotfiles_download() {
 }
 
 dotfiles_deploy() {
+    print_header "Deploy dotfiles"
     local dotabs="$(cd $DOTPATH && pwd)"
     if [ ! -d "$dotabs" ]; then
         echo "$dotabs: not found"
@@ -41,6 +47,7 @@ dotfiles_deploy() {
 }
 
 dotfiles_initialize() {
+    print_header "Initialize dotfiles"
     local dotabs="$(cd $DOTPATH && pwd)"
     if [ ! -d "$dotabs" ]; then
         echo "$dotabs: not found"
