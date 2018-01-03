@@ -46,9 +46,9 @@ safe_install() {
 export TERM=xterm-256color
 
 print_header "Locate settings"
-local locale_source="ja_JP"
-local locale_charmap="UTF-8"
-local my_locale="$locale_source.$locale_charmap"
+locale_source="ja_JP"
+locale_charmap="UTF-8"
+my_locale="$locale_source.$locale_charmap"
 if [ "${LANG:-}" != $my_locale ]; then
     if [ -z "$(locale -a | grep $my_locale)" ]; then
         if [ ! -d /usr/share/i18n/charmaps ]; then
