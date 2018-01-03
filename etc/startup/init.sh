@@ -44,11 +44,32 @@ safe_install() {
 
 
 export TERM=xterm-256color
-export LANG=ja_JP.utf-8
-export LC_ALL=ja_JP.utf-8
+
+print_header "Locate settings"
+local locale_source="ja_JP"
+local locale_charmap="UTF-8"
+local my_locale="$locale_source.$locale_charmap"
+if [ "${LANG:-}" != $my_locale ]; then
+    if [ -z "$(locale -a | grep $my_locale)" ]; then
+        if [ ! -d /usr/share/i18n/charmaps ]; then
+            # download langpack
+            if $(is_exists "apt-get"); then
+                # for Ubuntu
+                sudo apt-get install -y language-pack-ja
+            else
+                echo "Error: langpack not installed"
+                exit 1
+            fi
+        fi
+        # set language
+        sudo localedef -f $locale_charmap -i $locale_source $my_locale
+    fi
+    export LC_ALL=$my_locale
+    export LANG=$my_locale
+fi
 
 print_header "Install brew"
-if ! $(is_exists 'brew'); then
+if ! $(is_exists "brew"); then
     if is_ios; then
         # install Homebrew
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
