@@ -1,0 +1,31 @@
+[user]
+    name = Ryunosuke Seto
+    email = seto-r@klab.com
+[core]
+    excludesfile = ~/dotfiles/gitignore_global
+    editor = nvim -c \"set fenc=utf-8\"
+    autocrlf = input
+    commentchar = "#"
+[color]
+    ui = true
+[merge]
+    tool = vimmerge
+[alias]
+    b = branch
+    co = checkout
+    cm = commit
+    df = difftool -y
+    delete-branch = !git branch | grep -vE '^\\*|master$|develop$' | xargs -I % git branch -dq % || true
+[hub]
+    host = github.jp.klab.com
+[diff]
+    algorithm = histogram
+    tool = vimdiff
+[difftool "vimdiff"]
+    cmd = nvim -R -d $LOCAL $REMOTE
+    # cmd = nvim -d $LOCAL $MERGED -c 'set ro' -c 'wincmd w'
+[mergetool "vimmerge"]
+    # cmd = echo "MERGED: $MERGED" && echo "LOCAL: $LOCAL" && echo "BASE: $BASE" && echo "REMOTE: $REMOTE" && nvim -R -d $MERGED $LOCAL $BASE $REMOTE
+    cmd = nvim -R -d $MERGED $LOCAL $BASE $REMOTE -c 'wincmd J' -c 'set noro'
+
+# vim: set ft=gitconfig:
