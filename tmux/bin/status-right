@@ -1,0 +1,13 @@
+#!/bin/bash
+set -eu
+
+shellpath="$(echo $XDG_CONFIG_HOME)/tmux/bin"
+fg=$1
+bg=$2
+
+res="#[fg=$bg]⮂#[fg=$fg,bg=$bg] "
+# load average
+res+="$(uptime | awk '{print $(NF-2) " " $(NF-1) " " $(NF)}') ⮃ "
+res+="$($shellpath/get_wifi.sh) ⮃ "
+res+="$($shellpath/get_battery.sh $fg $bg)"
+echo $res

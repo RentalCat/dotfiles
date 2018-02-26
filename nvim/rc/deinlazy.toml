@@ -1,0 +1,186 @@
+[[plugins]]  # plantuml シンタックス & プレビュー
+repo = 'aklt/plantuml-syntax'
+on_ft = 'plantuml'
+hook_add = '''
+  " filetype=plantuml 時に :make コマンドで同名のpngファイルを生成後プレビューを表示
+  execute 'let g:plantuml_executable_script="' GetNvimrcDir() . '/lib/plantuml/plantuml"'
+'''
+
+[[plugins]]
+repo = 'cespare/vim-toml'
+on_ft = 'toml'
+
+[[plugins]]  # gitk サポート for fugitive
+repo = 'cohama/agit.vim'
+
+[[plugins]]
+repo = 'hynek/vim-python-pep8-indent'
+on_ft = 'python'
+
+[[plugins]]  # Asynchronous Lint Engine というシンタックスチェッカー (Syntasticの代わり)
+repo = 'w0rp/ale'
+hook_add = '''
+  let g:ale_echo_msg_format = '[%linter%] %s'
+  nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+  nmap <silent> <C-j> <Plug>(ale_next_wrap)
+'''
+
+[[plugins]]
+repo = 'osyo-manga/shabadou.vim'
+depends = 'vim-quickrun'
+
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+on_map = {n = '<Plug>'}
+on_if = "isdirectory(bufname('%'))"
+hook_add = '''
+  execute 'source' GetNvimrcDir() . '/plugins/nerdtree.rc.vim'
+  nnoremap <silent> ;f :<C-u>call NerdTreeToggle()<CR>
+'''
+
+[[plugins]]
+repo = 'Shougo/context_filetype.vim'
+
+[[plugins]]  # 補完機能 (neovim 用)
+repo = 'Shougo/deoplete.nvim'
+on_source = 'unite.vim'
+if = "has('nvim')"
+on_i = 1
+depends = 'context_filetype.vim'
+hook_add = '''
+  let g:deoplete#enable_at_startup = 1
+  let g:deoplete#omni_patterns = {}
+'''
+
+[[plugins]]  # Unite file_mru 用
+repo = 'Shougo/neomru.vim'
+on_source = 'unite.vim'
+hook_add = '''
+  let g:unite_source_file_mru_ignore_pattern =
+      \ '\~$\|\.\%(o\|exe\|dll\|bak\|zwc\|pyc\|sw[po]\)$'.
+      \ '\|\%(^\|/\)\.\%(hg\|git\|bzr\|svn\)\%($\|/\)'.
+      \ '\|^\%(\\\\\|/mnt/\|/media/\|/temp/\|/tmp/\|\%(/private\)\=/var/folders/\)'.
+      \ '\|\%(^\%(fugitive\)://\)'.
+      \ '\|\%(^\%(term\)://\)'.
+      \ '\|\%(^\%(gita\)://\)'
+'''
+
+[[plugins]]  # Unite  # TODO もう少し便利にしたい
+repo = 'Shougo/unite.vim'
+on_if = 1
+hook_add = '''
+  execute 'source' GetNvimrcDir() . '/plugins/unite.rc.vim'
+
+  nnoremap [unite] <Nop>
+  nmap    ;u [unite]
+
+  nnoremap <silent> [unite]b
+        \ :<C-u>Unite -buffer-name=buffer buffer -auto-preview -start-insert -no-resize<CR>
+  nnoremap <silent> [unite]f
+        \ :<C-u>execute 'Unite find:' . unite#util#path2project_directory(expand('%'))
+        \               . ' -buffer-name=grep(`tabpagenr()`) -auto-preview -no-empty -start-insert'
+        \               . ' -ignorecase -smartcase -no-resize'<CR>
+  nnoremap <silent> [unite]r
+        \ :<C-u>Unite -buffer-name=register -default-action=append register<CR>
+  nnoremap <silent> [unite]u
+        \ :<C-u>Unite -buffer-name=file_mru file_mru -auto-preview -start-insert -no-resize<CR>
+  nnoremap <silent> [unite]v
+        \ :<C-u>execute 'Unite grep:' . unite#util#path2project_directory(expand('%'))
+        \               . ' -buffer-name=grep(`tabpagenr()`) -auto-preview -no-empty -start-insert'
+        \               . ' -ignorecase -smartcase -no-resize'<CR>
+  nnoremap <silent> [unite];
+        \ :<C-u>UniteResume<CR>
+  " ↓ 動かない (ref: https://github.com/neovim/neovim/issues/2048)
+  nnoremap <silent> <C-h>  :<C-u>Unite -buffer-name=help help<CR>
+
+  nnoremap gv
+        \ :<C-u>execute 'Unite grep:' . unite#util#path2project_directory(expand('%'))
+        \               . ' -buffer-name=grep(`tabpagenr()`) -auto-preview -no-empty -start-insert'
+        \               . ' -ignorecase -smartcase -no-resize'<CR><C-r><C-w><CR>
+'''
+
+[[plugins]]  # help を見やすくする unite
+repo = 'Shougo/unite-help'
+on_source = 'unite.vim'
+
+[[plugins]]
+repo = 'sjl/gundo.vim'
+on_cmd = 'GundoToggle'
+hook_add = '''
+  let g:gundo_prefer_python3 = has('python3')
+  let g:gundo_right = 1
+  let g:gundo_preview_bottom = 1
+  nnoremap <silent> U  :<C-u>GundoToggle<CR>
+'''
+
+[[plugins]]  # vim のシンタックスチェッカー (パーサ)
+repo = 'syngan/vim-vimlint'
+
+[[plugins]]
+repo = 'thinca/vim-ft-vim_fold'
+on_ft = 'vim'
+
+[[plugins]]
+repo = 'thinca/vim-unite-history'
+on_source = 'unite.vim'
+
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+on_map = {n = '<Plug>'}
+hook_add = 'nmap <silent> <Leader>r <Plug>(quickrun)'
+
+[[plugins]]  # git wrapper
+repo = 'tpope/vim-fugitive'
+depends = 'agit.vim'
+hook_add = '''
+  nnoremap [fugitive]    <Nop>
+  nmap ;g  [fugitive]
+  nnoremap <silent> [fugitive]c :<C-u>Gcommit<CR>
+  nnoremap <silent> [fugitive]b :<C-u>Gblame<CR>
+  nnoremap <silent> [fugitive]d :<C-u>Gdiff<CR>
+  nnoremap <silent> [fugitive]D :<C-u>Gdiff origin/develop<CR>
+  nnoremap <silent> [fugitive]g :<C-u>Ggrep<CR>
+  nnoremap <silent> [fugitive]s :<C-u>Gstatus<CR>
+'''
+
+[[plugins]]  # コメントアウト補助
+repo = 'tyru/caw.vim'
+on_map = { nx = '<Plug>'}
+hook_add = '''
+  function! InitCaw() abort
+    if !&l:modifiable
+      silent! nunmap <buffer> <C-_>
+      silent! xunmap <buffer> <C-_>
+    else
+      nmap <buffer> <C-_> <Plug>(caw:hatpos:toggle)
+      xmap <buffer> <C-_> <Plug>(caw:hatpos:toggle)
+    endif
+  endfunction
+  augroup my_caw
+    autocmd!
+    autocmd FileType * call InitCaw()
+  augroup END
+'''
+
+[[plugins]]  # vim のシンタックスチェッカー (本体)
+repo = 'ynkdir/vim-vimlparser'
+
+[[plugins]]
+repo = 'davidhalter/jedi-vim'
+on_ft = 'python'
+hook_add = '''
+  augroup my_jedi
+    autocmd!
+    autocmd FileType python setlocal omnifunc=jedi#completions
+  augroup END
+  let g:jedi#completions_enabled = 0
+  let g:jedi#auto_vim_configuration = 0
+'''
+
+[[plugins]]
+repo = 'zchee/deoplete-jedi'
+depends = ['deoplete.nvim', 'jedi-vim']
+on_ft = 'python'
+hook_add = '''
+  let g:deoplete#omni_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+'''

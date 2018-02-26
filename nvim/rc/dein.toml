@@ -1,0 +1,91 @@
+[[plugins]]
+repo = 'freeo/vim-kalisi'
+
+[[plugins]]
+repo = 'tomasr/molokai'
+
+[[plugins]]
+repo = 'KKPMW/moonshine-vim'
+
+[[plugins]]
+repo = 'romainl/Apprentice'
+
+[[plugins]]
+repo = 'jacoborus/tender.vim'
+
+[[plugins]]
+repo = 'altercation/vim-colors-solarized'
+hook_add = '''
+  let g:solarized_termcolors=256
+  let g:solarized_termtrans=1
+'''
+
+[[plugins]]
+repo = 'easymotion/vim-easymotion'
+hook_add = '''
+  let g:EasyMotion_do_mapping = 0
+  nmap , <Plug>(easymotion-s2)
+  nmap / <Plug>(easymotion-sn)
+  nmap f <Plug>(easymotion-fl)
+  nmap F <Plug>(easymotion-Fl)
+'''
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+depends = ['ale', 'vim-fugitive']
+hook_add = '''
+  execute 'source' GetNvimrcDir() . '/plugins/lightline.rc.vim'
+'''
+
+[[plugins]]  # vimdiff を histogram アルゴリズムで表示 (通常のより賢い)
+repo = 'lambdalisue/vim-unified-diff'
+hook_add = '''
+  set diffexpr=unified_diff#diffexpr()
+'''
+
+[[plugins]]
+repo = 'osyo-manga/vim-brightest'
+hook_add = '''
+  " ハイライトタイプはアンダーライン
+  let g:brightest#highlight = {'group': 'BrightestUnderline'}
+  " 単語上にカーソルオーバーでハイライト
+  let g:brightest#pattern = '\k\+'
+  " 全てのウィンドウでハイライト
+  let g:brightest#enable_highlight_all_window = 1
+  " インサートモードでもハイライト
+  let g:brightest#enable_insert_mode=1
+  " カーソルホールドでハイライト (処理が重たいと感じたら1にしよう)
+  let g:brightest#enable_on_CursorHold = 1
+'''
+
+[[plugins]]  # ファイル内置換プレビュー
+repo = 'osyo-manga/vim-over'
+hook_add = '''
+  cnoreabb <silent><expr>s
+      \ getcmdtype()==':' &&
+      \ getcmdline()=~'^s' ? 'OverCommandLine<CR><C-u>%s/<C-r>=get([], getchar(0), '')<CR>' : 's'
+'''
+
+[[plugins]]  # git 編集業に +-? を付ける
+repo = 'sgur/vim-gitgutter'
+
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+build = 'make'
+
+[[plugins]]  # .local.vimrc 読み込み
+repo = 'thinca/vim-localrc'
+
+[[plugins]]  # インデント毎に破線を表示
+repo = 'Yggdroot/indentLine'
+hook_add = '''
+  augroup indent_line
+    autocmd!
+    autocmd BufWinEnter,ShellCmdPost * IndentLinesReset
+  augroup END
+'''
+
+[[plugins]]  # 自作プラグイン
+repo = 'git@bitbucket.org:RentalCat/greview.vim.git'

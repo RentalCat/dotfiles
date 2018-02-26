@@ -1,0 +1,10 @@
+#!/bin/bash
+java -jar $(dirname $0)/plantuml.8051.jar -tpng $@
+
+if hash qlmanage 2> /dev/null; then
+    # for MacOS X
+    qlmanage -p ${@%%.*}.png >& /dev/null
+elif hash display 2> /dev/null; then
+    # for other OS
+    display ${@%%.*}.png
+fi

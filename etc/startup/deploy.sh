@@ -1,3 +1,18 @@
-#!/bin/sh
+#!/bin/bash
 set -eu
 
+REPOSITORY_ROOT=$(cd $(dirname $0)/../../ && pwd)
+
+# zsh
+ln -fsv $REPOSITORY_ROOT/zsh/.zshrc $HOME/.zshrc
+ln -fsv $REPOSITORY_ROOT/zsh/.zshrc $HOME/.zshenv
+
+# vim
+# ln -fsv $REPOSITORY_ROOT/vim/ $HOME/.vim
+# ln -fsv $REPOSITORY_ROOT/vim/.vimrc $HOME/.vimrc
+
+# tmux
+ln -fsv $REPOSITORY_ROOT/tmux/.tmux.conf $HOME/.tmux.conf
+
+# git
+ln -fsv $REPOSITORY_ROOT/.gitconfig $HOME/.gitconfig

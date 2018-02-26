@@ -1,0 +1,24 @@
+# nvim
+nvim/.cache/*
+nvim/.tmp/*
+
+# tmux
+tmux/env.conf
+
+# vim
+vim/bundle/*
+!vim/bundle/neobundle.vim
+vim/tmp/*
+vim/.netrwhist
+!vim/tmp/.gitkeep
+vim/personal.vim
+
+# zsh
+zsh/.zcompdump*
+zsh/cmd_history
+zsh/zsh-history
+
+# other
+xbuild/*
+NuGet/NuGet.Config
+
