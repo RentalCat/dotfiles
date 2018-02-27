@@ -62,21 +62,47 @@ zstyle ':completion:*' keep-prefix
 zstyle ':completion:*' completer _oldlist _complete _match _ignored _approximate _list _history
 zstyle ':completion:*' list-separator '-->'
 
-# history
-# if [[ -r $zsh_dir/zaw/zaw.zsh ]]; then
-#   source $zsh_dir/zaw/zaw.zsh
-#   bindkey '^r' zaw-history
-# fi
+# plugin
+export ZPLUG_HOME=$zsh_dir/.zplug
+if [[ ! -d $ZPLUG_HOME ]]; then
+  curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh 
+fi
+source $ZPLUG_HOME/init.zsh
+
+# fzf: インタラクティブフィルタ
+zplug "junegunn/fzf-bin", as:command, from:gh-r, rename-to:fzf
+
+# zsh のコマンドラインに色付けをする
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
+
+# 補完ファイル (dockerやjq等、デフォルトで補完されない内容をカバー)
+zplug "zsh-users/zsh-completions"
+
+# インクリメンタル補完をサポート
+zplug "zsh-users/zsh-autosuggestions", use:zsh-autosuggestions.zsh
+
+# 256色対応化
+zplug "chrissicool/zsh-256color"
 
 # b4b4r07/history
-if [[ ! -r $zsh_dir/zsh-history/misc/zsh/init.zsh ]]; then
-  git clone https://github.com/b4b4r07/history $zsh_dir/zsh-history
-fi
+# zplug 'b4b4r07/history', use:misc/zsh/init.zsh
 # ZSH_HISTORY_KEYBIND_GET_BY_DIR="^r"
-ZSH_HISTORY_KEYBIND_GET_ALL="^r"
-ZSH_HISTORY_KEYBIND_ARROW_UP="^p"
-ZSH_HISTORY_KEYBIND_ARROW_DOWN="^n"
-source $zsh_dir/zsh-history/misc/zsh/init.zsh
+# ZSH_HISTORY_KEYBIND_GET_ALL="^r"
+# ZSH_HISTORY_KEYBIND_ARROW_UP="^p"
+# ZSH_HISTORY_KEYBIND_ARROW_DOWN="^n"
+#source $zsh_dir/zsh-history/misc/zsh/init.zsh
+
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+# Then, source plugins and add commands to $PATH
+zplug load
+# zplug load --verbose
 
 HISTFILE=$zsh_dir/cmd_history
 HISTSIZE=1000000
@@ -87,14 +113,14 @@ zstyle ':filter-select' hist-find-no-dups yes
 zstyle ':filter-select' extended-search yes
 
 # Macで時間のかかるコマンドが終わったら、自動で通知するzsh設定
-if [[ `which terminal-notifier > /dev/null 2>&1; echo $?` -eq 0 ]]; then
-  export SYS_NOTIFIER="`which terminal-notifier`"  # terminal-notifierコマンドのパス
-  export NOTIFY_COMMAND_COMPLETE_TIMEOUT=10        # 「時間のかかるコマンド」と判断する実行時間(秒)
-  source $zsh_dir/zsh-notify/notify.plugin.zsh
-else
-  echo "terminal-notifier is not found."
-  echo "please \`brew install terminal-notifier; brew install reattach-to-user-namespace\`"
-fi
+#if [[ `which terminal-notifier > /dev/null 2>&1; echo $?` -eq 0 ]]; then
+#  export SYS_NOTIFIER="`which terminal-notifier`"  # terminal-notifierコマンドのパス
+#  export NOTIFY_COMMAND_COMPLETE_TIMEOUT=10        # 「時間のかかるコマンド」と判断する実行時間(秒)
+#  source $zsh_dir/zsh-notify/notify.plugin.zsh
+#else
+#  echo "terminal-notifier is not found."
+#  echo "please \`brew install terminal-notifier; brew install reattach-to-user-namespace\`"
+#fi
 
 # settings
 # general
@@ -163,8 +189,8 @@ bindkey "^[[1;5D" backward-word
 # rbenv
 # [[ -x `which rbenv` ]] && eval "$(rbenv init -)"
 
-show-current-dir-as-window-name() {
-    [[ -x `whence -p tmux` ]] && tmux rename-window "`echo ${PWD} | sed -e \"s,$HOME/,~/,\"`" > /dev/null
-}
-
-add-zsh-hook chpwd show-current-dir-as-window-name
+# show-current-dir-as-window-name() {
+#     [[ -x `whence -p tmux` ]] && tmux rename-window "`echo ${PWD} | sed -e \"s,$HOME/,~/,\"`" > /dev/null
+# }
+#
+# add-zsh-hook chpwd show-current-dir-as-window-name

@@ -87,5 +87,5 @@ hook_add = '''
   augroup END
 '''
 
-[[plugins]]  # 自作プラグイン
-repo = 'git@bitbucket.org:RentalCat/greview.vim.git'
+# [[plugins]]  # 自作プラグイン
+# repo = 'git@bitbucket.org:RentalCat/greview.vim.git'

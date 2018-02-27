@@ -4,6 +4,7 @@ nvim/.tmp/*
 
 # tmux
 tmux/env.conf
+tmux/.tpm
 
 # vim
 vim/bundle/*
@@ -14,9 +15,9 @@ vim/.netrwhist
 vim/personal.vim
 
 # zsh
+zsh/.zplug
 zsh/.zcompdump*
 zsh/cmd_history
-zsh/zsh-history
 
 # other
 xbuild/*
