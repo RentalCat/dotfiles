@@ -1,3 +1,4 @@
+[[ -n $ZSH_DEBUG ]] && zmodload zsh/zprof && zprof
 # keybind
 bindkey -d
 bindkey -e
@@ -194,3 +195,7 @@ bindkey "^[[1;5D" backward-word
 # }
 #
 # add-zsh-hook chpwd show-current-dir-as-window-name
+
+if (which zprof > /dev/null 2>&1) ;then
+  zprof
+fi
