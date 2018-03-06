@@ -3,7 +3,14 @@ let g:unite_data_directory = GetSafeDir(GetCacheDir() . '/unite')
 
 
 " Unite grep の設定
-if executable('hw')
+if executable('pt')
+  " pt: The Platinum Searcher
+  "   https://github.com/monochromegane/the_platinum_searcher
+  let g:unite_source_grep_command = 'pt'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor'
+  let g:unite_source_grep_recursive_opt = ''
+  let g:unite_source_grep_encoding = 'utf-8'
+elseif executable('hw')
   " highway: http://tkengo.github.io/blog/2015/10/19/release-highway/
   let g:unite_source_grep_command = 'hw'
   let g:unite_source_grep_default_opts = '--no-group --no-color'
