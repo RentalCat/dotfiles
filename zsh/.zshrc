@@ -71,7 +71,7 @@ fi
 source $ZPLUG_HOME/init.zsh
 
 # fzf: インタラクティブフィルタ
-zplug "junegunn/fzf-bin", as:command, from:gh-r, rename-to:fzf
+zplug "junegunn/fzf-bin", as:command, from:gh-r, rename-to:fzf, frozen:1
 
 # zsh のコマンドラインに色付けをする
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
@@ -84,6 +84,9 @@ zplug "zsh-users/zsh-autosuggestions", use:zsh-autosuggestions.zsh
 
 # 256色対応化
 zplug "chrissicool/zsh-256color"
+
+# コードサーチツール, agの進化版
+zplug "monochromegane/the_platinum_searcher", as:command, from:gh-r, rename-to:"pt", frozen:1
 
 # b4b4r07/history
 # zplug 'b4b4r07/history', use:misc/zsh/init.zsh
@@ -185,7 +188,7 @@ bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
 # pyenv
-[[ -x `which pyenv` ]] && eval "$(pyenv init -)"
+[[ -x `which pyenv > /dev/null 2>&1` ]] && eval "$(pyenv init -)"
 
 # rbenv
 # [[ -x `which rbenv` ]] && eval "$(rbenv init -)"
