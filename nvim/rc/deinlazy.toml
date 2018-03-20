@@ -19,8 +19,8 @@ on_ft = 'python'
 
 [[plugins]]  # Asynchronous Lint Engine というシンタックスチェッカー (Syntasticの代わり)
 repo = 'w0rp/ale'
+hook_source = 'execute "source" GetNvimrcDir() . "/plugins/ale.rc.vim"'
 hook_add = '''
-  let g:ale_echo_msg_format = '[%linter%] %s'
   nmap <silent> <C-k> <Plug>(ale_previous_wrap)
   nmap <silent> <C-j> <Plug>(ale_next_wrap)
 '''
@@ -74,7 +74,7 @@ hook_add = '''
   nnoremap <silent> [denite]u
     \ :<C-u>Denite -highlight-matched-char=PreProc file_mru<CR>
   nnoremap <silent> [denite]v
-    \ :<C-u>DniteProjectDir -highlight-matched-char=PreProc grep<CR>
+    \ :<C-u>Denite -highlight-matched-char=PreProc grep<CR>
   nnoremap <silent> <C-h>
     \ :<C-u>Denite -highlight-matched-char=PreProc help<CR>
   nnoremap <silent> [denite]; :<C-u>Denite -resume<CR>

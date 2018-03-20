@@ -73,6 +73,9 @@ source $ZPLUG_HOME/init.zsh
 # fzf: インタラクティブフィルタ
 zplug "junegunn/fzf-bin", as:command, from:gh-r, rename-to:fzf, frozen:1
 
+# jq: json整形コマンド
+zplug "stedolan/jq", as:command, from:gh-r, rename-to:jq, frozen:1
+
 # zsh のコマンドラインに色付けをする
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
