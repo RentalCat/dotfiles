@@ -98,6 +98,9 @@ zplug "chrissicool/zsh-256color"
 # コードサーチツール, agの進化版
 zplug "monochromegane/the_platinum_searcher", as:command, from:gh-r, rename-to:"pt", frozen:1
 
+# cd 強化 (要: fzf, or peco, ...)
+zplug "b4b4r07/enhancd", use:init.sh
+
 # b4b4r07/history
 # zplug 'b4b4r07/history', use:misc/zsh/init.zsh
 # ZSH_HISTORY_KEYBIND_GET_BY_DIR="^r"
