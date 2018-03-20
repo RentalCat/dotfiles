@@ -63,6 +63,13 @@ zstyle ':completion:*' keep-prefix
 zstyle ':completion:*' completer _oldlist _complete _match _ignored _approximate _list _history
 zstyle ':completion:*' list-separator '-->'
 
+# wordstyle
+autoload -Uz select-word-style
+select-word-style default
+zstyle ':zle:*' word-chars ' /=;@:{}[]()<>,|.'
+# zstyle ':zle:*' word-chars " /=;@:_-."
+zstyle ':zle:*' word-style unspecified
+
 # plugin
 export ZPLUG_HOME=$zsh_dir/.zplug
 if [[ ! -d $ZPLUG_HOME ]]; then
@@ -168,12 +175,6 @@ setopt auto_pushd                                # 「cd -[TAB]」でディレ�
 setopt auto_param_slash                          # ディレクトリ名の補完で末尾の / を自動的に付加
 setopt auto_remove_slash                         # 補完時にスラッシュが2回続いた場合、1つ取り除く
 setopt pushd_ignore_dups                         # 重複したディレクトリを追加しない
-
-# wordstyle
-autoload -Uz select-word-style
-select-word-style default
-zstyle ':zle:*' word-chars " _-./;@"
-zstyle ':zle:*' word-style unspecified
 
 # command_not_found_handler : typo したときにコマンドをヒストリに記録しない
 # command_not_found_handler()
