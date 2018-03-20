@@ -77,11 +77,11 @@ if [[ ! -d $ZPLUG_HOME ]]; then
 fi
 source $ZPLUG_HOME/init.zsh
 
-# fzf: インタラクティブフィルタ
-zplug "junegunn/fzf-bin", as:command, from:gh-r, rename-to:fzf, frozen:1
+# fzy: インタラクティブフィルタ
+zplug "jhawthorn/fzy", as:command, rename-to:'fzy', hook-build:"{ make install }", frozen:1
 
 # jq: json整形コマンド
-zplug "stedolan/jq", as:command, from:gh-r, rename-to:jq, frozen:1
+zplug "stedolan/jq", as:command, from:gh-r, rename-to:'jq', frozen:1
 
 # zsh のコマンドラインに色付けをする
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
@@ -96,9 +96,9 @@ zplug "zsh-users/zsh-autosuggestions", use:zsh-autosuggestions.zsh
 zplug "chrissicool/zsh-256color"
 
 # コードサーチツール, agの進化版
-zplug "monochromegane/the_platinum_searcher", as:command, from:gh-r, rename-to:"pt", frozen:1
+zplug "monochromegane/the_platinum_searcher", as:command, from:gh-r, rename-to:'pt', frozen:1
 
-# cd 強化 (要: fzf, or peco, ...)
+# cd 強化 (required: fzy, fzf, peco, or...)
 zplug "b4b4r07/enhancd", use:init.sh
 
 # b4b4r07/history
