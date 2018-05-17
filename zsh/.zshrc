@@ -77,8 +77,14 @@ if [[ ! -d $ZPLUG_HOME ]]; then
 fi
 source $ZPLUG_HOME/init.zsh
 
+# fzf: インタラクティブフィルタ
+zplug "junegunn/fzf-bin", as:command, from:gh-r, rename-to:'fzf'
+zplug "junegunn/fzf", as:command, use:bin/fzf-tmux
 # fzy: インタラクティブフィルタ
-zplug "jhawthorn/fzy", as:command, rename-to:'fzy', hook-build:"{ make install }", frozen:1
+# zplug "jhawthorn/fzy", as:command, rename-to:'fzy', hook-build:"{ make install }", frozen:1
+
+# anyframe (Anything風インターフェース)
+zplug "mollifier/anyframe"
 
 # jq: json整形コマンド
 zplug "stedolan/jq", as:command, from:gh-r, rename-to:'jq', frozen:1
@@ -193,6 +199,13 @@ bindkey "^[[1;5A" beginning-of-line
 # bindkey "^[[1;5B" end-of-line
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
+# anyframe
+bindkey '^r' anyframe-widget-put-history
+bindkey '^xr' anyframe-widget-put-history
+bindkey '^x^r' anyframe-widget-put-history
+
+bindkey '^xb' anyframe-widget-checkout-git-branch
+bindkey '^x^b' anyframe-widget-checkout-git-branch
 
 # pyenv
 [[ -x `which pyenv > /dev/null 2>&1` ]] && eval "$(pyenv init -)"

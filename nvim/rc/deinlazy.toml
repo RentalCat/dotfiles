@@ -25,10 +25,6 @@ hook_add = '''
   nmap <silent> <C-j> <Plug>(ale_next_wrap)
 '''
 
-[[plugins]]  # 文字候補絞込プラグイン(matcher), required `brew install boost`
-repo = 'nixprime/cpsm'
-build = 'env PY3=ON ./install.sh'
-
 [[plugins]]
 repo = 'osyo-manga/shabadou.vim'
 depends = 'vim-quickrun'
@@ -68,7 +64,7 @@ hook_add = '''
   nnoremap <silent> [denite]b
     \ :<C-u>Denite -highlight-matched-char=PreProc buffer<CR>
   nnoremap <silent> [denite]f
-    \ :<C-u>Denite -highlight-matched-char=PreProc file_mru file_rec<CR>
+    \ :<C-u>Denite -highlight-matched-char=PreProc file_rec<CR>
   nnoremap <silent> [denite]r
     \ :<C-u>Denite -highlight-matched-char=PreProc register<CR>
   nnoremap <silent> [denite]u
