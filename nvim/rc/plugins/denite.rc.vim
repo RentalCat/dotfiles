@@ -42,5 +42,5 @@ elseif executable('ag')
 endif
 " NOTE: hw (highway) is not supported.
 
-" matcher tools settings (using: cpsm)
-call denite#custom#source('_', 'matchers', ['matcher_cpsm', 'matcher_fuzzy'])
+" matcher tools settings
+call denite#custom#source('_', 'matchers', ['matcher_fuzzy'])
