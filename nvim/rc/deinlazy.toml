@@ -7,6 +7,10 @@ hook_add = '''
 '''
 
 [[plugins]]
+repo = 'ambv/black'
+on_ft = 'python'
+
+[[plugins]]
 repo = 'cespare/vim-toml'
 on_ft = 'toml'
 
