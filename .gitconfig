@@ -24,3 +24,5 @@
     cmd = nvim -R -d $MERGED $LOCAL $BASE $REMOTE -c 'wincmd J' -c 'set noro'
 
 # vim: set ft=gitconfig:
+[init]
+	templatedir = ~/dotfiles/git_template
