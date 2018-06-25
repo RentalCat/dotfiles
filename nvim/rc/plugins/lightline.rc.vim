@@ -32,7 +32,7 @@ let g:lightline = {
       \     'fileencoding': 'g:mylightline.getFileEncoding',
       \   },
       \   'component_expand': {
-      \     'syntax': 'ALEGetStatusLine',
+      \     'syntax': 'g:mylightline.getSyntaxStatus',
       \   },
       \   'component_type': {
       \     'syntax': 'error',
@@ -205,5 +205,5 @@ function! g:mylightline.getFileEncoding() abort
 endfunction
 
 function! g:mylightline.getSyntaxStatus() abort
-  return ALEGetStatusLine()
+  return ale#statusline#StatusForListFormat()
 endfunction

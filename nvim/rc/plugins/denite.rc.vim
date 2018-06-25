@@ -23,7 +23,7 @@ if executable('pt')
     \ ['--nogroup', '--nocolor', '--smart-case'])
   call denite#custom#var('grep', 'recursive_opts', [])
   call denite#custom#var('grep', 'pattern_opt', [])
-  call denite#custom#var('grep', 'separator', ['--'])
+  " call denite#custom#var('grep', 'separator', ['--'])
   call denite#custom#var('grep', 'final_opts', [])
 elseif executable('ag')
   " ag
@@ -43,4 +43,4 @@ endif
 " NOTE: hw (highway) is not supported.
 
 " matcher tools settings
-call denite#custom#source('_', 'matchers', ['matcher_fuzzy'])
+call denite#custom#source('_', 'matchers', ['matcher_fuzzy', 'sorter_rank'])
