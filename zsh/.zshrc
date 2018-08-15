@@ -41,6 +41,7 @@ if [[ -x `whence -p brew` ]] then
   alias brew="env PATH=${PATH/$HOME\/\.pyenv\/shims(:|)/} brew"
 fi
 alias ssh="TERM=xterm ssh"
+alias grep="grep -u"
 
 # prompt
 if [[ -r $zsh_dir/prompt.zsh ]]; then
