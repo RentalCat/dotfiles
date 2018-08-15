@@ -10,9 +10,13 @@ hook_add = '''
 repo = 'ambv/black'
 on_ft = 'python'
 
-[[plugins]]
+[[plugins]]  # Syntax highlight: toml
 repo = 'cespare/vim-toml'
 on_ft = 'toml'
+
+[[plugins]]  # Syntax highlight: nginx.conf
+repo = 'chr4/nginx.vim'
+on_ft = 'nginx'
 
 [[plugins]]  # gitk サポート for fugitive
 repo = 'cohama/agit.vim'
