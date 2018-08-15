@@ -38,7 +38,7 @@ safe_install() {
         brew install $1 || true
         brew link --overwrite $1
     else
-        brew install $1
+        brew install $1 || true
     fi
 }
 
