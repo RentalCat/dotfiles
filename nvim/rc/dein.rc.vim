@@ -21,8 +21,9 @@ endif
 " 読み込みが完了していない場合は読み込み
 if dein#load_state(s:dein_dir)
   " 読込処理開始
-  call dein#begin(s:dein_dir, [expand('<sfile>')]
-        \ + split(glob(expand('<sfile>:h') . '/*.toml'), '\n'))
+  call dein#begin(s:dein_dir)
+  " call dein#begin(s:dein_dir, [expand('<sfile>')]
+  "       \ + split(glob(expand('<sfile>:h') . '/*.toml'), '\n'))
 
   " toml ロード, キャッシュもするらしい
   call dein#load_toml(expand('<sfile>:h') . '/dein.toml', {'lazy': 0})
