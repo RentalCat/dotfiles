@@ -1,3 +1,5 @@
+[user]
+    useConfigOnly = true
 [core]
     excludesfile = ~/dotfiles/gitignore_global
     editor = nvim -c \"set fenc=utf-8\"
