@@ -1,6 +1,7 @@
 [user]
     name = Ryunosuke Seto
     email = seto-r@klab.com
+    useConfigOnly = true
 [core]
     excludesfile = ~/dotfiles/gitignore_global
     editor = nvim -c \"set fenc=utf-8\"
