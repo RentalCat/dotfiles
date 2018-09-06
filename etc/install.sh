@@ -5,7 +5,7 @@ _AUTHOR="RentalCat"
 _REPOSITORY="dotfiles"
 _BRANCH="master"
 
-if [ -z "${DOTPATH:-}" ]; then export DOTPATH=~/.dotfiles; fi
+if [ -z "${DOTPATH:-}" ]; then export DOTPATH=~/$_REPOSITORY; fi
 export DOTFILES_GITHUB="https://github.com/$_AUTHOR/$_REPOSITORY.git"
 
 

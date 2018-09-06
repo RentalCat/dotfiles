@@ -208,8 +208,23 @@ bindkey '^x^r' anyframe-widget-put-history
 bindkey '^xb' anyframe-widget-checkout-git-branch
 bindkey '^x^b' anyframe-widget-checkout-git-branch
 
+# anyenv
+if [[ ! -x `whence -p anyenv` ]] then
+  git clone https://github.com/riywo/anyenv ~/.anyenv
+  export PATH=$HOME/.anyenv/bin:$PATH
+fi
+eval "$(anyenv init -)"
+
 # pyenv
-[[ -x `which pyenv > /dev/null 2>&1` ]] && eval "$(pyenv init -)"
+if [[ ! -x `whence -p pyenv` ]] then
+  anyenv install pyenv
+fi
+# pyenv virtualenv
+pyenv_path="$(pyenv root)/plugins/pyenv-virtualenv"
+if [[ ! -e $pyenv_path ]] then
+git clone https://github.com/pyenv/pyenv-virtualenv.git $pyenv_path
+fi
+eval "$(pyenv virtualenv-init -)"
 
 # rbenv
 # [[ -x `which rbenv` ]] && eval "$(rbenv init -)"
