@@ -23,3 +23,5 @@ zsh/cmd_history
 xbuild/*
 NuGet/NuGet.Config
 
+# htop
+htop/htoprc
