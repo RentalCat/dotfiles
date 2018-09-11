@@ -51,14 +51,10 @@ repo = 'Shougo/context_filetype.vim'
 
 [[plugins]]  # 補完機能 (neovim 用)
 repo = 'Shougo/deoplete.nvim'
-on_source = 'unite.vim'
 if = "has('nvim')"
 on_i = 1
 depends = 'context_filetype.vim'
-hook_add = '''
-  let g:deoplete#enable_at_startup = 1
-  let g:deoplete#omni_patterns = {}
-'''
+hook_source = 'execute "source" GetNvimrcDir() . "/plugins/deoplete.rc.vim"'
 
 [[plugins]]  # dark powered Unite
 repo = 'Shougo/denite.nvim'
