@@ -40,13 +40,6 @@ let g:lightline = {
       \   },
       \ }
 
-" シンタックスチェックを lightline#update に hock する
-let g:ale_statusline_format = ['E%d', 'W%d', '']
-augroup ale_statusline
-  autocmd!
-  autocmd User ALELint call lightline#update()
-augroup END
-
 let s:displayable_components = {}
 let s:margin = 0
 let s:mode_len = 6
