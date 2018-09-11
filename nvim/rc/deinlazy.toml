@@ -36,10 +36,8 @@ hook_add = '''
 
 [[plugins]]
 repo = 'maximbaz/lightline-ale'
-on_source = 'ale'
-hook_source = 'let g:lightlineale_test = 1'
-hook_add = '''
-let g:ale_statusline_format = ['E%d', 'W%d', 'ok']
+on_source = ['ale', 'lightline']
+hook_source = '''
 let g:lightline.component_expand = {
 \   'linter_checking': 'lightline#ale#checking',
 \   'linter_warnings': 'lightline#ale#warnings',
