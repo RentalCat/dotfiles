@@ -27,15 +27,19 @@ function! GetNvimrcDir() abort
   return s:nvim_rc_dir
 endfunction
 
-function! GetCacheDir() abort
-  return s:nvim_dir . '/.cache'
-endfunction
-
 function! GetSafeDir(dir_path) abort
   if !isdirectory(a:dir_path)
     call mkdir(iconv(a:dir_path, &encoding, &termencoding), 'p')
   endif
   return expand(a:dir_path)
+endfunction
+
+function! GetCacheDir() abort
+  return GetSafeDir(s:nvim_dir . '/.cache')
+endfunction
+
+function! GetTmpDir() abort
+  return GetSafeDir(s:nvim_dir . '/.tmp')
 endfunction
 
 " 文字コード設定 --------------------------------------------------------------
