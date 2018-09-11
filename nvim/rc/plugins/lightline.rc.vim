@@ -13,7 +13,7 @@ let g:lightline = {
       \       ['gitbranch', 'readonly', 'filename'],
       \     ],
       \     'right': [
-      \       ['lineinfo', 'charvaluehex', 'syntax'],
+      \       ['lineinfo', 'charvaluehex', 'linter_checking', 'linter_warnings', 'linter_errors', 'linter_ok'],
       \       ['percent'],
       \       ['fileformat', 'fileencoding', 'filetype'],
       \     ],
@@ -30,12 +30,6 @@ let g:lightline = {
       \     'fileformat'  : 'g:mylightline.getFileFormat',
       \     'filetype'    : 'g:mylightline.getFileType',
       \     'fileencoding': 'g:mylightline.getFileEncoding',
-      \   },
-      \   'component_expand': {
-      \     'syntax': 'g:mylightline.getSyntaxStatus',
-      \   },
-      \   'component_type': {
-      \     'syntax': 'error',
       \   },
       \   'separator': {'left': "\u2b80", 'right': "\u2b82"},
       \   'subseparator': {'left': "\u2b81", 'right': "\u2b83"},
@@ -202,8 +196,4 @@ endfunction
 function! g:mylightline.getFileEncoding() abort
   call s:updateDisplayableComponents()
   return s:getDisplayableComponents('fencoding')
-endfunction
-
-function! g:mylightline.getSyntaxStatus() abort
-  return ale#statusline#StatusForListFormat()
 endfunction

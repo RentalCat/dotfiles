@@ -27,10 +27,31 @@ on_ft = 'python'
 
 [[plugins]]  # Asynchronous Lint Engine というシンタックスチェッカー (Syntasticの代わり)
 repo = 'w0rp/ale'
+on_if = 1
 hook_source = 'execute "source" GetNvimrcDir() . "/plugins/ale.rc.vim"'
 hook_add = '''
   nmap <silent> <C-k> <Plug>(ale_previous_wrap)
   nmap <silent> <C-j> <Plug>(ale_next_wrap)
+'''
+
+[[plugins]]
+repo = 'maximbaz/lightline-ale'
+on_source = 'ale'
+hook_source = 'let g:lightlineale_test = 1'
+hook_add = '''
+let g:ale_statusline_format = ['E%d', 'W%d', 'ok']
+let g:lightline.component_expand = {
+\   'linter_checking': 'lightline#ale#checking',
+\   'linter_warnings': 'lightline#ale#warnings',
+\   'linter_errors': 'lightline#ale#errors',
+\   'linter_ok': 'lightline#ale#ok',
+\ }
+let g:lightline.component_type = {
+\   'linter_checking': 'left',
+\   'linter_warnings': 'warning',
+\   'linter_errors': 'error',
+\   'linter_ok': 'left',
+\ }
 '''
 
 [[plugins]]
@@ -46,14 +67,11 @@ hook_add = '''
   nnoremap <silent> ;f :<C-u>call NerdTreeToggle()<CR>
 '''
 
-[[plugins]]
-repo = 'Shougo/context_filetype.vim'
-
 [[plugins]]  # 補完機能 (neovim 用)
 repo = 'Shougo/deoplete.nvim'
 if = "has('nvim')"
 on_i = 1
-depends = 'context_filetype.vim'
+hook_add = 'let g:deoplete#enable_at_startup = 1'
 hook_source = 'execute "source" GetNvimrcDir() . "/plugins/deoplete.rc.vim"'
 
 [[plugins]]  # dark powered Unite
