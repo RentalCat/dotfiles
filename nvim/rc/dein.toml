@@ -31,10 +31,7 @@ hook_add = '''
 '''
 [[plugins]]
 repo = 'itchyny/lightline.vim'
-depends = ['ale', 'vim-fugitive']
-hook_add = '''
-  execute 'source' GetNvimrcDir() . '/plugins/lightline.rc.vim'
-'''
+hook_add = 'execute "source" GetNvimrcDir() . "/plugins/lightline.rc.vim"'
 
 [[plugins]]  # vimdiff を histogram アルゴリズムで表示 (通常のより賢い)
 repo = 'lambdalisue/vim-unified-diff'
