@@ -82,6 +82,10 @@ hook_add = '''
     \ :<C-u>DeniteCursorWord -highlight-matched-char=PreProc grep<CR>
 '''
 
+[[plugins]]
+repo = 'Shougo/neco-vim'
+on_source = 'deoplete.nvim'
+
 [[plugins]]  # Unite file_mru 用
 repo = 'Shougo/neomru.vim'
 on_source = 'unite.vim'
