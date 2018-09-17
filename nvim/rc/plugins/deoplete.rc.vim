@@ -13,7 +13,9 @@ call deoplete#custom#source('dictionary', 'min_pattern_length', 4)
 " 辞書設定: 完全一致以外は候補から除外
 call deoplete#custom#source('dictionary', 'matchers', ['matcher_head'])
 
-
 " for debug
 " call deoplete#custom#source('vim', 'is_debug_enabled', 1)
-" call deoplete#enable_logging('DEBUG', GetTmpDir() . '/deoplete.log')
+call deoplete#enable_logging('INFO', GetTmpDir() . '/deoplete.log')
+
+" 設定が全部終わったら自動補完を有効にする
+call deoplete#enable()
