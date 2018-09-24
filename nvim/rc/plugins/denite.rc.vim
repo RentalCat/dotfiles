@@ -10,6 +10,7 @@ call denite#custom#map('insert', "<Down>", '<denite:move_to_next_line>')
 call denite#custom#map('insert', "<Up>", '<denite:move_to_previous_line>')
 call denite#custom#map('insert', "<C-d>", '<denite:scroll_window_downwards>')
 call denite#custom#map('insert', "<C-u>", '<denite:scroll_page_forwards>')
+call denite#custom#map('insert', "<C-a>", '<denite:move_caret_to_head>')
 
 " greper tools settings
 if executable('pt')

@@ -17,3 +17,6 @@ ln -fsv $REPOSITORY_ROOT/tmux/local.conf $REPOSITORY_ROOT/tmux/env.conf
 
 # git
 ln -fsv $REPOSITORY_ROOT/.gitconfig $HOME/.gitconfig
+
+# global (gtags)
+ln -fsv $REPOSITORY_ROOT/globalrc $HOME/.globalrc
