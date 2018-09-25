@@ -20,6 +20,7 @@ on_ft = 'nginx'
 
 [[plugins]]  # gitk サポート for fugitive
 repo = 'cohama/agit.vim'
+on_source = 'vim-fugitive'
 
 [[plugins]]
 repo = 'hynek/vim-python-pep8-indent'
@@ -187,7 +188,7 @@ hook_add = 'nmap <silent> <Leader>r <Plug>(quickrun)'
 
 [[plugins]]  # git wrapper
 repo = 'tpope/vim-fugitive'
-depends = 'agit.vim'
+on_cmd = ['Gcommit', 'Gblame', 'Gdiff', 'Ggrep', 'Gstatus']
 hook_add = '''
   nnoremap [fugitive]    <Nop>
   nmap ;g  [fugitive]
