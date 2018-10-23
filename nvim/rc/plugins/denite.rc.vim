@@ -43,5 +43,7 @@ elseif executable('ag')
 endif
 " NOTE: hw (highway) is not supported.
 
+
 " matcher tools settings
 call denite#custom#source('_', 'matchers', ['matcher_fuzzy', 'sorter_rank'])
+" call denite#custom#source('_', 'matchers', ['matcher_regexp'])

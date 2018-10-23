@@ -31,7 +31,7 @@ hook_add = '''
 '''
 [[plugins]]
 repo = 'itchyny/lightline.vim'
-hook_add = 'execute "source" GetNvimrcDir() . "/plugins/lightline.rc.vim"'
+hook_add = 'execute "source " . GetNvimrcDir() . "/plugins/lightline.rc.vim"'
 
 [[plugins]]  # vimdiff を histogram アルゴリズムで表示 (通常のより賢い)
 repo = 'lambdalisue/vim-unified-diff'
@@ -83,6 +83,9 @@ hook_add = '''
     autocmd BufWinEnter,ShellCmdPost * IndentLinesReset
   augroup END
 '''
+
+[[plugins]]  # テキストオブジェクト強化 (囲う系強化)
+repo = 'tpope/vim-surround'
 
 # [[plugins]]  # 自作プラグイン
 # repo = 'git@bitbucket.org:RentalCat/greview.vim.git'

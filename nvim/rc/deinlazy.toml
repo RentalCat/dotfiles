@@ -29,7 +29,7 @@ on_ft = 'python'
 [[plugins]]  # Asynchronous Lint Engine というシンタックスチェッカー (Syntasticの代わり)
 repo = 'w0rp/ale'
 on_event = 'InsertEnter'
-hook_source = 'execute "source" GetNvimrcDir() . "/plugins/ale.rc.vim"'
+hook_source = 'execute "source " . GetNvimrcDir() . "/plugins/ale.rc.vim"'
 hook_add = '''
   nmap <silent> <C-k> <Plug>(ale_previous_wrap)
   nmap <silent> <C-j> <Plug>(ale_next_wrap)
@@ -74,13 +74,13 @@ hook_add = '''
 repo = 'Shougo/deoplete.nvim'
 if = "has('nvim')"
 on_event = 'InsertEnter'
-hook_source = 'execute "source" GetNvimrcDir() . "/plugins/deoplete.rc.vim"'
+hook_source = 'execute "source " . GetNvimrcDir() . "/plugins/deoplete.rc.vim"'
 
 [[plugins]]  # dark powered Unite
 repo = 'Shougo/denite.nvim'
 on_cmd = ['Denite', 'DeniteBufferDir', 'DeniteCursorWord', 'DeniteProjectDir']
 if = 'has("nvim")'
-hook_source = 'execute "source" GetNvimrcDir() . "/plugins/denite.rc.vim"'
+hook_source = 'execute "source " . GetNvimrcDir() . "/plugins/denite.rc.vim"'
 hook_add = '''
   nnoremap [denite] <Nop>
   nmap    ;d [denite]
@@ -231,20 +231,21 @@ hook_add = '''
   let g:deoplete#omni_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 '''
 
-[[plugins]]  # global (gtags) コマンドによるコードジャンプサポート
-repo = 'ozelentok/denite-gtags'
-on_cmd = 'DeniteCursorWord'
-on_source = 'denite.nvim'
-hook_add = '''
-  nnoremap <silent> [denite]d
-    \ :<C-u>DeniteCursorWord gtags_def -highlight-matched-char=PreProc -buffer-name=gtags_def<CR>
-  nnoremap <silent> [denite]r
-    \ :<C-u>DeniteCursorWord gtags_ref -highlight-matched-char=PreProc -buffer-name=gtags_ref<CR>
-'''
-
-[[plugins]]  # global (gtags) ファイル自動更新
-repo = 'jsfaint/gen_tags.vim'
-on_source = 'denite-gtags'
-hook_add = '''
-    let g:gen_tags#gtags_auto_gen = 1
-'''
+# [[plugins]]  # global (gtags) コマンドによるコードジャンプサポート
+# repo = 'ozelentok/denite-gtags'
+# on_cmd = 'DeniteCursorWord'
+# on_source = 'denite.nvim'
+# hook_add = '''
+#   nnoremap <silent> [denite]d
+#     \ :<C-u>DeniteCursorWord gtags_def -highlight-matched-char=PreProc -buffer-name=gtags_def<CR>
+#   nnoremap <silent> [denite]r
+#     \ :<C-u>DeniteCursorWord gtags_ref -highlight-matched-char=PreProc -buffer-name=gtags_ref<CR>
+# '''
+#
+# [[plugins]]  # global (gtags) ファイル自動更新
+# repo = 'jsfaint/gen_tags.vim'
+# on_source = 'denite-gtags'
+# hook_add = '''
+#     let g:gen_tags#gtags_auto_gen = 1
+#     let g:gen_tags#statusline = 1
+# '''
