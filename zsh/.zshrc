@@ -42,6 +42,7 @@ if [[ -x `whence -p brew` ]] then
 fi
 alias ssh="TERM=xterm ssh"
 alias grep="grep -u"
+alias cp="cp -i"
 
 # prompt
 if [[ -r $zsh_dir/prompt.zsh ]]; then

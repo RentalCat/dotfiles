@@ -2,10 +2,11 @@
 call deoplete#custom#option({
 \   'auto_complete_delay': 0,
 \   'min_pattern_length': 1,
+\   'max_list': 100,
 \ })
 
 " 辞書設定: 読み込む辞書を追加
-setlocal dictionary+=/usr/share/dict/words
+set dictionary+=/usr/share/dict/words
 " 辞書設定: 辞書ファイルはソートされてるので deoplete ではソートしない
 call deoplete#custom#source('dictionary', 'sorters', [])
 " 辞書設定: 短い単語は補完しない

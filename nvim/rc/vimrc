@@ -125,6 +125,8 @@ if has('nvim') && has('clipboard')
 endif
 
 " キー関係 --------------------------------------------------------------------
+" Leader設定
+let mapleader = "\<Space>"
 " <ESC><ESC>  ==> ハイライトを消す
 nmap <Esc><Esc> :<C-u>nohlsearch<CR><Esc>
 " ZQ          ==> 全ファイルクローズ (従来の :q! やめました)
