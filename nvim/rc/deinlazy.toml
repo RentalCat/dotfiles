@@ -67,7 +67,7 @@ on_map = {n = '<Plug>'}
 on_if = "isdirectory(bufname('%'))"
 hook_add = '''
   execute 'source' GetNvimrcDir() . '/plugins/nerdtree.rc.vim'
-  nnoremap <silent> ;f :<C-u>call NerdTreeToggle()<CR>
+  nnoremap <silent> <Leader>f :<C-u>call NerdTreeToggle()<CR>
 '''
 
 [[plugins]]  # 補完機能 (neovim 用)
@@ -83,7 +83,7 @@ if = 'has("nvim")'
 hook_source = 'execute "source " . GetNvimrcDir() . "/plugins/denite.rc.vim"'
 hook_add = '''
   nnoremap [denite] <Nop>
-  nmap    ;d [denite]
+  nmap    <Leader>d [denite]
 
   nnoremap <silent> [denite]b
     \ :<C-u>Denite -highlight-matched-char=PreProc buffer<CR>
@@ -97,7 +97,7 @@ hook_add = '''
     \ :<C-u>Denite -highlight-matched-char=PreProc grep<CR>
   nnoremap <silent> <C-h>
     \ :<C-u>Denite -highlight-matched-char=PreProc help<CR>
-  nnoremap <silent> [denite]; :<C-u>Denite -resume<CR>
+  nnoremap <silent> [denite]<Leader> :<C-u>Denite -resume<CR>
   nnoremap <silent> gv
     \ :<C-u>DeniteCursorWord -highlight-matched-char=PreProc grep<CR>
 '''
@@ -131,7 +131,7 @@ hook_add = '''
   execute 'source' GetNvimrcDir() . '/plugins/unite.rc.vim'
 
   nnoremap [unite] <Nop>
-  nmap    ;u [unite]
+  nmap    <Leader>u [unite]
 
   nnoremap <silent> [unite]b
         \ :<C-u>Unite -buffer-name=buffer buffer -auto-preview -start-insert -no-resize<CR>
@@ -147,7 +147,7 @@ hook_add = '''
         \ :<C-u>execute 'Unite grep:' . unite#util#path2project_directory(expand('%'))
         \               . ' -buffer-name=grep(`tabpagenr()`) -auto-preview -no-empty -start-insert'
         \               . ' -ignorecase -smartcase -no-resize'<CR>
-  nnoremap <silent> [unite];
+  nnoremap <silent> [unite]<Leader>
         \ :<C-u>UniteResume<CR>
 
   " nnoremap <silent> gv
@@ -191,7 +191,7 @@ repo = 'tpope/vim-fugitive'
 on_cmd = ['Gcommit', 'Gblame', 'Gdiff', 'Ggrep', 'Gstatus']
 hook_add = '''
   nnoremap [fugitive]    <Nop>
-  nmap ;g  [fugitive]
+  nmap <Leader>g  [fugitive]
   nnoremap <silent> [fugitive]c :<C-u>Gcommit<CR>
   nnoremap <silent> [fugitive]b :<C-u>Gblame<CR>
   nnoremap <silent> [fugitive]d :<C-u>Gdiff<CR>
