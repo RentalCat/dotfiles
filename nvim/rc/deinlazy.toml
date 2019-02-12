@@ -111,6 +111,10 @@ on_source = 'deoplete.nvim'
 repo = 'Shougo/neco-syntax'
 on_source = 'deoplete.nvim'
 
+[[plugins]]  # deoplete: ffxiv の補完 (自作)
+repo = 'RentalCat/deoplete-ffxiv'
+on_source = 'deoplete.nvim'
+
 [[plugins]]  # Unite file_mru 用
 repo = 'Shougo/neomru.vim'
 on_source = 'unite.vim'

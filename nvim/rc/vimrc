@@ -44,6 +44,11 @@ set ambiwidth=double
 " 画面最後の行をできる限り表示する。
 set display+=lastline
 
+" シンタックスハイライト(ファイルタイプ宣言) ----------------------------------
+augroup vimrcFileType
+  autocmd!
+  autocmd BufRead,BufNewFile *.ffxivmacro set filetype=ffxivmacro
+augroup END
 " コマンドライン・ステータスライン --------------------------------------------
 " コマンドラインで補完時に候補一覧を表示
 set wildmenu
