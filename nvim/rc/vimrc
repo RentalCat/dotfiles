@@ -172,5 +172,3 @@ set background=dark
 " colorscheme moonshine
 " colorscheme kalisi
 colorscheme molokai
-
-filetype plugin indent on
