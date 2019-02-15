@@ -35,6 +35,10 @@ hook_add = '''
   nmap <silent> <C-j> <Plug>(ale_next_wrap)
 '''
 
+[[plugins]]  # Gist
+repo = 'lambdalisue/vim-gista'
+on_cmd = ['Gista']
+
 [[plugins]]
 repo = 'maximbaz/lightline-ale'
 on_source = ['ale', 'lightline']
@@ -78,6 +82,7 @@ hook_source = 'execute "source " . GetNvimrcDir() . "/plugins/deoplete.rc.vim"'
 
 [[plugins]]  # dark powered Unite
 repo = 'Shougo/denite.nvim'
+rev = '1.2'
 on_cmd = ['Denite', 'DeniteBufferDir', 'DeniteCursorWord', 'DeniteProjectDir']
 if = 'has("nvim")'
 hook_source = 'execute "source " . GetNvimrcDir() . "/plugins/denite.rc.vim"'
@@ -111,9 +116,9 @@ on_source = 'deoplete.nvim'
 repo = 'Shougo/neco-syntax'
 on_source = 'deoplete.nvim'
 
-[[plugins]]  # deoplete: ffxiv の補完 (自作)
-repo = 'RentalCat/deoplete-ffxiv'
-on_source = 'deoplete.nvim'
+# [[plugins]]  # deoplete: ffxiv の補完 (自作)
+# repo = 'RentalCat/deoplete-ffxiv'
+# on_source = 'deoplete.nvim'
 
 [[plugins]]  # Unite file_mru 用
 repo = 'Shougo/neomru.vim'
