@@ -164,6 +164,12 @@ let g:python_host_prog = $PYENV_ROOT . '/shims/python2'
 let g:python3_host_prog = $PYENV_ROOT . '/shims/python3'
 execute 'source' expand('<sfile>:h').'/dein.rc.vim'
 
+" local.vim -------------------------------------------------------------------
+let s:localrc_filepath = resolve(expand('<sfile>:h').'/.local.rc.vim')
+if filereadable(s:localrc_filepath)
+  execute 'source' s:localrc_filepath
+endif
+
 set t_Co=256
 set background=dark
 " colorscheme tender

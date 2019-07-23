@@ -38,7 +38,7 @@ if [[ -x `whence -p git` ]] then
   }
 fi
 if [[ -x `whence -p brew` ]] then
-  alias brew="env PATH=${PATH/$HOME\/\.pyenv\/shims(:|)/} brew"
+  alias brew="env PATH=${PATH/$HOME\/\.anyenv\/envs\/pyenv\/shims(:|)/} brew"
 fi
 alias ssh="TERM=xterm ssh"
 alias grep="grep -u"
@@ -212,7 +212,6 @@ bindkey '^x^b' anyframe-widget-checkout-git-branch
 # anyenv
 if [[ ! -x `whence -p anyenv` ]] then
   git clone https://github.com/riywo/anyenv ~/.anyenv
-  export PATH=$HOME/.anyenv/bin:$PATH
 fi
 eval "$(anyenv init -)"
 
@@ -223,7 +222,7 @@ fi
 # pyenv virtualenv
 pyenv_path="$(pyenv root)/plugins/pyenv-virtualenv"
 if [[ ! -e $pyenv_path ]] then
-git clone https://github.com/pyenv/pyenv-virtualenv.git $pyenv_path
+  git clone https://github.com/pyenv/pyenv-virtualenv.git $pyenv_path
 fi
 eval "$(pyenv virtualenv-init -)"
 
