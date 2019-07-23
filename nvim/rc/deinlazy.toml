@@ -35,10 +35,6 @@ hook_add = '''
   nmap <silent> <C-j> <Plug>(ale_next_wrap)
 '''
 
-[[plugins]]  # Gist
-repo = 'lambdalisue/vim-gista'
-on_cmd = ['Gista']
-
 [[plugins]]
 repo = 'maximbaz/lightline-ale'
 on_source = ['ale', 'lightline']
@@ -94,8 +90,8 @@ hook_add = '''
     \ :<C-u>Denite -highlight-matched-char=PreProc buffer<CR>
   nnoremap <silent> [denite]f
     \ :<C-u>Denite -highlight-matched-char=PreProc file_rec<CR>
-  " nnoremap <silent> [denite]r
-  "   \ :<C-u>Denite -highlight-matched-char=PreProc register<CR>
+  nnoremap <silent> [denite]r
+    \ :<C-u>Denite -highlight-matched-char=PreProc register<CR>
   nnoremap <silent> [denite]u
     \ :<C-u>Denite -highlight-matched-char=PreProc file_mru<CR>
   nnoremap <silent> [denite]v

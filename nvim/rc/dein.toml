@@ -29,9 +29,13 @@ hook_add = '''
   nmap f <Plug>(easymotion-fl)
   nmap F <Plug>(easymotion-Fl)
 '''
+
 [[plugins]]
 repo = 'itchyny/lightline.vim'
 hook_add = 'execute "source " . GetNvimrcDir() . "/plugins/lightline.rc.vim"'
+
+[[plugins]]  # Gist
+repo = 'lambdalisue/vim-gista'
 
 [[plugins]]  # vimdiff を histogram アルゴリズムで表示 (通常のより賢い)
 repo = 'lambdalisue/vim-unified-diff'

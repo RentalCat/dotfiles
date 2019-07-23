@@ -10,7 +10,6 @@ export NVIM_PYTHON_LOG_LEVEL=DEBUG
 # path
 export -U path
 export ANYENV_ROOT="$HOME/.anyenv"
-export PYENV_ROOT="$HOME/.pyenv"
 export NODEBREW_ROOT="$HOME/.nodebrew"
 go_root=$HOME/.go
 go_thirdparty_path=$go_root/third-party
@@ -19,8 +18,6 @@ export GOPATH=$go_thirdparty_path:$go_project_path
 setopt no_global_rcs
 path=(
   $ANYENV_ROOT/bin(N-/)
-  $PYENV_ROOT/bin(N-/)
-  $PYENV_ROOT/shims(N-/)
   $go_thirdparty_path/bin(N-/)
   $go_project_path/bin(N-/)
   $NODEBREW_ROOT/current/bin(N-/)
