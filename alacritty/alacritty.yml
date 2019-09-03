@@ -641,3 +641,5 @@ key_bindings:
   - { key: F12,      mods: Super,   chars: "\x1b[24;3~"                      }
   - { key: NumpadEnter,             chars: "\n"                              }
 
+    # Personal settings are below
+  - { key: Return,   mods: Command, action: ToggleFullscreen                 }

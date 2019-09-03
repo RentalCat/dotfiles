@@ -178,3 +178,9 @@ set background=dark
 " colorscheme moonshine
 " colorscheme kalisi
 colorscheme molokai
+
+" 透過設定
+highlight Normal ctermbg=NONE guibg=NONE
+highlight NonText ctermbg=NONE guibg=NONE
+highlight SpecialKey ctermbg=NONE guibg=NONE
+highlight EndOfBuffer ctermbg=NONE guibg=NONE
