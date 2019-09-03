@@ -66,6 +66,15 @@ hook_add = '''
       \ getcmdline()=~'^s' ? 'OverCommandLine<CR><C-u>%s/<C-r>=get([], getchar(0), '')<CR>' : 's'
 '''
 
+[[plugins]]  # ページ内検索時に現在の 検索件数 & 検索位置 を表示するよ
+repo = 'osyo-manga/vim-anzu'
+hook_add = '''
+  nmap n <Plug>(anzu-n-with-echo)
+  nmap N <Plug>(anzu-N-with-echo)
+  nmap * <Plug>(anzu-star-with-echo)
+  nmap # <Plug>(anzu-sharp-with-echo)
+'''
+
 [[plugins]]  # git 編集業に +-? を付ける
 repo = 'sgur/vim-gitgutter'
 
