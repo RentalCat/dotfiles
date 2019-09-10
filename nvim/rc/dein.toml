@@ -85,8 +85,25 @@ repo = 'Shougo/dein.vim'
 repo = 'Shougo/vimproc.vim'
 build = 'make'
 
+[[plugins]]  # git wrapper
+repo = 'tpope/vim-fugitive'
+#on_cmd = ['Gcommit', 'Gblame', 'Gdiff', 'Ggrep', 'Gstatus']
+hook_add = '''
+  nnoremap [fugitive]    <Nop>
+  nmap <Leader>g  [fugitive]
+  nnoremap <silent> [fugitive]c :<C-u>Gcommit<CR>
+  nnoremap <silent> [fugitive]b :<C-u>Gblame<CR>
+  nnoremap <silent> [fugitive]d :<C-u>Gdiff<CR>
+  nnoremap <silent> [fugitive]D :<C-u>Gdiff origin/develop<CR>
+  nnoremap <silent> [fugitive]g :<C-u>Ggrep<CR>
+  nnoremap <silent> [fugitive]s :<C-u>Gstatus<CR>
+'''
+
 [[plugins]]  # .local.vimrc 読み込み
 repo = 'thinca/vim-localrc'
+
+[[plugins]]  # cfi: ステータスバーに関数情報を載せる
+repo = 'tyru/current-func-info.vim'
 
 [[plugins]]  # ハイライトいっぱい付ける
 repo = 't9md/vim-quickhl'
