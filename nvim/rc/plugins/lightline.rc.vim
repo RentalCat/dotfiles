@@ -11,6 +11,7 @@ let g:lightline = {
       \     'left': [
       \       ['mode', 'paste'],
       \       ['gitbranch', 'readonly', 'filename'],
+      \       ['funcname'],
       \     ],
       \     'right': [
       \       ['lineinfo', 'charvaluehex', 'linter_checking', 'linter_warnings', 'linter_errors', 'linter_ok'],
@@ -26,6 +27,7 @@ let g:lightline = {
       \     'gitbranch'   : 'g:mylightline.getGitBranch',
       \     'readonly'    : 'g:mylightline.getReadonly',
       \     'filename'    : 'g:mylightline.getFilename',
+      \     'funcname'    : 'g:mylightline.getFuncname',
       \     'debug'       : 'g:mylightline.getDebugText',
       \     'fileformat'  : 'g:mylightline.getFileFormat',
       \     'filetype'    : 'g:mylightline.getFileType',
@@ -73,6 +75,14 @@ function! s:filename() abort
   return expand('%:t')
 endfunction
 
+function! s:funcname() abort
+  " カーソル上の関数・クラス名
+  if !exists('*cfi#get_func_name')
+    return ''
+  endif
+  return cfi#get_func_name()
+endfunction
+
 function! s:relPath() abort
   " 相対パス
   return substitute(expand('%'), s:filename(), '', 'g')
@@ -110,6 +120,10 @@ function! s:updateDisplayableComponents() abort
 
   " ファイル名
   let l:rlen = s:setDisplayableComponents('filename', s:filename(), l:rlen, 3)
+  if l:rlen <= 0 | return | endif  " 表示枠足りなかったらここで終了
+
+  " 関数・クラス名
+  let l:rlen = s:setDisplayableComponents('funcname', s:funcname(), l:rlen, 0)
   if l:rlen <= 0 | return | endif  " 表示枠足りなかったらここで終了
 
   " 相対パス (カレントディテクトリから該当ファイルのあるディレクトリパスまで)
@@ -154,39 +168,42 @@ function! s:getDisplayableComponents(key) abort
 endfunction
 
 function! g:mylightline.getGitBranch() abort
-  call s:updateDisplayableComponents()
   return s:getDisplayableComponents('git')
 endfunction
 
 function! g:mylightline.getReadonly() abort
-  call s:updateDisplayableComponents()
   return s:getDisplayableComponents('readonly')
 endfunction
 
 function! g:mylightline.getFilename() abort
-  call s:updateDisplayableComponents()
   return s:getDisplayableComponents('abspath')
         \ . s:getDisplayableComponents('relpath')
         \ . s:getDisplayableComponents('filename')
 endfunction
 
+function! g:mylightline.getFuncname() abort
+  return s:getDisplayableComponents('funcname')
+endfunction
+
 function! g:mylightline.getDebugText() abort
   " デバッグ用
-  call s:updateDisplayableComponents()
   return s:getDisplayableComponents('debug')
 endfunction
 
 function! g:mylightline.getFileFormat() abort
-  call s:updateDisplayableComponents()
   return s:getDisplayableComponents('fformat')
 endfunction
 
 function! g:mylightline.getFileType() abort
-  call s:updateDisplayableComponents()
   return s:getDisplayableComponents('ftype')
 endfunction
 
 function! g:mylightline.getFileEncoding() abort
-  call s:updateDisplayableComponents()
   return s:getDisplayableComponents('fencoding')
 endfunction
+
+augroup mylightline
+  autocmd!
+  " バッファに入った時、カーソルが動いた時に情報を更新する
+  autocmd BufWinEnter,CursorMoved * call s:updateDisplayableComponents()
+augroup END
