@@ -199,20 +199,25 @@ hook_source = 'execute "source " . GetNvimrcDir() . "/plugins/eskk.rc.vim"'
 
 [[plugins]]  # コメントアウト補助
 repo = 'tyru/caw.vim'
-on_map = { nx = '<Plug>'}
+on_if = 1
 hook_add = '''
   function! InitCaw() abort
     if !&l:modifiable
-      silent! nunmap <buffer> <C-_>
-      silent! xunmap <buffer> <C-_>
+      silent! nunmap <buffer> _
+      silent! xunmap <buffer> _
+      " silent! nunmap <buffer> <C-_>
+      " silent! xunmap <buffer> <C-_>
     else
-      nmap <buffer> <C-_> <Plug>(caw:hatpos:toggle)
-      xmap <buffer> <C-_> <Plug>(caw:hatpos:toggle)
+      nmap <buffer> _ <Plug>(caw:hatpos:toggle)
+      xmap <buffer> _ <Plug>(caw:hatpos:toggle)
+      " nmap <buffer> <C-_> <Plug>(caw:hatpos:toggle)
+      " xmap <buffer> <C-_> <Plug>(caw:hatpos:toggle)
     endif
   endfunction
+
   augroup my_caw
     autocmd!
-    autocmd FileType * call InitCaw()
+    autocmd BufWinEnter * call InitCaw()
   augroup END
 '''
 
