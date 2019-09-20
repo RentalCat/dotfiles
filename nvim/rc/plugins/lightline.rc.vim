@@ -10,23 +10,33 @@ let g:lightline = {
       \   'active': {
       \     'left': [
       \       ['mode', 'paste'],
-      \       ['gitbranch', 'readonly', 'filename'],
+      \       ['gitbranch', 'readonly', 'myfilename'],
       \       ['funcname'],
       \     ],
       \     'right': [
-      \       ['lineinfo', 'charvaluehex', 'linter_checking', 'linter_warnings', 'linter_errors', 'linter_ok'],
+      \       ['linter_checking', 'linter_warnings', 'linter_errors', 'linter_ok', 'lineinfo', 'charvaluehex'],
       \       ['percent'],
       \       ['fileformat', 'fileencoding', 'filetype'],
+      \     ],
+      \   },
+      \   'inactive': {
+      \     'left': [
+      \       ['filename'],
+      \     ],
+      \     'right': [
+      \       ['lineinfo'],
+      \       ['percent'],
       \     ],
       \   },
       \   'component': {
       \     'paste': '%{&paste ? "PST" : ""}',
       \     'charvaluehex': '0x%04B',
+      \     'lineinfo': "\u2b61 %2l:%-2v",
       \   },
       \   'component_function': {
       \     'gitbranch'   : 'g:mylightline.getGitBranch',
       \     'readonly'    : 'g:mylightline.getReadonly',
-      \     'filename'    : 'g:mylightline.getFilename',
+      \     'myfilename'  : 'g:mylightline.getFilename',
       \     'funcname'    : 'g:mylightline.getFuncname',
       \     'debug'       : 'g:mylightline.getDebugText',
       \     'fileformat'  : 'g:mylightline.getFileFormat',
@@ -43,17 +53,18 @@ let g:lightline = {
       \ }
 
 let s:displayable_components = {}
-let s:margin = 0
+let s:margin = 4
 let s:mode_len = 6
 let s:paste_len = 6
-let s:persent_len = 8
-let s:charvalue_len = 10
+let s:persent_len = 7
+let s:charvalue_len = 9
+let s:ale_len = 6
 
 function! s:lineInfoLen() abort
   " 現在の位置情報文字列の長さ
-  let l:line_num = max([strlen(line('.')), 3])
+  let l:line_num = max([strlen(line('.')), 2])
   let l:col_num = max([strlen(col('.')), 2])
-  return l:line_num + l:col_num + 3
+  return l:line_num + l:col_num + 6
 endfunction
 
 function! s:readonly() abort
@@ -113,7 +124,7 @@ function! s:updateDisplayableComponents() abort
   let l:rlen = winwidth(0) - s:margin
   " 絶対に表示するもの(mode, lineinfo, percent)を引く
   let l:rlen -= s:mode_len + (&paste ? s:paste_len : 0) + s:lineInfoLen() +
-        \       s:persent_len + s:charvalue_len
+        \       s:persent_len + s:charvalue_len + s:ale_len
 
   " readonly
   let l:rlen = s:setDisplayableComponents('readonly', s:readonly(), l:rlen, 3)
@@ -123,7 +134,7 @@ function! s:updateDisplayableComponents() abort
   if l:rlen <= 0 | return | endif  " 表示枠足りなかったらここで終了
 
   " 関数・クラス名
-  let l:rlen = s:setDisplayableComponents('funcname', s:funcname(), l:rlen, 0)
+  let l:rlen = s:setDisplayableComponents('funcname', s:funcname(), l:rlen, 3)
   if l:rlen <= 0 | return | endif  " 表示枠足りなかったらここで終了
 
   " 相対パス (カレントディテクトリから該当ファイルのあるディレクトリパスまで)
@@ -205,5 +216,5 @@ endfunction
 augroup mylightline
   autocmd!
   " バッファに入った時、カーソルが動いた時に情報を更新する
-  autocmd BufWinEnter,CursorMoved * call s:updateDisplayableComponents()
+  autocmd BufWinEnter,CursorMovedI,CursorMoved,CursorHold,CursorHoldI,BufWritePost,FileWritePost * call s:updateDisplayableComponents()
 augroup END
