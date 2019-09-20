@@ -74,11 +74,14 @@ endfunction
 
 function! s:gitBranchName() abort
   " Git branch名
-  if !exists('*fugitive#head')
-    return ''
-  else
-    return "\u2b60 ". fugitive#head()
+  if exists('*fugitive#head')
+    let l:head = fugitive#head()
+    if l:head != ''
+      return "\u2b60 ". l:head
+    endif
   endif
+
+  return ''
 endfunction
 
 function! s:filename() abort
