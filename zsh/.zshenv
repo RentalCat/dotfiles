@@ -22,10 +22,12 @@ path=(
   $go_thirdparty_path/bin(N-/)
   $go_project_path/bin(N-/)
   $NODEBREW_ROOT/current/bin(N-/)
+  /home/linuxbrew/.linuxbrew/bin(N-/)
   /usr/local/opt/mysql@5.6/bin(N-/)
   /usr/local/bin(N-/)
   $path
 )
+export PATH=$(echo $PATH | sed -e "s/ /\\\ /g")  # for windows: path include space escaping
 unset go_root go_thirdparty_path go_project_path
 
 # The next line updates PATH for the Google Cloud SDK.
