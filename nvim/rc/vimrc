@@ -170,6 +170,7 @@ if filereadable(s:localrc_filepath)
   execute 'source' s:localrc_filepath
 endif
 
+" colorscheme, highlight ------------------------------------------------------
 set t_Co=256
 set background=dark
 " colorscheme tender
@@ -179,11 +180,14 @@ set background=dark
 " colorscheme kalisi
 colorscheme molokai
 
-" vimdiff colorscheme
+" visual highlight
+highlight Visual     ctermbg=243
+
+" vimdiff highlight
 highlight DiffAdd     ctermfg=NONE ctermbg=22
 highlight DiffDelete  ctermfg=88   ctermbg=52
 highlight DiffChange  ctermfg=NONE ctermbg=17
-highlight DiffText    ctermfg=NONE ctermbg=19
+highlight DiffText    ctermfg=NONE ctermbg=19 cterm=None
 
 " 透過設定
 highlight Normal      ctermbg=NONE guibg=NONE
