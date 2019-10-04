@@ -179,8 +179,14 @@ set background=dark
 " colorscheme kalisi
 colorscheme molokai
 
+" vimdiff colorscheme
+highlight DiffAdd     ctermfg=NONE ctermbg=22
+highlight DiffDelete  ctermfg=88   ctermbg=52
+highlight DiffChange  ctermfg=NONE ctermbg=17
+highlight DiffText    ctermfg=NONE ctermbg=19
+
 " 透過設定
-highlight Normal ctermbg=NONE guibg=NONE
-highlight NonText ctermbg=NONE guibg=NONE
-highlight SpecialKey ctermbg=NONE guibg=NONE
+highlight Normal      ctermbg=NONE guibg=NONE
+highlight NonText     ctermbg=NONE guibg=NONE
+highlight SpecialKey  ctermbg=NONE guibg=NONE
 highlight EndOfBuffer ctermbg=NONE guibg=NONE
