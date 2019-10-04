@@ -38,7 +38,7 @@ if [[ -x `whence -p git` ]] then
   }
 fi
 if [[ -x `whence -p brew` ]] then
-  alias brew="env PATH=${PATH/$HOME\/\.anyenv\/envs\/pyenv\/shims(:|)/} brew"
+  alias brew="env PATH='${PATH/$HOME\/\.anyenv\/envs\/pyenv\/shims(:|)/}' brew"
 fi
 alias ssh="TERM=xterm ssh"
 alias grep="grep -u"
@@ -186,6 +186,10 @@ setopt auto_pushd                                # 「cd -[TAB]」でディレ�
 setopt auto_param_slash                          # ディレクトリ名の補完で末尾の / を自動的に付加
 setopt auto_remove_slash                         # 補完時にスラッシュが2回続いた場合、1つ取り除く
 setopt pushd_ignore_dups                         # 重複したディレクトリを追加しない
+
+# for ubuntu
+umask 002                                        # 安全のため、生成されるファイルのパーミッションをマスクする
+
 
 # command_not_found_handler : typo したときにコマンドをヒストリに記録しない
 # command_not_found_handler()
