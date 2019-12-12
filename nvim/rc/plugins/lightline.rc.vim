@@ -10,7 +10,7 @@ let g:lightline = {
       \   'active': {
       \     'left': [
       \       ['mode', 'paste'],
-      \       ['gitbranch', 'readonly', 'myfilename'],
+      \       ['gitbranch', 'filemark', 'myfilename'],
       \       ['funcname'],
       \     ],
       \     'right': [
@@ -35,7 +35,7 @@ let g:lightline = {
       \   },
       \   'component_function': {
       \     'gitbranch'   : 'g:mylightline.getGitBranch',
-      \     'readonly'    : 'g:mylightline.getReadonly',
+      \     'filemark'    : 'g:mylightline.getFilemark',
       \     'myfilename'  : 'g:mylightline.getFilename',
       \     'funcname'    : 'g:mylightline.getFuncname',
       \     'debug'       : 'g:mylightline.getDebugText',
@@ -67,9 +67,19 @@ function! s:lineInfoLen() abort
   return l:line_num + l:col_num + 6
 endfunction
 
-function! s:readonly() abort
+function! s:filemark() abort
   " 読込専用 & 編集状態 の文字列
-  return (!&modifiable || &readonly) ? "\u2b64" : &modified ? '+' : ''
+  if !&modifiable || &readonly
+    " 読込専用
+    return "\u2b64"
+  elseif expand('%') =~ '^fugitive://'
+    return "\uf440"
+  elseif &modified
+    " 編集済み
+    return '+'
+  endif
+  " それ以外
+  return ''
 endfunction
 
 function! s:gitBranchName() abort
@@ -99,12 +109,24 @@ endfunction
 
 function! s:relPath() abort
   " 相対パス
-  return substitute(expand('%'), s:filename(), '', 'g')
+  let l:filepath = expand('%')
+  if l:filepath =~ '^fugitive://'
+    let l:filepath = substitute(
+    \   l:filepath, '^fugitive:\/\/\(.*\)\.git\/\/[a-zA-Z0-9]*\/\(.*\)', '\2', 'g'
+    \ )
+  endif
+  return substitute(l:filepath, s:filename(), '', 'g')
 endfunction
 
 function! s:absPath() abort
   " 絶対パス
-  return substitute(expand('%:p'), s:relPath() . s:filename(), '', 'g')
+  let l:filepath = expand('%:p')
+  if l:filepath =~ '^fugitive://'
+    let l:filepath = substitute(
+    \   l:filepath, '^fugitive:\/\/\(.*\)\.git\/\/[a-zA-Z0-9]*\/\(.*\)', '\1\2', 'g'
+    \ )
+  endif
+  return substitute(l:filepath, s:relPath() . s:filename(), '', 'g')
 endfunction
 
 function! s:fileformat() abort
@@ -129,8 +151,8 @@ function! s:updateDisplayableComponents() abort
   let l:rlen -= s:mode_len + (&paste ? s:paste_len : 0) + s:lineInfoLen() +
         \       s:persent_len + s:charvalue_len + s:ale_len
 
-  " readonly
-  let l:rlen = s:setDisplayableComponents('readonly', s:readonly(), l:rlen, 3)
+  " filemark
+  let l:rlen = s:setDisplayableComponents('filemark', s:filemark(), l:rlen, 3)
 
   " ファイル名
   let l:rlen = s:setDisplayableComponents('filename', s:filename(), l:rlen, 3)
@@ -185,8 +207,8 @@ function! g:mylightline.getGitBranch() abort
   return s:getDisplayableComponents('git')
 endfunction
 
-function! g:mylightline.getReadonly() abort
-  return s:getDisplayableComponents('readonly')
+function! g:mylightline.getFilemark() abort
+  return s:getDisplayableComponents('filemark')
 endfunction
 
 function! g:mylightline.getFilename() abort

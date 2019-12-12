@@ -39,7 +39,7 @@ set diffopt=internal,filler,vertical,algorithm:histogram,indent-heuristic
 set formatoptions+=mMj
 
 " □や○の文字があってもカーソル位置がずれないようにする。
-set ambiwidth=double
+set ambiwidth=single
 
 " 画面最後の行をできる限り表示する。
 set display+=lastline
