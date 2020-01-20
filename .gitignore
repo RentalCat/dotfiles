@@ -29,3 +29,10 @@ htop/htoprc
 
 # anyenv
 anyenv
+
+# mycli
+mycli/.mycli-history
+mycli/.mycli.log
+
+# npm
+configstore/update-notifier-npm.json

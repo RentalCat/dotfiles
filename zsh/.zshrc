@@ -231,7 +231,10 @@ fi
 eval "$(pyenv virtualenv-init -)"
 
 # rbenv
-# [[ -x `which rbenv` ]] && eval "$(rbenv init -)"
+if [[ ! -x `whence -p rbenv` ]] then
+  anyenv install rbenv
+fi
+eval "$(rbenv init -)"
 
 # show-current-dir-as-window-name() {
 #     [[ -x `whence -p tmux` ]] && tmux rename-window "`echo ${PWD} | sed -e \"s,$HOME/,~/,\"`" > /dev/null

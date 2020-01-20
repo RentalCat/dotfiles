@@ -7,6 +7,7 @@ export XDG_CONFIG_HOME=$HOME/dotfiles
 export zsh_dir=$XDG_CONFIG_HOME/zsh
 export NVIM_PYTHON_LOG_FILE="$XDG_CONFIG_HOME/nvim/.tmp/log"
 export NVIM_PYTHON_LOG_LEVEL=DEBUG
+export MYCLI_HISTFILE=$XDG_CONFIG_HOME/mycli/.mycli-history
 
 # path
 export -U path

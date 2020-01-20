@@ -20,3 +20,7 @@ ln -fsv $REPOSITORY_ROOT/.gitconfig $HOME/.gitconfig
 
 # global (gtags)
 ln -fsv $REPOSITORY_ROOT/globalrc $HOME/.globalrc
+
+# mycli
+ln -fsv $REPOSITORY_ROOT/mycli/.myclirc $HOME/.myclirc
+

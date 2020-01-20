@@ -9,6 +9,8 @@ endif
 " シンタックスハイライト ON
 syntax on
 
+" True Collor
+set termguicolors
 " スクリプト実行中に再描画しない (重たくなるので)
 set lazyredraw
 

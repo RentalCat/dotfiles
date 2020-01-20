@@ -31,7 +31,7 @@ let g:lightline = {
       \   'component': {
       \     'paste': '%{&paste ? "PST" : ""}',
       \     'charvaluehex': '0x%04B',
-      \     'lineinfo': "\u2b61 %2l:%-2v",
+      \     'lineinfo': "\ue0a1 %2l:%-2v",
       \   },
       \   'component_function': {
       \     'gitbranch'   : 'g:mylightline.getGitBranch',
@@ -43,8 +43,8 @@ let g:lightline = {
       \     'filetype'    : 'g:mylightline.getFileType',
       \     'fileencoding': 'g:mylightline.getFileEncoding',
       \   },
-      \   'separator': {'left': "\u2b80", 'right': "\u2b82"},
-      \   'subseparator': {'left': "\u2b81", 'right': "\u2b83"},
+      \   'separator': {'left': "\ue0b0", 'right': "\ue0b2"},
+      \   'subseparator': {'left': "\ue0b1", 'right': "\ue0b3"},
       \   'mode_map': {
       \     'n': 'NOR',     'i': 'INS', 'R': 'REP', 'v': 'VIS', 'V': 'V-L',
       \     "\<C-v>": 'V-B','c': 'COM', 's': 'SEL', 'S': 'S-L', "\<C-s>": 'S-B',
@@ -71,7 +71,7 @@ function! s:filemark() abort
   " 読込専用 & 編集状態 の文字列
   if !&modifiable || &readonly
     " 読込専用
-    return "\u2b64"
+    return "\ue0a2"
   elseif expand('%') =~ '^fugitive://'
     return "\uf440"
   elseif &modified
@@ -87,7 +87,7 @@ function! s:gitBranchName() abort
   if exists('*fugitive#head')
     let l:head = fugitive#head()
     if l:head != ''
-      return "\u2b60 ". l:head
+      return "\ue0a0 ". l:head
     endif
   endif
 
@@ -162,12 +162,12 @@ function! s:updateDisplayableComponents() abort
   let l:rlen = s:setDisplayableComponents('funcname', s:funcname(), l:rlen, 3)
   if l:rlen <= 0 | return | endif  " 表示枠足りなかったらここで終了
 
-  " 相対パス (カレントディテクトリから該当ファイルのあるディレクトリパスまで)
-  let l:rlen = s:setDisplayableComponents('relpath', s:relPath(), l:rlen, 0)
-  if l:rlen <= 0 | return | endif  " 表示枠足りなかったらここで終了
-
   " git 情報
   let l:rlen = s:setDisplayableComponents('git', s:gitBranchName(), l:rlen, 3)
+  if l:rlen <= 0 | return | endif  " 表示枠足りなかったらここで終了
+
+  " 相対パス (カレントディテクトリから該当ファイルのあるディレクトリパスまで)
+  let l:rlen = s:setDisplayableComponents('relpath', s:relPath(), l:rlen, 0)
   if l:rlen <= 0 | return | endif  " 表示枠足りなかったらここで終了
 
   " ファイルタイプ
