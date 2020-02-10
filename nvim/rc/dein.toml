@@ -5,10 +5,10 @@ repo = 'tomasr/molokai'
 repo = 'easymotion/vim-easymotion'
 hook_add = '''
   let g:EasyMotion_do_mapping = 0
-  nnoremap , <Plug>(easymotion-s2)
-  nnoremap / <Plug>(easymotion-sn)
-  nnoremap f <Plug>(easymotion-fl)
-  nnoremap F <Plug>(easymotion-Fl)
+  nmap , <Plug>(easymotion-s2)
+  nmap / <Plug>(easymotion-sn)
+  nmap f <Plug>(easymotion-fl)
+  nmap F <Plug>(easymotion-Fl)
 '''
 
 [[plugins]]  # status bar, tab bar のUIカスタマイズ
@@ -50,10 +50,10 @@ hook_add = '''
 [[plugins]]  # ページ内検索時に現在の 検索件数 & 検索位置 を表示するよ
 repo = 'osyo-manga/vim-anzu'
 hook_add = '''
-  nnoremap n <Plug>(anzu-n-with-echo)
-  nnoremap N <Plug>(anzu-N-with-echo)
-  nnoremap * <Plug>(anzu-star-with-echo)
-  nnoremap # <Plug>(anzu-sharp-with-echo)
+  nmap n <Plug>(anzu-n-with-echo)
+  nmap N <Plug>(anzu-N-with-echo)
+  nmap * <Plug>(anzu-star-with-echo)
+  nmap # <Plug>(anzu-sharp-with-echo)
 '''
 
 [[plugins]]  # git 編集業に +-? を付ける
@@ -71,7 +71,7 @@ repo = 'tpope/vim-fugitive'
 #on_cmd = ['Gcommit', 'Gblame', 'Gdiff', 'Ggrep', 'Gstatus']
 hook_add = '''
   nnoremap [fugitive]    <Nop>
-  nnoremap <Leader>g  [fugitive]
+  nmap <Leader>g  [fugitive]
   nnoremap <silent> [fugitive]c :<C-u>Gcommit<CR>
   nnoremap <silent> [fugitive]b :<C-u>Gblame<CR>
   nnoremap <silent> [fugitive]d :<C-u>Gdiff<CR>
@@ -89,11 +89,11 @@ repo = 'tyru/current-func-info.vim'
 [[plugins]]  # ハイライトいっぱい付ける
 repo = 't9md/vim-quickhl'
 hook_add = '''
-  nnoremap <Leader>m <Plug>(quickhl-manual-this-whole-word)
-  xnoremap <Leader>m <Plug>(quickhl-manual-this)
-  nnoremap <Leader>M <Plug>(quickhl-manual-reset)
-  xnoremap <Leader>M <Plug>(quickhl-manual-reset)
-  nnoremap <Esc><Esc> <Plug>(quickhl-manual-reset):<C-u>nohlsearch<CR><Esc>
+  nmap <Leader>m <Plug>(quickhl-manual-this-whole-word)
+  xmap <Leader>m <Plug>(quickhl-manual-this)
+  nmap <Leader>M <Plug>(quickhl-manual-reset)
+  xmap <Leader>M <Plug>(quickhl-manual-reset)
+  nmap <Esc><Esc> <Plug>(quickhl-manual-reset):<C-u>nohlsearch<CR><Esc>
 '''
 
 [[plugins]]  # インデント毎に破線を表示

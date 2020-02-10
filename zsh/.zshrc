@@ -1,7 +1,7 @@
 [[ -n $ZSH_DEBUG ]] && zmodload zsh/zprof && zprof
 # keybind
-bindkey -d
-bindkey -e
+bindkey -d  # キーバインドリセット
+bindkey -e  # キーバインドをemacsモードで
 
 # color
 autoload colors

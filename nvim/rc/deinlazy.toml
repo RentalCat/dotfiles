@@ -50,8 +50,8 @@ repo = 'w0rp/ale'
 on_ft = ['python', 'vim']
 hook_source = 'execute "source " . GetNvimrcDir() . "/plugins/ale.rc.vim"'
 hook_add = '''
-  nnoremap <silent> <C-k> <Plug>(ale_previous_wrap)
-  nnoremap <silent> <C-j> <Plug>(ale_next_wrap)
+  nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+  nmap <silent> <C-j> <Plug>(ale_next_wrap)
 '''
 
 [[plugins]]
@@ -81,7 +81,7 @@ if = 'has("nvim")'
 hook_source = 'execute "source " . GetNvimrcDir() . "/plugins/denite.rc.vim"'
 hook_add = '''
   nnoremap [denite] <Nop>
-  nnoremap    <Leader>d [denite]
+  nmap    <Leader>d [denite]
 
   nnoremap <silent> [denite]b
     \ :<C-u>Denite -highlight-matched-char=PreProc buffer<CR>
@@ -113,75 +113,12 @@ on_source = 'deoplete.nvim'
 # repo = 'RentalCat/deoplete-ffxiv'
 # on_source = 'deoplete.nvim'
 
-[[plugins]]  # Unite file_mru 用
-repo = 'Shougo/neomru.vim'
-on_source = 'unite.vim'
-hook_add = '''
-  let g:unite_source_file_mru_ignore_pattern =
-      \ '\~$\|\.\%(o\|exe\|dll\|bak\|zwc\|pyc\|sw[po]\)$'.
-      \ '\|\%(^\|/\)\.\%(hg\|git\|bzr\|svn\)\%($\|/\)'.
-      \ '\|^\%(\\\\\|/mnt/\|/media/\|/temp/\|/tmp/\|\%(/private\)\=/var/folders/\)'.
-      \ '\|\%(^\%(fugitive\)://\)'.
-      \ '\|\%(^\%(term\)://\)'.
-      \ '\|\%(^\%(gita\)://\)'
-'''
-
-[[plugins]]  # Unite  # TODO もう少し便利にしたい
-repo = 'Shougo/unite.vim'
-on_if = 1
-hook_add = '''
-  execute 'source' GetNvimrcDir() . '/plugins/unite.rc.vim'
-
-  nnoremap [unite] <Nop>
-  nnoremap    <Leader>u [unite]
-
-  nnoremap <silent> [unite]b
-        \ :<C-u>Unite -buffer-name=buffer buffer -auto-preview -start-insert -no-resize<CR>
-  nnoremap <silent> [unite]f
-        \ :<C-u>execute 'Unite find:' . unite#util#path2project_directory(expand('%'))
-        \               . ' -buffer-name=grep(`tabpagenr()`) -auto-preview -no-empty -start-insert'
-        \               . ' -ignorecase -smartcase -no-resize'<CR>
-  nnoremap <silent> [unite]r
-        \ :<C-u>Unite -buffer-name=register -default-action=append register<CR>
-  nnoremap <silent> [unite]u
-        \ :<C-u>Unite -buffer-name=file_mru file_mru -auto-preview -start-insert -no-resize<CR>
-  nnoremap <silent> [unite]v
-        \ :<C-u>execute 'Unite grep:' . unite#util#path2project_directory(expand('%'))
-        \               . ' -buffer-name=grep(`tabpagenr()`) -auto-preview -no-empty -start-insert'
-        \               . ' -ignorecase -smartcase -no-resize'<CR>
-  nnoremap <silent> [unite]<Leader>
-        \ :<C-u>UniteResume<CR>
-
-  " nnoremap <silent> gv
-  "       \ :<C-u>execute 'Unite grep:' . unite#util#path2project_directory(expand('%'))
-  "       \               . ' -buffer-name=grep(`tabpagenr()`) -auto-preview -no-empty -start-insert'
-  "       \               . ' -ignorecase -smartcase -no-resize'<CR><C-r><C-w><CR>
-'''
-
-[[plugins]]  # help を見やすくする unite
-repo = 'Shougo/unite-help'
-on_source = 'unite.vim'
-
-[[plugins]]
-repo = 'sjl/gundo.vim'
-on_cmd = 'GundoToggle'
-hook_add = '''
-  let g:gundo_prefer_python3 = has('python3')
-  let g:gundo_right = 1
-  let g:gundo_preview_bottom = 1
-  nnoremap <silent> U  :<C-u>GundoToggle<CR>
-'''
-
 [[plugins]]  # vim のシンタックスチェッカー (パーサ)
 repo = 'syngan/vim-vimlint'
 
 [[plugins]]
 repo = 'thinca/vim-ft-vim_fold'
 on_ft = 'vim'
-
-[[plugins]]
-repo = 'thinca/vim-unite-history'
-on_source = 'unite.vim'
 
 [[plugins]]
 repo = 'thinca/vim-quickrun'
@@ -204,10 +141,10 @@ hook_add = '''
       " silent! nunnoremap <buffer> <C-_>
       " silent! xunnoremap <buffer> <C-_>
     else
-      nnoremap <buffer> _ <Plug>(caw:hatpos:toggle)
-      xnoremap <buffer> _ <Plug>(caw:hatpos:toggle)
-      " nnoremap <buffer> <C-_> <Plug>(caw:hatpos:toggle)
-      " xnoremap <buffer> <C-_> <Plug>(caw:hatpos:toggle)
+      nmap <buffer> _ <Plug>(caw:hatpos:toggle)
+      xmap <buffer> _ <Plug>(caw:hatpos:toggle)
+      " nmap <buffer> <C-_> <Plug>(caw:hatpos:toggle)
+      " xmap <buffer> <C-_> <Plug>(caw:hatpos:toggle)
     endif
   endfunction
 
