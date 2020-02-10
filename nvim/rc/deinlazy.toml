@@ -6,10 +6,6 @@ hook_add = '''
   execute 'let g:plantuml_executable_script="' GetNvimrcDir() . '/lib/plantuml/plantuml"'
 '''
 
-[[plugins]]
-repo = 'ambv/black'
-on_ft = 'python'
-
 [[plugins]]  # Syntax highlight: toml
 repo = 'cespare/vim-toml'
 on_ft = 'toml'
@@ -54,8 +50,8 @@ repo = 'w0rp/ale'
 on_ft = ['python', 'vim']
 hook_source = 'execute "source " . GetNvimrcDir() . "/plugins/ale.rc.vim"'
 hook_add = '''
-  nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-  nmap <silent> <C-j> <Plug>(ale_next_wrap)
+  nnoremap <silent> <C-k> <Plug>(ale_previous_wrap)
+  nnoremap <silent> <C-j> <Plug>(ale_next_wrap)
 '''
 
 [[plugins]]
@@ -85,7 +81,7 @@ if = 'has("nvim")'
 hook_source = 'execute "source " . GetNvimrcDir() . "/plugins/denite.rc.vim"'
 hook_add = '''
   nnoremap [denite] <Nop>
-  nmap    <Leader>d [denite]
+  nnoremap    <Leader>d [denite]
 
   nnoremap <silent> [denite]b
     \ :<C-u>Denite -highlight-matched-char=PreProc buffer<CR>
@@ -137,7 +133,7 @@ hook_add = '''
   execute 'source' GetNvimrcDir() . '/plugins/unite.rc.vim'
 
   nnoremap [unite] <Nop>
-  nmap    <Leader>u [unite]
+  nnoremap    <Leader>u [unite]
 
   nnoremap <silent> [unite]b
         \ :<C-u>Unite -buffer-name=buffer buffer -auto-preview -start-insert -no-resize<CR>
@@ -190,7 +186,7 @@ on_source = 'unite.vim'
 [[plugins]]
 repo = 'thinca/vim-quickrun'
 on_map = {n = '<Plug>'}
-hook_add = 'nmap <silent> <Leader>r <Plug>(quickrun)'
+hook_add = 'nnoremap <silent> <Leader>r <Plug>(quickrun)'
 
 #[[plugins]]  # 日本語IM環境強化
 #repo = 'tyru/eskk.vim'
@@ -203,15 +199,15 @@ on_if = 1
 hook_add = '''
   function! InitCaw() abort
     if !&l:modifiable
-      silent! nunmap <buffer> _
-      silent! xunmap <buffer> _
-      " silent! nunmap <buffer> <C-_>
-      " silent! xunmap <buffer> <C-_>
+      silent! nunnoremap <buffer> _
+      silent! xunnoremap <buffer> _
+      " silent! nunnoremap <buffer> <C-_>
+      " silent! xunnoremap <buffer> <C-_>
     else
-      nmap <buffer> _ <Plug>(caw:hatpos:toggle)
-      xmap <buffer> _ <Plug>(caw:hatpos:toggle)
-      " nmap <buffer> <C-_> <Plug>(caw:hatpos:toggle)
-      " xmap <buffer> <C-_> <Plug>(caw:hatpos:toggle)
+      nnoremap <buffer> _ <Plug>(caw:hatpos:toggle)
+      xnoremap <buffer> _ <Plug>(caw:hatpos:toggle)
+      " nnoremap <buffer> <C-_> <Plug>(caw:hatpos:toggle)
+      " xnoremap <buffer> <C-_> <Plug>(caw:hatpos:toggle)
     endif
   endfunction
 

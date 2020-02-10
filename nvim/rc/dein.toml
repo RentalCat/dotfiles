@@ -1,36 +1,17 @@
-[[plugins]]
-repo = 'freeo/vim-kalisi'
-
-[[plugins]]
+[[plugins]]  # colorscheme
 repo = 'tomasr/molokai'
 
-[[plugins]]
-repo = 'KKPMW/moonshine-vim'
-
-[[plugins]]
-repo = 'romainl/Apprentice'
-
-[[plugins]]
-repo = 'jacoborus/tender.vim'
-
-[[plugins]]
-repo = 'altercation/vim-colors-solarized'
-hook_add = '''
-  let g:solarized_termcolors=256
-  let g:solarized_termtrans=1
-'''
-
-[[plugins]]
+[[plugins]]  # 単語検索拡張
 repo = 'easymotion/vim-easymotion'
 hook_add = '''
   let g:EasyMotion_do_mapping = 0
-  nmap , <Plug>(easymotion-s2)
-  nmap / <Plug>(easymotion-sn)
-  nmap f <Plug>(easymotion-fl)
-  nmap F <Plug>(easymotion-Fl)
+  nnoremap , <Plug>(easymotion-s2)
+  nnoremap / <Plug>(easymotion-sn)
+  nnoremap f <Plug>(easymotion-fl)
+  nnoremap F <Plug>(easymotion-Fl)
 '''
 
-[[plugins]]
+[[plugins]]  # status bar, tab bar のUIカスタマイズ
 repo = 'itchyny/lightline.vim'
 hook_add = 'execute "source " . GetNvimrcDir() . "/plugins/lightline.rc.vim"'
 
@@ -43,7 +24,7 @@ hook_add = '''
   set diffexpr=unified_diff#diffexpr()
 '''
 
-[[plugins]]
+[[plugins]]  # カーソル下の同じ単語をハイライトしてくれる
 repo = 'osyo-manga/vim-brightest'
 hook_add = '''
   " ハイライトタイプはアンダーライン
@@ -69,16 +50,16 @@ hook_add = '''
 [[plugins]]  # ページ内検索時に現在の 検索件数 & 検索位置 を表示するよ
 repo = 'osyo-manga/vim-anzu'
 hook_add = '''
-  nmap n <Plug>(anzu-n-with-echo)
-  nmap N <Plug>(anzu-N-with-echo)
-  nmap * <Plug>(anzu-star-with-echo)
-  nmap # <Plug>(anzu-sharp-with-echo)
+  nnoremap n <Plug>(anzu-n-with-echo)
+  nnoremap N <Plug>(anzu-N-with-echo)
+  nnoremap * <Plug>(anzu-star-with-echo)
+  nnoremap # <Plug>(anzu-sharp-with-echo)
 '''
 
 [[plugins]]  # git 編集業に +-? を付ける
 repo = 'sgur/vim-gitgutter'
 
-[[plugins]]
+[[plugins]]  # プラグイン管理ツール
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
@@ -90,7 +71,7 @@ repo = 'tpope/vim-fugitive'
 #on_cmd = ['Gcommit', 'Gblame', 'Gdiff', 'Ggrep', 'Gstatus']
 hook_add = '''
   nnoremap [fugitive]    <Nop>
-  nmap <Leader>g  [fugitive]
+  nnoremap <Leader>g  [fugitive]
   nnoremap <silent> [fugitive]c :<C-u>Gcommit<CR>
   nnoremap <silent> [fugitive]b :<C-u>Gblame<CR>
   nnoremap <silent> [fugitive]d :<C-u>Gdiff<CR>
@@ -108,11 +89,11 @@ repo = 'tyru/current-func-info.vim'
 [[plugins]]  # ハイライトいっぱい付ける
 repo = 't9md/vim-quickhl'
 hook_add = '''
-  nmap <Leader>m <Plug>(quickhl-manual-this-whole-word)
-  xmap <Leader>m <Plug>(quickhl-manual-this)
-  nmap <Leader>M <Plug>(quickhl-manual-reset)
-  xmap <Leader>M <Plug>(quickhl-manual-reset)
-  nmap <Esc><Esc> <Plug>(quickhl-manual-reset):<C-u>nohlsearch<CR><Esc>
+  nnoremap <Leader>m <Plug>(quickhl-manual-this-whole-word)
+  xnoremap <Leader>m <Plug>(quickhl-manual-this)
+  nnoremap <Leader>M <Plug>(quickhl-manual-reset)
+  xnoremap <Leader>M <Plug>(quickhl-manual-reset)
+  nnoremap <Esc><Esc> <Plug>(quickhl-manual-reset):<C-u>nohlsearch<CR><Esc>
 '''
 
 [[plugins]]  # インデント毎に破線を表示
