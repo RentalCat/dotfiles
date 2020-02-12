@@ -14,6 +14,22 @@ on_ft = 'toml'
 repo = 'chr4/nginx.vim'
 on_ft = 'nginx'
 
+[[plugins]]  # Syntax highlight: markdown
+repo = 'plasticboy/vim-markdown'
+on_ft = 'markdown'
+hook_source = '''
+  let g:vim_markdown_folding_disabled = 1
+  let g:vim_markdown_conceal = 0
+  let g:vim_markdown_conceal_code_blocks = 0
+  let g:vim_markdown_fenced_languages = [
+  \   'c++=cpp',
+  \   'viml=vim',
+  \   'bash=sh',
+  \   'ini=dosini',
+  \   'py=python',
+  \ ]
+'''
+
 [[plugins]]  # gitk サポート for fugitive
 repo = 'cohama/agit.vim'
 on_source = 'vim-fugitive'

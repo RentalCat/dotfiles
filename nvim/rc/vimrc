@@ -166,6 +166,9 @@ let g:python_host_prog = $PYENV_ROOT . '/shims/python2'
 let g:python3_host_prog = $PYENV_ROOT . '/shims/python3'
 execute 'source' expand('<sfile>:h').'/dein.rc.vim'
 
+" tools -----------------------------------------------------------------------
+execute 'source' expand('<sfile>:h').'/tools/syntax_info.vim'
+
 " local.vim -------------------------------------------------------------------
 let s:localrc_filepath = resolve(expand('<sfile>:h').'/.local.rc.vim')
 if filereadable(s:localrc_filepath)
