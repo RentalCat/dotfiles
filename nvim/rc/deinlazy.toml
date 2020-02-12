@@ -30,6 +30,20 @@ hook_source = '''
   \ ]
 '''
 
+[[plugins]]  # markdown preview
+repo = 'previm/previm'
+depends = ['vim-markdown']
+on_source = 'vim-markdown'
+hook_add = '''
+    nnoremap <silent> <C-p> :PrevimOpen<CR>
+    let g:previm_enable_realtime=1
+'''
+
+[[plugins]]
+repo = 'tyru/open-browser.vim'
+depends = ['vim-markdown', 'previm']
+on_source = 'previm'
+
 [[plugins]]  # gitk サポート for fugitive
 repo = 'cohama/agit.vim'
 on_source = 'vim-fugitive'
