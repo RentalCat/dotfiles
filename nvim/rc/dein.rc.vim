@@ -1,3 +1,4 @@
+scriptencoding utf-8
 
 " プラグインがインストールされるディレクトリ: dotfiles/nvim/.cache/dein/
 let s:dein_dir = resolve(expand('<sfile>:h').'/../.cache/dein')

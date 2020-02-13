@@ -1,16 +1,17 @@
+scriptencoding utf-8
 " 見た目変更
 call denite#custom#option('default', 'prompt', '>')
 " PreProc
 
-call denite#custom#map('insert', "<C-t>", '<denite:nop>')
-call denite#custom#map('insert', "<C-g>", '<denite:nop>')
-call denite#custom#map('insert', "<C-j>", '<denite:move_to_next_line>')
-call denite#custom#map('insert', "<C-k>", '<denite:move_to_previous_line>')
-call denite#custom#map('insert', "<Down>", '<denite:move_to_next_line>')
-call denite#custom#map('insert', "<Up>", '<denite:move_to_previous_line>')
-call denite#custom#map('insert', "<C-d>", '<denite:scroll_window_downwards>')
-call denite#custom#map('insert', "<C-u>", '<denite:scroll_page_forwards>')
-call denite#custom#map('insert', "<C-a>", '<denite:move_caret_to_head>')
+call denite#custom#map('insert', '<C-t>', '<denite:nop>')
+call denite#custom#map('insert', '<C-g>', '<denite:nop>')
+call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>')
+call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>')
+call denite#custom#map('insert', '<Down>', '<denite:move_to_next_line>')
+call denite#custom#map('insert', '<Up>', '<denite:move_to_previous_line>')
+call denite#custom#map('insert', '<C-d>', '<denite:scroll_window_downwards>')
+call denite#custom#map('insert', '<C-u>', '<denite:scroll_page_forwards>')
+call denite#custom#map('insert', '<C-a>', '<denite:move_caret_to_head>')
 
 " greper tools settings
 if executable('pt')

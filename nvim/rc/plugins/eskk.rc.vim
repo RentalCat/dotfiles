@@ -1,3 +1,4 @@
+scriptencoding utf-8
 " 日本語入力補助ツール eskk の使い方
 " <C-j>   : SKK の起動 / [アスキーモード] から [かなモード] に切り替え
 " q       : [かなモード] <=> [カナモード] の切り替え
@@ -22,7 +23,7 @@ let g:eskk#dictionary = {
 \ 'sorted': 0,
 \ 'encoding': 'utf-8',
 \ }
-let s:eskk_jisyo_filename = "/SKK-JISYO.L"
+let s:eskk_jisyo_filename = '/SKK-JISYO.L'
 let s:eskk_jisyo_filepath = g:eskk#directory . s:eskk_jisyo_filename
 if !filereadable(s:eskk_jisyo_filepath)
   " eskk の辞書をインストールする

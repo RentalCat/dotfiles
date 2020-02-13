@@ -1,10 +1,9 @@
-scriptencoding utf-8
-
 " 起動時のみ呼ばれるやーつ
 if has('vim_starting')
   execute 'source' expand('<sfile>:h').'/init.rc.vim'
 endif
 
+scriptencoding utf-8
 " 描画関係 (全域に影響あるもの) -----------------------------------------------
 " シンタックスハイライト ON
 syntax on

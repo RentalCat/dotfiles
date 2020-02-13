@@ -1,3 +1,4 @@
+scriptencoding utf-8
 "let g:NERDTreeShowHidden=1
 let g:NERDTreeWinPos = 'left'
 "let g:NERDTreeDirArrows=0
@@ -15,7 +16,7 @@ augroup END
 
 function! s:IsNerdTreeOpenInCurrentTab() abort
   for i in tabpagebuflist()
-    if getbufvar(i, '&filetype') =~ 'nerdtree'
+    if getbufvar(i, '&filetype') =~? 'nerdtree'
       return 1
     endif
   endfor

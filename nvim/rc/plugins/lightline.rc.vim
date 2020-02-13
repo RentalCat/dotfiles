@@ -72,7 +72,7 @@ function! s:filemark() abort
   if !&modifiable || &readonly
     " 読込専用
     return "\ue0a2"
-  elseif expand('%') =~ '^fugitive://'
+  elseif expand('%') =~? '^fugitive://'
     return "\uf440"
   elseif &modified
     " 編集済み
@@ -86,7 +86,7 @@ function! s:gitBranchName() abort
   " Git branch名
   if exists('*fugitive#head')
     let l:head = fugitive#head()
-    if l:head != ''
+    if l:head !=# ''
       return "\ue0a0 ". l:head
     endif
   endif
@@ -110,7 +110,7 @@ endfunction
 function! s:relPath() abort
   " 相対パス
   let l:filepath = expand('%')
-  if l:filepath =~ '^fugitive://'
+  if l:filepath =~? '^fugitive://'
     let l:filepath = substitute(
     \   l:filepath, '^fugitive:\/\/\(.*\)\.git\/\/[a-zA-Z0-9]*\/\(.*\)', '\2', 'g'
     \ )
@@ -121,7 +121,7 @@ endfunction
 function! s:absPath() abort
   " 絶対パス
   let l:filepath = expand('%:p')
-  if l:filepath =~ '^fugitive://'
+  if l:filepath =~? '^fugitive://'
     let l:filepath = substitute(
     \   l:filepath, '^fugitive:\/\/\(.*\)\.git\/\/[a-zA-Z0-9]*\/\(.*\)', '\1\2', 'g'
     \ )
@@ -136,12 +136,12 @@ endfunction
 
 function! s:filetype() abort
   " ファイルタイプ
-  return &filetype == '' ? 'no ft' : &filetype
+  return &filetype ==# '' ? 'no ft' : &filetype
 endfunction
 
 function! s:fileencoding() abort
   " ファイルエンコーディング
-  return &fileencoding == '' ? &fileencoding : &encoding
+  return &fileencoding ==# '' ? &fileencoding : &encoding
 endfunction
 
 function! s:updateDisplayableComponents() abort
