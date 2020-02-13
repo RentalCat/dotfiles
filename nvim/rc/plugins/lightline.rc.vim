@@ -84,13 +84,13 @@ endfunction
 
 function! s:gitBranchName() abort
   " Git branch名
-  if exists('*fugitive#head')
+  try
     let l:head = fugitive#head()
     if l:head !=# ''
       return "\ue0a0 ". l:head
     endif
-  endif
-
+  catch /E117.*/
+  endtry
   return ''
 endfunction
 

@@ -68,7 +68,6 @@ build = 'make'
 
 [[plugins]]  # git wrapper
 repo = 'tpope/vim-fugitive'
-#on_cmd = ['Gcommit', 'Gblame', 'Gdiff', 'Ggrep', 'Gstatus']
 hook_add = '''
   nnoremap [fugitive]    <Nop>
   nmap <Leader>g  [fugitive]
