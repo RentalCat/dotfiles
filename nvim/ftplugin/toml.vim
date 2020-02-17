@@ -1,6 +1,6 @@
 scriptencoding utf-8
-let s:save_cpo = &cpo
-set cpo&vim
+let s:save_cpo = &cpoptions
+set cpoptions&vim
 
 " タブ文字の幅
 setlocal tabstop=2
@@ -17,4 +17,4 @@ setlocal iskeyword+=:,#
 " 複数行コメントの syntax の精度を上げる
 syntax sync minlines=100 maxlines=1000
 "
-let &cpo = s:save_cpo
+let &cpoptions = s:save_cpo

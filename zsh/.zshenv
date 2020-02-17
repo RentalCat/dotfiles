@@ -11,15 +11,22 @@ export MYCLI_HISTFILE=$XDG_CONFIG_HOME/mycli/.mycli-history
 
 # path
 export -U path
+## anyenv (python, ruby...)
 export ANYENV_ROOT="$HOME/.anyenv"
+## nodebrew
 export NODEBREW_ROOT="$HOME/.nodebrew"
+## go
 go_root=$HOME/.go
 go_thirdparty_path=$go_root/third-party
 go_project_path=$go_root/my-project
 export GOPATH=$go_thirdparty_path:$go_project_path
+## rustup
+export CARGO_HOME=$HOME/.cargo
+
 setopt no_global_rcs
 path=(
   $ANYENV_ROOT/bin(N-/)
+  $CARGO_HOME/bin(N-/)
   $go_thirdparty_path/bin(N-/)
   $go_project_path/bin(N-/)
   $NODEBREW_ROOT/current/bin(N-/)

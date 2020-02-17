@@ -155,11 +155,6 @@ repo = 'thinca/vim-quickrun'
 on_map = {n = '<Plug>'}
 hook_add = 'nnoremap <silent> <Leader>r <Plug>(quickrun)'
 
-#[[plugins]]  # 日本語IM環境強化
-#repo = 'tyru/eskk.vim'
-#on_event = 'InsertEnter'
-#hook_source = 'execute "source " . GetNvimrcDir() . "/plugins/eskk.rc.vim"'
-
 [[plugins]]  # コメントアウト補助
 repo = 'tyru/caw.vim'
 on_if = 1
