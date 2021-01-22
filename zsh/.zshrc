@@ -43,6 +43,8 @@ fi
 alias ssh="TERM=xterm ssh"
 alias grep="grep -u"
 alias cp="cp -i"
+# for Ubuntu on Windows
+[[ ${OSTYPE} == linux* ]] && alias pbcopy="clip.exe"
 
 # prompt
 if [[ -r $zsh_dir/prompt.zsh ]]; then
@@ -75,7 +77,8 @@ zstyle ':zle:*' word-style unspecified
 # plugin
 export ZPLUG_HOME=$zsh_dir/.zplug
 if [[ ! -d $ZPLUG_HOME ]]; then
-  curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh 
+  #curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh 
+  git clone https://github.com/zplug/zplug $ZPLUG_HOME
 fi
 source $ZPLUG_HOME/init.zsh
 
@@ -235,6 +238,13 @@ if [[ ! -x `whence -p rbenv` ]] then
   anyenv install rbenv
 fi
 eval "$(rbenv init -)"
+
+
+# nodebrew
+if [[ ! -x `whence -p nodebrew` ]] then
+  brew install nodebrew
+  nodebrew setup
+fi
 
 # show-current-dir-as-window-name() {
 #     [[ -x `whence -p tmux` ]] && tmux rename-window "`echo ${PWD} | sed -e \"s,$HOME/,~/,\"`" > /dev/null

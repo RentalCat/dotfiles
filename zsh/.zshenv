@@ -11,6 +11,11 @@ export MYCLI_HISTFILE=$XDG_CONFIG_HOME/mycli/.mycli-history
 
 # path
 export -U path
+# libnsl (for neovim; Ubuntu on Windows only...?)
+if [[ ${OSTYPE} == linux* ]]; then
+  export LDFLAGS="-L/home/linuxbrew/.linuxbrew/opt/libnsl/lib"
+  export CPPFLAGS="-I/home/linuxbrew/.linuxbrew/opt/libnsl/include"
+fi
 ## anyenv (python, ruby...)
 export ANYENV_ROOT="$HOME/.anyenv"
 ## nodebrew
@@ -30,7 +35,7 @@ path=(
   $go_thirdparty_path/bin(N-/)
   $go_project_path/bin(N-/)
   $NODEBREW_ROOT/current/bin(N-/)
-  /home/linuxbrew/.linuxbrew/bin(N-/)
+  /home/linuxbrew/.linuxbrew/sbin(N-/)
   /usr/local/opt/mysql@5.6/bin(N-/)
   /usr/local/bin(N-/)
   $path
