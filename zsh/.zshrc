@@ -11,39 +11,7 @@ export LS_COLORS='di=36:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46
 zstyle ':completion:*' list-colors 'di=36' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
 
 # alias
-if [[ -x `whence -p ls` ]] then
-  case ${OSTYPE} in
-    darwin*) alias ls="ls -G -F";;
-    linux*)  alias ls="ls --color -F";;
-  esac
-  alias ll="ls -l"
-  alias la="ls -a"
-fi
-[[ -x `whence -p rm` ]]    && alias rm="rm -iv"
-[[ -x `whence -p mkdir` ]] && alias mkdir="mkdir -p"
-[[ -x `whence -p tmux` ]]  && alias tmux="tmux -2"
-[[ -x `whence -p nvim` ]]  && alias vim="nvim"
-if [[ -x `whence -p git` ]] then
-  alias g="git"
-  alias gst="git status -sbu"
-  alias gco="git checkout"
-  alias gadd="git add --all"
-  alias gcommit="git commit -m"
-  alias glogg="git -c color.diff=always log --stat --pretty=format:'%C(cyan)%h %C(green)%ar %C(yellow)%an %C(reset)%s %C(red)%d%C(reset)'"
-  alias glog="glogg | head"
-  alias gloggraph="git -c color.diff=always log --graph --date-order --pretty=format:'%C(cyan)%h %C(green)%ci %C(yellow)%an %C(blue)%m %C(reset)%s %C(red)%d'"
-  function gpush() {
-    git push origin $(basename "`git symbolic-ref HEAD 2> /dev/null`")
-  }
-fi
-if [[ -x `whence -p brew` ]] then
-  alias brew="env PATH='${PATH/$HOME\/\.anyenv\/envs\/pyenv\/shims(:|)/}' brew"
-fi
-alias ssh="TERM=xterm ssh"
-alias grep="grep -u"
-alias cp="cp -i"
-# for Ubuntu on Windows
-[[ ${OSTYPE} == linux* ]] && alias pbcopy="clip.exe"
+[[ -r $zsh_dir/rc/alias.zsh ]] && source $zsh_dir/rc/alias.zsh
 
 # prompt
 [[ -r $zsh_dir/rc/prompt.zsh ]] && source $zsh_dir/rc/prompt.zsh
@@ -159,40 +127,7 @@ bindkey '^xb' anyframe-widget-checkout-git-branch
 bindkey '^x^b' anyframe-widget-checkout-git-branch
 
 # anyenv
-if [[ ! -x `whence -p anyenv` ]] then
-  git clone https://github.com/riywo/anyenv ~/.anyenv
-fi
-eval "$(anyenv init -)"
-
-# pyenv
-if [[ ! -x `whence -p pyenv` ]] then
-  anyenv install pyenv
-fi
-# pyenv virtualenv
-pyenv_path="$(pyenv root)/plugins/pyenv-virtualenv"
-if [[ ! -e $pyenv_path ]] then
-  git clone https://github.com/pyenv/pyenv-virtualenv.git $pyenv_path
-fi
-eval "$(pyenv virtualenv-init -)"
-
-# rbenv
-if [[ ! -x `whence -p rbenv` ]] then
-  anyenv install rbenv
-fi
-eval "$(rbenv init -)"
-
-
-# nodebrew
-if [[ ! -x `whence -p nodebrew` ]] then
-  brew install nodebrew
-  nodebrew setup
-fi
-
-# show-current-dir-as-window-name() {
-#     [[ -x `whence -p tmux` ]] && tmux rename-window "`echo ${PWD} | sed -e \"s,$HOME/,~/,\"`" > /dev/null
-# }
-#
-# add-zsh-hook chpwd show-current-dir-as-window-name
+[[ -r $zsh_dir/rc/anyenv.zsh ]] && source $zsh_dir/rc/anyenv.zsh
 
 if (which zprof > /dev/null 2>&1) ;then
   zprof
