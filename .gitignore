@@ -16,7 +16,7 @@ vim/.netrwhist
 vim/personal.vim
 
 # zsh
-zsh/.zplug
+zsh/.zinit
 zsh/.zcompdump*
 zsh/cmd_history
 

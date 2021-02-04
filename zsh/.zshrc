@@ -1,4 +1,3 @@
-[[ -n $ZSH_DEBUG ]] && zmodload zsh/zprof && zprof
 # keybind
 bindkey -d  # キーバインドリセット
 bindkey -e  # キーバインドをemacsモードで
@@ -47,9 +46,7 @@ alias cp="cp -i"
 [[ ${OSTYPE} == linux* ]] && alias pbcopy="clip.exe"
 
 # prompt
-if [[ -r $zsh_dir/prompt.zsh ]]; then
-  source $zsh_dir/prompt.zsh
-fi
+[[ -r $zsh_dir/rc/prompt.zsh ]] && source $zsh_dir/rc/prompt.zsh
 
 # completion
 autoload -Uz compinit
@@ -75,62 +72,7 @@ zstyle ':zle:*' word-chars ' /=;@:{}[]()<>,|.'
 zstyle ':zle:*' word-style unspecified
 
 # plugin
-export ZPLUG_HOME=$zsh_dir/.zplug
-if [[ ! -d $ZPLUG_HOME ]]; then
-  #curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh 
-  git clone https://github.com/zplug/zplug $ZPLUG_HOME
-fi
-source $ZPLUG_HOME/init.zsh
-
-# fzf: インタラクティブフィルタ
-zplug "junegunn/fzf-bin", as:command, from:gh-r, rename-to:'fzf'
-zplug "junegunn/fzf", as:command, use:bin/fzf-tmux
-# fzy: インタラクティブフィルタ
-# zplug "jhawthorn/fzy", as:command, rename-to:'fzy', hook-build:"{ make install }", frozen:1
-
-# anyframe (Anything風インターフェース)
-zplug "mollifier/anyframe"
-
-# jq: json整形コマンド
-zplug "stedolan/jq", as:command, from:gh-r, rename-to:'jq', frozen:1
-
-# zsh のコマンドラインに色付けをする
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-
-# 補完ファイル (dockerやjq等、デフォルトで補完されない内容をカバー)
-zplug "zsh-users/zsh-completions"
-
-# インクリメンタル補完をサポート
-zplug "zsh-users/zsh-autosuggestions", use:zsh-autosuggestions.zsh
-
-# 256色対応化
-zplug "chrissicool/zsh-256color"
-
-# コードサーチツール, agの進化版
-zplug "monochromegane/the_platinum_searcher", as:command, from:gh-r, rename-to:'pt', frozen:1
-
-# cd 強化 (required: fzy, fzf, peco, or...)
-zplug "b4b4r07/enhancd", use:init.sh
-
-# b4b4r07/history
-# zplug 'b4b4r07/history', use:misc/zsh/init.zsh
-# ZSH_HISTORY_KEYBIND_GET_BY_DIR="^r"
-# ZSH_HISTORY_KEYBIND_GET_ALL="^r"
-# ZSH_HISTORY_KEYBIND_ARROW_UP="^p"
-# ZSH_HISTORY_KEYBIND_ARROW_DOWN="^n"
-#source $zsh_dir/zsh-history/misc/zsh/init.zsh
-
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
-
-# Then, source plugins and add commands to $PATH
-zplug load
-# zplug load --verbose
+[[ -r $zsh_dir/rc/plugin.zsh ]] && source $zsh_dir/rc/plugin.zsh
 
 HISTFILE=$zsh_dir/cmd_history
 HISTSIZE=1000000

@@ -1,3 +1,5 @@
+[[ -n $ZSH_DEBUG ]] && zmodload zsh/zprof && zprof
+
 export LANG=ja_JP.UTF-8
 export LC_TYPE=ja_JP.UTF-8
 
@@ -36,23 +38,10 @@ path=(
   $go_project_path/bin(N-/)
   $NODEBREW_ROOT/current/bin(N-/)
   /home/linuxbrew/.linuxbrew/sbin(N-/)
+  /home/linuxbrew/.linuxbrew/bin(N-/)
   /usr/local/opt/mysql@5.6/bin(N-/)
   /usr/local/bin(N-/)
   $path
 )
 export PATH=$(echo $PATH | sed -e "s/ /\\\ /g")  # for windows: path include space escaping
 unset go_root go_thirdparty_path go_project_path
-
-# The next line updates PATH for the Google Cloud SDK.
-# source "$HOME/google-cloud-sdk/path.zsh.inc"
-
-# The next line enables shell command completion for gcloud.
-# source "$HOME/google-cloud-sdk/completion.zsh.inc"
-
-# tmux auto attach
-# if [ -z $WINDOW ] && [ -z $TMUX ]; then
-#   if which tmux >/dev/null; then
-#     #if not inside a tmux session, and if no session is started, start a new session
-#     test -z $TMUX && (tmux a -t default || tmux new-session -s default)
-#   fi
-# fi
