@@ -9,7 +9,18 @@ fi
 [[ -x `whence -p rm` ]]    && alias rm="rm -iv"
 [[ -x `whence -p mkdir` ]] && alias mkdir="mkdir -p"
 [[ -x `whence -p tmux` ]]  && alias tmux="tmux -2"
-[[ -x `whence -p nvim` ]]  && alias vim="nvim"
+
+# vim
+function nvim_with_anyenv() {
+  # pyenv, rbenvが未読込なら読み込む
+  if [[ ! -x `whence -p pyenv`  || ! -x `whence -p rbenv` ]] then
+    anyenv &> /dev/null  # anyenvを遅延読込してパスを通す
+  fi
+  nvim "$@"
+}
+[[ -x `whence -p nvim` ]] && alias vim="nvim_with_anyenv"
+
+# git
 if [[ -x `whence -p git` ]] then
   alias g="git"
   alias gst="git status -sbu"
