@@ -9,7 +9,7 @@ let g:NERDTreeAutoDeleteBuffer = 1
 " if called vim without filename, open nardtree.
 augroup augroup_nerd_tree
   autocmd!
-  autocmd VimEnter * if !argc() | NERDTree | endif
+  " autocmd VimEnter * if !argc() | NERDTree | endif
   autocmd BufEnter * if (winnr('$') == 1 && exists('b:NERDTreeType') &&
         \                b:NERDTreeType == 'primary') | q | endif
 augroup END
