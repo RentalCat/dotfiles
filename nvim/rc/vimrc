@@ -58,6 +58,7 @@ set display+=lastline
 augroup vimrcFileType
   autocmd!
   autocmd BufRead,BufNewFile *.ffxivmacro set filetype=ffxivmacro
+  autocmd BufRead,BufNewFile todo.txt set filetype=todotext
 augroup END
 " コマンドライン・ステータスライン --------------------------------------------
 " コマンドラインで補完時に候補一覧を表示
