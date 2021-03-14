@@ -6,7 +6,7 @@ if !exists('g:lightline')
 endif
 
 let g:lightline = {
-      \   'colorscheme': 'powerline',
+      \   'colorscheme': 'molokai',
       \   'active': {
       \     'left': [
       \       ['mode', 'paste'],
