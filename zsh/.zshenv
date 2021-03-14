@@ -11,6 +11,9 @@ export NVIM_PYTHON_LOG_FILE="$XDG_CONFIG_HOME/nvim/.tmp/log"
 export NVIM_PYTHON_LOG_LEVEL=DEBUG
 export MYCLI_HISTFILE=$XDG_CONFIG_HOME/mycli/.mycli-history
 
+# for gnupg signature
+export GPG_TTY=$(tty)
+
 # path
 export -U path
 # libnsl (for neovim; Ubuntu on Windows only...?)
