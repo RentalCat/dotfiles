@@ -2,6 +2,37 @@ scriptencoding utf-8
 
 set nospell
 
+" options
+" Disable URI checking. (default: 0)
+let g:spelunker_disable_uri_checking = 1
+
+" Disable email-like words checking. (default: 0)
+let g:spelunker_disable_email_checking = 1
+
+" Disable account name checking, e.g. @foobar, foobar@. (default: 0)
+" NOTE: Spell checking is also disabled for JAVA annotations.
+let g:spelunker_disable_account_name_checking = 1
+
+" Disable acronym checking. (default: 0)
+let g:spelunker_disable_acronym_checking = 1
+
+" Disable checking words in backtick/backquote. (default: 0)
+let g:spelunker_disable_backquoted_checking = 1
+
+" key mapping
+silent! vmap <unique> zg <Plug>(add-spelunker-good)
+silent! nmap <unique> zg <Plug>(add-spelunker-good-nmap)
+silent! vmap <unique> zug <Plug>(undo-spelunker-good)
+silent! nmap <unique> zug <Plug>(undo-spelunker-good-nmap)
+silent! vmap <unique> zw <Plug>(add-spelunker-bad)
+silent! nmap <unique> zw <Plug>(add-spell-bad-nmap)
+silent! vmap <unique> zuw <Plug>(undo-spelunker-bad)
+silent! nmap <unique> zuw <Plug>(undo-spelunker-bad-nmap)
+silent! nmap <unique> ]s <Plug>(spelunker-jump-next)
+silent! nmap <unique> zn <Plug>(spelunker-jump-next)
+silent! nmap <unique> [s <Plug>(spelunker-jump-prev)
+silent! nmap <unique> zp <Plug>(spelunker-jump-next)
+
 function! s:projectDir()
   try
     " depended on: airblade/vim-rooter
@@ -33,7 +64,8 @@ endfunction
 
 augroup mySpelunker
   autocmd!
-  autocmd BufEnter * execute 'setlocal spellfile+=' . s:get_spell_files()
+  autocmd BufEnter * execute 'setlocal spellfile+=' . s:get_spell_files() | call spelunker#check()
+  autocmd Syntax *
+  \ highlight SpelunkerSpellBad cterm=underline ctermfg=88 gui=underline guifg=#9e0000 |
+  \ highlight SpelunkerComplexOrCompoundWord cterm=underline ctermfg=88 gui=underline guifg=#9e0000
 augroup END
-
-" execute 'set spellfile=' . GetSpellDir() . '/vim.utf-8.add'
