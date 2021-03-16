@@ -1,3 +1,6 @@
+[[plugins]]  # プロジェクトルート探索関数 FindRootDirectory を提供
+repo = 'airblade/vim-rooter'
+
 [[plugins]]  # colorscheme
 repo = 'tomasr/molokai'
 
@@ -55,6 +58,10 @@ hook_add = '''
   nmap * <Plug>(anzu-star-with-echo)
   nmap # <Plug>(anzu-sharp-with-echo)
 '''
+
+[[plugins]]  # スペルチェック強化プラグイン
+repo = 'kamykn/spelunker.vim'
+hook_add = 'execute "source " . GetNvimrcDir() . "/plugins/spelunker.rc.vim"'
 
 [[plugins]]  # git 編集業に +-? を付ける
 repo = 'sgur/vim-gitgutter'

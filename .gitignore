@@ -2,6 +2,8 @@
 nvim/.cache/*
 nvim/.tmp/*
 nvim/rc/.local.rc.vim
+nvim/spell/.tmp.*.add
+nvim/spell/*.spl
 
 # tmux
 tmux/env.conf
