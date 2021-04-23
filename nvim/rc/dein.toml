@@ -116,3 +116,6 @@ repo = 'tpope/vim-surround'
 
 # [[plugins]]  # 自作プラグイン
 # repo = 'git@bitbucket.org:RentalCat/greview.vim.git'
+
+[[plugins]]
+repo = 'RentalCat/eumetopias.nvim'
