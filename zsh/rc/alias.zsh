@@ -6,7 +6,7 @@ if [[ -x `whence -p ls` ]] then
   alias ll="ls -l"
   alias la="ls -a"
 fi
-[[ -x `whence -p rm` ]]    && alias rm="rm -iv"
+# [[ -x `whence -p rm` ]]    && alias rm="rm -iv"
 [[ -x `whence -p mkdir` ]] && alias mkdir="mkdir -p"
 [[ -x `whence -p tmux` ]]  && alias tmux="tmux -2"
 
