@@ -59,9 +59,9 @@ hook_add = '''
   nmap # <Plug>(anzu-sharp-with-echo)
 '''
 
-[[plugins]]  # スペルチェック強化プラグイン
-repo = 'kamykn/spelunker.vim'
-hook_add = 'execute "source " . GetNvimrcDir() . "/plugins/spelunker.rc.vim"'
+# [[plugins]]  # スペルチェック強化プラグイン
+# repo = 'kamykn/spelunker.vim'
+# hook_add = 'execute "source " . GetNvimrcDir() . "/plugins/spelunker.rc.vim"'
 
 [[plugins]]  # git 編集業に +-? を付ける
 repo = 'sgur/vim-gitgutter'
@@ -117,5 +117,5 @@ repo = 'tpope/vim-surround'
 # [[plugins]]  # 自作プラグイン
 # repo = 'git@bitbucket.org:RentalCat/greview.vim.git'
 
-[[plugins]]
-repo = 'RentalCat/eumetopias.nvim'
+# [[plugins]]
+# repo = 'RentalCat/eumetopias.nvim'
