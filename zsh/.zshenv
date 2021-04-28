@@ -16,10 +16,13 @@ export GPG_TTY=$(tty)
 
 # path
 export -U path
-# libnsl (for neovim; Ubuntu on Windows only...?)
+
 if [[ ${OSTYPE} == linux* ]]; then
+  # libnsl (for neovim; Ubuntu on Windows only...?)
   export LDFLAGS="-L/home/linuxbrew/.linuxbrew/opt/libnsl/lib"
   export CPPFLAGS="-I/home/linuxbrew/.linuxbrew/opt/libnsl/include"
+  # ssh-agent (WSL (Ubuntu on Windows) only)
+  eval $(/mnt/c/Program\ Files\ \(x86\)/ssh-agent-wsl/ssh-agent-wsl -r) > /dev/null
 fi
 ## anyenv (python, ruby...)
 export ANYENV_ROOT="$HOME/.anyenv"
@@ -40,8 +43,8 @@ path=(
   $go_thirdparty_path/bin(N-/)
   $go_project_path/bin(N-/)
   $NODEBREW_ROOT/current/bin(N-/)
-  /home/linuxbrew/.linuxbrew/sbin(N-/)
   /home/linuxbrew/.linuxbrew/bin(N-/)
+  /home/linuxbrew/.linuxbrew/sbin(N-/)
   /usr/local/opt/mysql@5.6/bin(N-/)
   /usr/local/bin(N-/)
   $path

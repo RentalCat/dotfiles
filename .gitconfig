@@ -7,6 +7,8 @@
     commentchar = "#"
 [color]
     ui = true
+[commit]
+    gpgsign = true
 [merge]
     tool = vimmerge
 [alias]
@@ -27,4 +29,4 @@
 
 # vim: set ft=gitconfig:
 [init]
-	templatedir = ~/dotfiles/git_template
+    templatedir = ~/dotfiles/git_template
