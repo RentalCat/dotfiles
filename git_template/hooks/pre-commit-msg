@@ -1,0 +1,37 @@
+#!/bin/sh
+set -eu
+
+# コミットメッセージに issue 番号を突っ込む君
+# ルール:
+#   ブランチ名のどっかに `#` から始まる issue 番号が記載されてる
+#     例) sv-fix-typo-#123
+
+# hooks dir is `${repository_root}/.git/hooks/`
+GITHOOKS_DIR=`cd $(dirname $0) && pwd`
+REPOSITORY_ROOT=`cd ${GITHOOKS_DIR}/../../ && pwd`
+cd $REPOSITORY_ROOT
+
+# .git/COMMIT_MSG_FILE のパス (ここにコミットメッセージやら変更したファイル一覧が記載される)
+COMMIT_MSG_FILE=$1
+
+# コミットメッセージの種類 (message, template, merge, squash, commit のどれか)
+if [ $# -lt 2 ]; then
+    COMMIT_MSG_SOURCE=''
+else
+    COMMIT_MSG_SOURCE=$2
+fi
+
+# アクティブなブランチ名
+BRANCH_NAME=`git branch | grep '*' | awk '{print $2}'`
+# issue 番号 (記載がない場合は空文字)
+ISSUE_NUMBER=`echo $BRANCH_NAME | grep '\#[0-9]\+' | sed -e 's/.*\#\([0-9]*\).*/\1/'`
+if [ -z `echo $ISSUE_NUMBER` ]; then
+    exit 0
+fi
+
+if [ -z "$(head -n1 $COMMIT_MSG_FILE | grep \#$ISSUE_NUMBER)" ]; then
+    echo $COMMIT_MSG_SOURCE
+    cp $COMMIT_MSG_FILE $COMMIT_MSG_FILE.tmp
+    cat $COMMIT_MSG_FILE.tmp | sed -e "1s/$/ (ref: #$ISSUE_NUMBER)/" > $COMMIT_MSG_FILE
+    rm $COMMIT_MSG_FILE.tmp
+fi
