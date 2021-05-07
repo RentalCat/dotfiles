@@ -207,3 +207,13 @@ highlight Normal      ctermbg=NONE guibg=NONE
 highlight NonText     ctermbg=NONE guibg=NONE
 highlight SpecialKey  ctermbg=NONE guibg=NONE
 highlight EndOfBuffer ctermbg=NONE guibg=NONE
+
+" フォーカスウィンドウ設定 ----------------------------------------------------
+" フォーカスしていない時の背景色
+let g:InactiveBackGround = 'guibg=#3a3a3a'
+
+"Neovim内でフォーカスしていないペインの背景色設定
+execute ('hi NormalNC ' . g:InactiveBackGround)
+execute ('hi NontextNC ' . g:InactiveBackGround)
+execute ('hi SpecialkeyNC ' . g:InactiveBackGround)
+execute ('hi EndOfBufferNC ' . g:InactiveBackGround)
