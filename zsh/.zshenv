@@ -38,6 +38,7 @@ export CARGO_HOME=$HOME/.cargo
 
 setopt no_global_rcs
 path=(
+  $XDG_CONFIG_HOME/util(N-/)
   $ANYENV_ROOT/bin(N-/)
   $CARGO_HOME/bin(N-/)
   $go_thirdparty_path/bin(N-/)
