@@ -57,6 +57,7 @@ set display+=lastline
 " シンタックスハイライト(ファイルタイプ宣言) ----------------------------------
 augroup vimrcFileType
   autocmd!
+  autocmd BufRead,BufNewFile *.html set filetype=htmldjango
   autocmd BufRead,BufNewFile *.ffxivmacro set filetype=ffxivmacro
 augroup END
 " コマンドライン・ステータスライン --------------------------------------------

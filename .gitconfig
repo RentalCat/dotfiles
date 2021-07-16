@@ -16,7 +16,8 @@
     co = checkout
     cm = commit
     df = difftool -y
-    delete-branch = !git branch | grep -vE '^\\*|master$|develop$' | xargs -I % git branch -dq % || true
+    delete-merged-branch = !git fetch -p && git branch --merged | grep -vE '^\\*|master$|develop$' | xargs git branch -d || true
+    # delete-branch = !git branch | grep -vE '^\\*|master$|develop$' | xargs -I % git branch -dq % || true
 [diff]
     algorithm = histogram
     tool = vimdiff
@@ -32,3 +33,10 @@
     templatedir = ~/dotfiles/git_template
 [pull]
     rebase = false
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+[fetch]
+    prune = true

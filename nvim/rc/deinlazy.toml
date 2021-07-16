@@ -183,7 +183,7 @@ hook_add = '''
 repo = 'ynkdir/vim-vimlparser'
 
 [[plugins]]  # deoplete: python補完 (jedi)
-repo = 'zchee/deoplete-jedi'
+repo = 'deoplete-plugins/deoplete-jedi'
 on_source = 'deoplete.nvim'
 on_ft = 'python'
 hook_add = '''

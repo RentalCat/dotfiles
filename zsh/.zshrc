@@ -17,6 +17,7 @@ zstyle ':completion:*' list-colors 'di=36' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'c
 [[ -r $zsh_dir/rc/prompt.zsh ]] && source $zsh_dir/rc/prompt.zsh
 
 # completion
+export fpath=($zsh_dir/completion $fpath)
 autoload -Uz compinit
 compinit -d $zsh_dir/.zcompdump
 zstyle ':completion:*' verbose yes
