@@ -40,6 +40,11 @@ function rbenv() {  # for lazyload
 
 # nodebrew
 if [[ ! -x `whence -p nodebrew` ]] then
-  brew install nodebrew
+  if [[ -x `whence -p brew` ]] then
+    brew install nodebrew
+  else
+    curl -L git.io/nodebrew | perl - setup
+    export $PATH=$HOME/.nodebrew/current/bin:$PATH  # 初回だけパスが通ってないので通す
+  fi
   nodebrew setup
 fi

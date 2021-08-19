@@ -22,7 +22,7 @@ if [[ ${OSTYPE} == linux* ]]; then
   export LDFLAGS="-L/home/linuxbrew/.linuxbrew/opt/libnsl/lib"
   export CPPFLAGS="-I/home/linuxbrew/.linuxbrew/opt/libnsl/include"
   # ssh-agent (WSL (Ubuntu on Windows) only)
-  eval $(/mnt/c/Program\ Files\ \(x86\)/ssh-agent-wsl/ssh-agent-wsl -r) > /dev/null
+  #eval $(/mnt/c/Program\ Files\ \(x86\)/ssh-agent-wsl/ssh-agent-wsl -r) > /dev/null
 fi
 ## anyenv (python, ruby...)
 export ANYENV_ROOT="$HOME/.anyenv"
