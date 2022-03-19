@@ -1,4 +1,5 @@
 .python-version
 .local.vimrc
+.local
 *.orig
 .DS_Store

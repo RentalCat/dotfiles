@@ -1,0 +1,95 @@
+#!/bin/bash
+set -Ceuo pipefail
+
+function usage () {
+  echo "Usage:"
+  echo "  $(basename "${BASH_SOURCE[0]}") [-h | --help] <COMMAND> [-s | --simply] <args>"
+  echo
+  echo "show color information"
+  echo
+  echo "COMMAND:"
+  echo "  from-hex           Set HEX code (e.g.: '#797f2c', 'FFBBC3', ...)"
+  echo "  from-rgb           Set RGB values separated by cummas (e.g.: '121,127,44', '255,187,195', ...)"
+  echo
+  echo "OPTIONS:"
+  echo "  -s, --simply       Show information with simply."
+  echo "  -h, --help         Show this help text."
+}
+
+function cprint() {
+  readonly local hex="$1"
+  readonly local rgb="$2"
+  readonly local hsv="$3"
+  readonly local color_sample="$(ctext "$hex" 'default' '   ')"
+  printf "${color_sample} HEX: ${hex}"
+  printf "${color_sample} RGB: (${rgb})"
+  printf "${color_sample} HSV: (${hsv})"
+}
+
+function hex2rgb () {
+  # hex2rgb ${hex} [${sep}]
+  # ARGS:
+  #   hex: hex color code (797f2c), or 'default'
+  #   sep: separator string (default: ',')
+  # RETURN:
+  #   RGB values separated by ${seq} (121,127,44)
+  readonly local hex="$1"
+  readonly local seq="${2:-,}"
+  readonly local r="$((0x${hex:0:2}))"
+  readonly local g="$((0x${hex:2:2}))"
+  readonly local b="$((0x${hex:4:2}))"
+  # readonly local r="$(echo "obase=10; ibase=16; ${hex:0:2}" | bc)"
+  # readonly local g="$(echo "obase=10; ibase=16; ${hex:2:2}" | bc)"
+  # readonly local b="$(echo "obase=10; ibase=16; ${hex:4:2}" | bc)"
+  return "${r:-0}${seq}${g:-0}${seq}${b:-0}"
+}
+
+function ctext () {
+  # ctext ${bg_color} ${fg_color} ${text}
+  # ARGS:
+  #   bg_color: hex color code (797f2c), or 'default'
+  #   fg_color: hex color code (797f2c), or 'default'
+
+  function _ccode () {
+    # _ccode ${sgr} ${color}
+    # ARGS:
+    #   sgr: Select Graphic Rendition code (38(set forground color)or 48(ser background color))
+    #   color: hex color code (797f2c), or 'default'
+    # RETURN:
+    #   ANSI color code: '\e[38;2;121;127;44m'
+    readonly local sgr="$1"
+    readonly local color="$2"
+
+    if [[ "$color" == "default" ]]; then
+      return ""
+    fi
+
+    return "\e[${sgr};2;$(hex2rgb "${color}" ';')m"
+  }
+
+  readonly local bg_color="$(_ccode '48' "${1}")"
+  readonly local fg_color="$(_ccode '38' "${1}")"
+  return "${bg_color}${fg_color}${text}\e[0m"
+}
+
+while (($# > 0)); do
+  case "$1" in
+    --help | -h)
+      usage
+      exit 0
+      ;;
+    from-hex)
+      shift
+      from_hex $*
+      exit 0
+      ;;
+    from-rgb)
+      shift
+      from_rgb $*
+      exit 0
+      ;;
+    *)
+      error_exit "unexpected args -- $1"
+      ;;
+  esac
+done

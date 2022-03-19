@@ -1,4 +1,4 @@
-[[ -n $ZSH_DEBUG ]] && zmodload zsh/zprof && zprof
+[[ -n "${ZSH_DEBUG:-}" ]] && zmodload zsh/zprof && zprof
 
 export LANG=ja_JP.UTF-8
 export LC_TYPE=ja_JP.UTF-8
@@ -29,10 +29,7 @@ export ANYENV_ROOT="$HOME/.anyenv"
 ## nodebrew
 export NODEBREW_ROOT="$HOME/.nodebrew"
 ## go
-go_root=$HOME/.go
-go_thirdparty_path=$go_root/third-party
-go_project_path=$go_root/my-project
-export GOPATH=$go_thirdparty_path:$go_project_path
+export GOPATH=$HOME/.go
 ## rustup
 export CARGO_HOME=$HOME/.cargo
 
@@ -41,14 +38,13 @@ path=(
   $XDG_CONFIG_HOME/util(N-/)
   $ANYENV_ROOT/bin(N-/)
   $CARGO_HOME/bin(N-/)
-  $go_thirdparty_path/bin(N-/)
-  $go_project_path/bin(N-/)
+  $GOPATH/bin(N-/)
   $NODEBREW_ROOT/current/bin(N-/)
   /home/linuxbrew/.linuxbrew/bin(N-/)
   /home/linuxbrew/.linuxbrew/sbin(N-/)
   /usr/local/opt/mysql@5.6/bin(N-/)
+  /usr/local/sbin(N-/)
   /usr/local/bin(N-/)
   $path
 )
 export PATH=$(echo $PATH | sed -e "s/ /\\\ /g")  # for windows: path include space escaping
-unset go_root go_thirdparty_path go_project_path

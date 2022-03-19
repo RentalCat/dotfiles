@@ -45,3 +45,13 @@ zinit light "monochromegane/the_platinum_searcher"
 
 # cd 強化 (required: fzy, fzf, peco, or...)
 zinit light "b4b4r07/enhancd"
+
+
+# npm 関係
+if [[ ! -x `whence -p npm` ]]; then
+  echo "'npm' not found. please install 'node' with 'nodenv'."
+else
+  # gnomon: 出力の経過時間をいい感じに表示してくれるツール
+  [[ ! -x `whence -p gnomon` ]] && npm install -g gnomon
+fi
+

@@ -121,7 +121,7 @@ set updatetime=500
 
 " undo の履歴を記録しておく (再度開いた場合も undo 出来るようにしておく)
 if has('persistent_undo')
-  execute 'set undodir=' . GetSafeDir(GetCacheDir() . '/unite')
+  execute 'set undodir=' . GetSafeDir(GetCacheDir() . '/undo')
   augroup vimrcUndofile
     autocmd!
     autocmd BufReadPre * setlocal undofile
@@ -149,7 +149,6 @@ nmap <Esc><Esc> :<C-u>nohlsearch<CR><Esc>
 noremap ZQ      :<C-u>windo q<CR>
 " ZQ          ==> 全ファイル更新
 noremap ZE      :<C-u>windo e<CR>
-
 " タブ関係
 nnoremap [tab] <Nop>
 nmap t [tab]
@@ -171,7 +170,7 @@ noremap <Left>  <Nop>
 noremap <Right> <Nop>
 
 " dain.vim --------------------------------------------------------------------
-let g:python_host_prog = $PYENV_ROOT . '/shims/python2'
+" let g:python_host_prog = $PYENV_ROOT . '/shims/python2'
 let g:python3_host_prog = $PYENV_ROOT . '/shims/python3'
 execute 'source' expand('<sfile>:h').'/dein.rc.vim'
 

@@ -1,4 +1,15 @@
 scriptencoding utf-8
+
+augroup augroup_my_denite
+  autocmd!
+  autocmd FileType denite call s:denite_my_settings()
+augroup END
+
+" mapping in Denite buffer
+function! s:denite_my_settings() abort
+  nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
+endfunction
+
 " 見た目変更
 call denite#custom#option('default', 'prompt', '>')
 " PreProc

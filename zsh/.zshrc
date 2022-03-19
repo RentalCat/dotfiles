@@ -16,6 +16,9 @@ zstyle ':completion:*' list-colors 'di=36' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'c
 # prompt
 [[ -r $zsh_dir/rc/prompt.zsh ]] && source $zsh_dir/rc/prompt.zsh
 
+# anyenv
+[[ -r $zsh_dir/rc/anyenv.zsh ]] && source $zsh_dir/rc/anyenv.zsh
+
 # completion
 export fpath=($zsh_dir/completion $fpath)
 autoload -Uz compinit
@@ -102,7 +105,7 @@ setopt auto_remove_slash                         # 補完時にスラッシュ�
 setopt pushd_ignore_dups                         # 重複したディレクトリを追加しない
 
 # for ubuntu
-umask 002                                        # 安全のため、生成されるファイルのパーミッションをマスクする
+# umask 002                                        # 安全のため、生成されるファイルのパーミッションをマスクする
 
 
 # command_not_found_handler : typo したときにコマンドをヒストリに記録しない
@@ -126,9 +129,6 @@ bindkey '^x^r' anyframe-widget-put-history
 
 bindkey '^xb' anyframe-widget-checkout-git-branch
 bindkey '^x^b' anyframe-widget-checkout-git-branch
-
-# anyenv
-[[ -r $zsh_dir/rc/anyenv.zsh ]] && source $zsh_dir/rc/anyenv.zsh
 
 if (which zprof > /dev/null 2>&1) ;then
   zprof

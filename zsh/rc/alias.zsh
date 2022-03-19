@@ -31,13 +31,27 @@ if [[ -x `whence -p git` ]] then
   alias glog="glogg | head"
   alias gloggraph="git -c color.diff=always log --graph --date-order --pretty=format:'%C(cyan)%h %C(green)%ci %C(yellow)%an %C(blue)%m %C(reset)%s %C(red)%d'"
   function gpush() {
-    git push origin $(basename "`git symbolic-ref HEAD 2> /dev/null`")
+    git push origin $(git symbolic-ref HEAD | sed "s|refs/heads/||g" 2> /dev/null)
+  }
+  function gforcepush() {
+    local branch_name
+    readonly branch_name="$(git symbolic-ref HEAD | sed "s|refs/heads/||g" 2> /dev/null)"
+    git push --delete origin $branch_name
+    git push origin $branch_name
   }
 fi
 if [[ -x `whence -p brew` ]] then
   alias brew="env PATH='${PATH/$HOME\/\.anyenv\/envs\/pyenv\/shims(:|)/}' brew"
 fi
-alias ssh="TERM=xterm ssh"
+
+# diff
+if [[ -x `whence -p colordiff` ]] then
+  alias diff="colordiff -u"
+else
+  alias diff="diff -u"
+fi
+
+# alias ssh="TERM=xterm ssh"
 alias grep="grep -u"
 alias cp="cp -i"
 

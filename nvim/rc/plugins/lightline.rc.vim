@@ -6,51 +6,51 @@ if !exists('g:lightline')
 endif
 
 let g:lightline = {
-      \   'colorscheme': 'molokai',
-      \   'active': {
-      \     'left': [
-      \       ['mode', 'paste'],
-      \       ['gitbranch', 'filemark', 'myfilename'],
-      \       ['funcname'],
-      \     ],
-      \     'right': [
-      \       ['linter_checking', 'linter_warnings', 'linter_errors', 'linter_ok', 'lineinfo', 'charvaluehex'],
-      \       ['percent'],
-      \       ['fileformat', 'fileencoding', 'filetype'],
-      \     ],
-      \   },
-      \   'inactive': {
-      \     'left': [
-      \       ['filename'],
-      \     ],
-      \     'right': [
-      \       ['lineinfo'],
-      \       ['percent'],
-      \     ],
-      \   },
-      \   'component': {
-      \     'paste': '%{&paste ? "PST" : ""}',
-      \     'charvaluehex': '0x%04B',
-      \     'lineinfo': "\ue0a1 %2l:%-2v",
-      \   },
-      \   'component_function': {
-      \     'gitbranch'   : 'g:mylightline.getGitBranch',
-      \     'filemark'    : 'g:mylightline.getFilemark',
-      \     'myfilename'  : 'g:mylightline.getFilename',
-      \     'funcname'    : 'g:mylightline.getFuncname',
-      \     'debug'       : 'g:mylightline.getDebugText',
-      \     'fileformat'  : 'g:mylightline.getFileFormat',
-      \     'filetype'    : 'g:mylightline.getFileType',
-      \     'fileencoding': 'g:mylightline.getFileEncoding',
-      \   },
-      \   'separator': {'left': "\ue0b0", 'right': "\ue0b2"},
-      \   'subseparator': {'left': "\ue0b1", 'right': "\ue0b3"},
-      \   'mode_map': {
-      \     'n': 'NOR',     'i': 'INS', 'R': 'REP', 'v': 'VIS', 'V': 'V-L',
-      \     "\<C-v>": 'V-B','c': 'COM', 's': 'SEL', 'S': 'S-L', "\<C-s>": 'S-B',
-      \     't': 'TER',
-      \   },
-      \ }
+\   'colorscheme': 'molokai',
+\   'active': {
+\     'left': [
+\       ['mode', 'paste'],
+\       ['gitbranch', 'filemark', 'myfilename'],
+\       ['funcname'],
+\     ],
+\     'right': [
+\       ['linter_checking', 'linter_warnings', 'linter_errors', 'linter_ok', 'lineinfo', 'charvaluehex'],
+\       ['percent'],
+\       ['fileformat', 'fileencoding', 'filetype'],
+\     ],
+\   },
+\   'inactive': {
+\     'left': [
+\       ['filename'],
+\     ],
+\     'right': [
+\       ['lineinfo'],
+\       ['percent'],
+\     ],
+\   },
+\   'component': {
+\     'paste': '%{&paste ? "PST" : ""}',
+\     'charvaluehex': '0x%04B',
+\     'lineinfo': "\ue0a1 %2l:%-2v",
+\   },
+\   'component_function': {
+\     'gitbranch'   : 'g:mylightline.getGitBranch',
+\     'filemark'    : 'g:mylightline.getFilemark',
+\     'myfilename'  : 'g:mylightline.getFilename',
+\     'funcname'    : 'g:mylightline.getFuncname',
+\     'debug'       : 'g:mylightline.getDebugText',
+\     'fileformat'  : 'g:mylightline.getFileFormat',
+\     'filetype'    : 'g:mylightline.getFileType',
+\     'fileencoding': 'g:mylightline.getFileEncoding',
+\   },
+\   'separator': {'left': "\ue0b0", 'right': "\ue0b2"},
+\   'subseparator': {'left': "\ue0b1", 'right': "\ue0b3"},
+\   'mode_map': {
+\     'n': 'NOR',     'i': 'INS', 'R': 'REP', 'v': 'VIS', 'V': 'V-L',
+\     "\<C-v>": 'V-B','c': 'COM', 's': 'SEL', 'S': 'S-L', "\<C-s>": 'S-B',
+\     't': 'TER',
+\   },
+\ }
 
 let s:displayable_components = {}
 let s:margin = 4

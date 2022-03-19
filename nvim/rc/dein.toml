@@ -18,6 +18,9 @@ hook_add = '''
 repo = 'itchyny/lightline.vim'
 hook_add = 'execute "source " . GetNvimrcDir() . "/plugins/lightline.rc.vim"'
 
+[[plugins]]  # Jenkinsfile syntax
+repo = 'martinda/Jenkinsfile-vim-syntax'
+
 [[plugins]]  # Gist
 repo = 'lambdalisue/vim-gista'
 
@@ -79,11 +82,11 @@ hook_add = '''
   nnoremap [fugitive]    <Nop>
   nmap <Leader>g  [fugitive]
   nnoremap <silent> [fugitive]c :<C-u>Gcommit<CR>
-  nnoremap <silent> [fugitive]b :<C-u>Gblame<CR>
-  nnoremap <silent> [fugitive]d :<C-u>Gdiff<CR>
-  nnoremap <silent> [fugitive]D :<C-u>Gdiff origin/develop<CR>
+  nnoremap <silent> [fugitive]b :<C-u>Git blame<CR>
+  nnoremap <silent> [fugitive]d :<C-u>Gdiffsplit<CR>
+  nnoremap <silent> [fugitive]D :<C-u>Gdiffsplit origin/develop<CR>
   nnoremap <silent> [fugitive]g :<C-u>Ggrep<CR>
-  nnoremap <silent> [fugitive]s :<C-u>Gstatus<CR>
+  nnoremap <silent> [fugitive]s :<C-u>Git<CR>
 '''
 
 [[plugins]]  # .local.vimrc 読み込み
