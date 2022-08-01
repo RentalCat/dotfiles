@@ -77,7 +77,7 @@ let g:lightline#ale#indicator_ok = "\uf00c"
 
 [[plugins]]  # Asynchronous Lint Engine というシンタックスチェッカー (Syntasticの代わり)
 repo = 'w0rp/ale'
-on_ft = ['go', 'python', 'vim', 'rust']
+on_ft = ['go', 'python', 'vim', 'rust', 'typescript']
 hook_source = 'execute "source " . GetNvimrcDir() . "/plugins/ale.rc.vim"'
 hook_add = '''
   nmap <silent> <C-k> <Plug>(ale_previous_wrap)

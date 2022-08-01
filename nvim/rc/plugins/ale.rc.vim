@@ -8,6 +8,7 @@ let g:ale_linters = {
   \   'html': ['tidy'],
   \   'python': ['flake8', 'mypy'],
   \   'rust': ['rustc'],
+  \   'typescript': ['tsserver'],
   \   'vim': ['vint'],
   \ }
 let g:ale_fixers = {
