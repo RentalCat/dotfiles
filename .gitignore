@@ -38,3 +38,6 @@ mycli/.mycli.log
 
 # npm
 configstore/update-notifier-npm.json
+
+# gh
+gh/hosts.yml

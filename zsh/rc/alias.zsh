@@ -53,7 +53,7 @@ fi
 
 # alias ssh="TERM=xterm ssh"
 alias grep="grep -u"
-alias cp="cp -i"
+# alias cp="cp -i"
 
 # for Ubuntu on Windows
 [[ ${OSTYPE} == linux* ]] && alias pbcopy="clip.exe"

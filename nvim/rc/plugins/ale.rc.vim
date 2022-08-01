@@ -12,7 +12,6 @@ let g:ale_linters = {
   \ }
 let g:ale_fixers = {
   \   'go': ['gofmt', 'goimports', 'golines'],
-  \   'python': ['black'],
   \ }
 let g:ale_fix_on_save = 1
 let g:ale_max_signs = 50
