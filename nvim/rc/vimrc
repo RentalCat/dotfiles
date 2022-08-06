@@ -1,14 +1,15 @@
-scriptencoding utf-8
-
 " 起動時のみ呼ばれるやーつ
 if has('vim_starting')
   execute 'source' expand('<sfile>:h').'/init.rc.vim'
 endif
 
+scriptencoding utf-8
 " 描画関係 (全域に影響あるもの) -----------------------------------------------
 " シンタックスハイライト ON
 syntax on
 
+" True Color
+set termguicolors
 " スクリプト実行中に再描画しない (重たくなるので)
 set lazyredraw
 
@@ -18,6 +19,15 @@ set relativenumber
 
 " カーソル行を色付け (描画処理が重たいときはコメント)
 set cursorline
+
+" guiカーソル設定 (neovimはデフォルトで書き換えちゃう)
+augroup vimrcGuiCursor
+  autocmd!
+  autocmd VimEnter,VimResume * set guicursor=n-v-c-sm-r-cr-o:hor20
+    \,i-ci-ve:ver20,a:blinkwait500-blinkoff500-blinkon500
+  " vimを抜けてもカーソルは元に戻らないので手動で戻す
+  autocmd VimLeave,VimSuspend * set guicursor=a:hor20-blinkwait500-blinkoff500-blinkon500
+augroup END
 
 " 100 文字目に色を付ける
 set colorcolumn=100
@@ -32,14 +42,14 @@ set nowrap
 " 対応する括弧を強調表示する
 set showmatch
 
-" diff モードの分割を縦方向にする (デフォルトは横)
-set diffopt+=vertical
+" diff モード設定 (分割を縦方向に、アルゴリズム変更)
+set diffopt=internal,filler,vertical,algorithm:histogram,indent-heuristic
 
 " 日本語(マルチバイト文字)行の連結時には空白を入力しない + コメント行処理を行う
 set formatoptions+=mMj
 
 " □や○の文字があってもカーソル位置がずれないようにする。
-set ambiwidth=double
+set ambiwidth=single
 
 " 画面最後の行をできる限り表示する。
 set display+=lastline
@@ -47,6 +57,7 @@ set display+=lastline
 " シンタックスハイライト(ファイルタイプ宣言) ----------------------------------
 augroup vimrcFileType
   autocmd!
+  autocmd BufRead,BufNewFile *.html set filetype=htmldjango
   autocmd BufRead,BufNewFile *.ffxivmacro set filetype=ffxivmacro
 augroup END
 " コマンドライン・ステータスライン --------------------------------------------
@@ -110,7 +121,7 @@ set updatetime=500
 
 " undo の履歴を記録しておく (再度開いた場合も undo 出来るようにしておく)
 if has('persistent_undo')
-  execute 'set undodir=' . GetSafeDir(GetCacheDir() . '/unite')
+  execute 'set undodir=' . GetSafeDir(GetCacheDir() . '/undo')
   augroup vimrcUndofile
     autocmd!
     autocmd BufReadPre * setlocal undofile
@@ -138,7 +149,6 @@ nmap <Esc><Esc> :<C-u>nohlsearch<CR><Esc>
 noremap ZQ      :<C-u>windo q<CR>
 " ZQ          ==> 全ファイル更新
 noremap ZE      :<C-u>windo e<CR>
-
 " タブ関係
 nnoremap [tab] <Nop>
 nmap t [tab]
@@ -160,9 +170,12 @@ noremap <Left>  <Nop>
 noremap <Right> <Nop>
 
 " dain.vim --------------------------------------------------------------------
-let g:python_host_prog = $PYENV_ROOT . '/shims/python2'
+" let g:python_host_prog = $PYENV_ROOT . '/shims/python2'
 let g:python3_host_prog = $PYENV_ROOT . '/shims/python3'
 execute 'source' expand('<sfile>:h').'/dein.rc.vim'
+
+" tools -----------------------------------------------------------------------
+execute 'source' expand('<sfile>:h').'/tools/syntax_info.vim'
 
 " local.vim -------------------------------------------------------------------
 let s:localrc_filepath = resolve(expand('<sfile>:h').'/.local.rc.vim')
@@ -194,3 +207,13 @@ highlight Normal      ctermbg=NONE guibg=NONE
 highlight NonText     ctermbg=NONE guibg=NONE
 highlight SpecialKey  ctermbg=NONE guibg=NONE
 highlight EndOfBuffer ctermbg=NONE guibg=NONE
+
+" フォーカスウィンドウ設定 ----------------------------------------------------
+" フォーカスしていない時の背景色
+let g:InactiveBackGround = 'guibg=#3a3a3a'
+
+"Neovim内でフォーカスしていないペインの背景色設定
+execute ('hi NormalNC ' . g:InactiveBackGround)
+execute ('hi NontextNC ' . g:InactiveBackGround)
+execute ('hi SpecialkeyNC ' . g:InactiveBackGround)
+execute ('hi EndOfBufferNC ' . g:InactiveBackGround)

@@ -6,10 +6,6 @@ hook_add = '''
   execute 'let g:plantuml_executable_script="' GetNvimrcDir() . '/lib/plantuml/plantuml"'
 '''
 
-[[plugins]]
-repo = 'ambv/black'
-on_ft = 'python'
-
 [[plugins]]  # Syntax highlight: toml
 repo = 'cespare/vim-toml'
 on_ft = 'toml'
@@ -17,6 +13,36 @@ on_ft = 'toml'
 [[plugins]]  # Syntax highlight: nginx.conf
 repo = 'chr4/nginx.vim'
 on_ft = 'nginx'
+
+[[plugins]]  # Syntax highlight: markdown
+repo = 'plasticboy/vim-markdown'
+on_ft = 'markdown'
+hook_source = '''
+  let g:vim_markdown_folding_disabled = 1
+  let g:vim_markdown_conceal = 0
+  let g:vim_markdown_conceal_code_blocks = 0
+  let g:vim_markdown_fenced_languages = [
+  \   'c++=cpp',
+  \   'viml=vim',
+  \   'bash=sh',
+  \   'ini=dosini',
+  \   'py=python',
+  \ ]
+'''
+
+[[plugins]]  # markdown preview
+repo = 'previm/previm'
+depends = ['vim-markdown']
+on_source = 'vim-markdown'
+hook_add = '''
+    nnoremap <silent> <C-p> :PrevimOpen<CR>
+    let g:previm_enable_realtime=1
+'''
+
+[[plugins]]
+repo = 'tyru/open-browser.vim'
+depends = ['vim-markdown', 'previm']
+on_source = 'previm'
 
 [[plugins]]  # gitk サポート for fugitive
 repo = 'cohama/agit.vim'
@@ -38,7 +64,7 @@ let g:lightline.component_expand = {
 \   'linter_ok': 'lightline#ale#ok',
 \ }
 let g:lightline.component_type = {
-\   'linter_checking': 'left',
+\   'linter_checking': 'warning',
 \   'linter_warnings': 'warning',
 \   'linter_errors': 'error',
 \   'linter_ok': 'left',
@@ -51,7 +77,7 @@ let g:lightline#ale#indicator_ok = "\uf00c"
 
 [[plugins]]  # Asynchronous Lint Engine というシンタックスチェッカー (Syntasticの代わり)
 repo = 'w0rp/ale'
-on_ft = ['python', 'vim']
+on_ft = ['go', 'python', 'vim', 'rust', 'typescript']
 hook_source = 'execute "source " . GetNvimrcDir() . "/plugins/ale.rc.vim"'
 hook_add = '''
   nmap <silent> <C-k> <Plug>(ale_previous_wrap)
@@ -79,7 +105,6 @@ hook_source = 'execute "source " . GetNvimrcDir() . "/plugins/deoplete.rc.vim"'
 
 [[plugins]]  # dark powered Unite
 repo = 'Shougo/denite.nvim'
-rev = '1.2'
 on_cmd = ['Denite', 'DeniteBufferDir', 'DeniteCursorWord', 'DeniteProjectDir']
 if = 'has("nvim")'
 hook_source = 'execute "source " . GetNvimrcDir() . "/plugins/denite.rc.vim"'
@@ -117,65 +142,6 @@ on_source = 'deoplete.nvim'
 # repo = 'RentalCat/deoplete-ffxiv'
 # on_source = 'deoplete.nvim'
 
-[[plugins]]  # Unite file_mru 用
-repo = 'Shougo/neomru.vim'
-on_source = 'unite.vim'
-hook_add = '''
-  let g:unite_source_file_mru_ignore_pattern =
-      \ '\~$\|\.\%(o\|exe\|dll\|bak\|zwc\|pyc\|sw[po]\)$'.
-      \ '\|\%(^\|/\)\.\%(hg\|git\|bzr\|svn\)\%($\|/\)'.
-      \ '\|^\%(\\\\\|/mnt/\|/media/\|/temp/\|/tmp/\|\%(/private\)\=/var/folders/\)'.
-      \ '\|\%(^\%(fugitive\)://\)'.
-      \ '\|\%(^\%(term\)://\)'.
-      \ '\|\%(^\%(gita\)://\)'
-'''
-
-[[plugins]]  # Unite  # TODO もう少し便利にしたい
-repo = 'Shougo/unite.vim'
-on_if = 1
-hook_add = '''
-  execute 'source' GetNvimrcDir() . '/plugins/unite.rc.vim'
-
-  nnoremap [unite] <Nop>
-  nmap    <Leader>u [unite]
-
-  nnoremap <silent> [unite]b
-        \ :<C-u>Unite -buffer-name=buffer buffer -auto-preview -start-insert -no-resize<CR>
-  nnoremap <silent> [unite]f
-        \ :<C-u>execute 'Unite find:' . unite#util#path2project_directory(expand('%'))
-        \               . ' -buffer-name=grep(`tabpagenr()`) -auto-preview -no-empty -start-insert'
-        \               . ' -ignorecase -smartcase -no-resize'<CR>
-  nnoremap <silent> [unite]r
-        \ :<C-u>Unite -buffer-name=register -default-action=append register<CR>
-  nnoremap <silent> [unite]u
-        \ :<C-u>Unite -buffer-name=file_mru file_mru -auto-preview -start-insert -no-resize<CR>
-  nnoremap <silent> [unite]v
-        \ :<C-u>execute 'Unite grep:' . unite#util#path2project_directory(expand('%'))
-        \               . ' -buffer-name=grep(`tabpagenr()`) -auto-preview -no-empty -start-insert'
-        \               . ' -ignorecase -smartcase -no-resize'<CR>
-  nnoremap <silent> [unite]<Leader>
-        \ :<C-u>UniteResume<CR>
-
-  " nnoremap <silent> gv
-  "       \ :<C-u>execute 'Unite grep:' . unite#util#path2project_directory(expand('%'))
-  "       \               . ' -buffer-name=grep(`tabpagenr()`) -auto-preview -no-empty -start-insert'
-  "       \               . ' -ignorecase -smartcase -no-resize'<CR><C-r><C-w><CR>
-'''
-
-[[plugins]]  # help を見やすくする unite
-repo = 'Shougo/unite-help'
-on_source = 'unite.vim'
-
-[[plugins]]
-repo = 'sjl/gundo.vim'
-on_cmd = 'GundoToggle'
-hook_add = '''
-  let g:gundo_prefer_python3 = has('python3')
-  let g:gundo_right = 1
-  let g:gundo_preview_bottom = 1
-  nnoremap <silent> U  :<C-u>GundoToggle<CR>
-'''
-
 [[plugins]]  # vim のシンタックスチェッカー (パーサ)
 repo = 'syngan/vim-vimlint'
 
@@ -184,29 +150,20 @@ repo = 'thinca/vim-ft-vim_fold'
 on_ft = 'vim'
 
 [[plugins]]
-repo = 'thinca/vim-unite-history'
-on_source = 'unite.vim'
-
-[[plugins]]
 repo = 'thinca/vim-quickrun'
 on_map = {n = '<Plug>'}
-hook_add = 'nmap <silent> <Leader>r <Plug>(quickrun)'
-
-[[plugins]]  # 日本語IM環境強化
-repo = 'tyru/eskk.vim'
-on_event = 'InsertEnter'
-hook_source = 'execute "source " . GetNvimrcDir() . "/plugins/eskk.rc.vim"'
+hook_add = 'nnoremap <silent> <Leader>r <Plug>(quickrun)'
 
 [[plugins]]  # コメントアウト補助
 repo = 'tyru/caw.vim'
-on_if = 1
+on_if = '1'
 hook_add = '''
   function! InitCaw() abort
     if !&l:modifiable
-      silent! nunmap <buffer> _
-      silent! xunmap <buffer> _
-      " silent! nunmap <buffer> <C-_>
-      " silent! xunmap <buffer> <C-_>
+      silent! nunnoremap <buffer> _
+      silent! xunnoremap <buffer> _
+      " silent! nunnoremap <buffer> <C-_>
+      " silent! xunnoremap <buffer> <C-_>
     else
       nmap <buffer> _ <Plug>(caw:hatpos:toggle)
       xmap <buffer> _ <Plug>(caw:hatpos:toggle)
@@ -225,12 +182,20 @@ hook_add = '''
 repo = 'ynkdir/vim-vimlparser'
 
 [[plugins]]  # deoplete: python補完 (jedi)
-repo = 'zchee/deoplete-jedi'
+repo = 'deoplete-plugins/deoplete-jedi'
 on_source = 'deoplete.nvim'
 on_ft = 'python'
 hook_add = '''
   let g:deoplete#omni_patterns = {}
   let g:deoplete#omni_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+'''
+
+[[plugins]]  # rust設定
+repo = 'rust-lang/rust.vim'
+on_ft = 'rust'
+hook_source = '''
+    let g:rustfmt_autosave = 0
+    let g:rust_doc#define_map_K = 0
 '''
 
 # [[plugins]]  # global (gtags) コマンドによるコードジャンプサポート

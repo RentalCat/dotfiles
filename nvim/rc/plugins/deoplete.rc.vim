@@ -1,3 +1,4 @@
+scriptencoding utf-8
 
 call deoplete#custom#option({
 \   'auto_complete_delay': 0,

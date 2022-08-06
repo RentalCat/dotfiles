@@ -42,9 +42,15 @@ function! GetTmpDir() abort
   return GetSafeDir(s:nvim_dir . '/.tmp')
 endfunction
 
+function! GetSpellDir() abort
+  return GetSafeDir(s:nvim_dir . '/spell')
+endfunction
 " 文字コード設定 --------------------------------------------------------------
 " vim の内部文字コードを UTF-8 に
+" vint: -ProhibitEncodingOptionAfterScriptEncoding
 set encoding=utf8
+set ambiwidth=single
+" vint: +ProhibitEncodingOptionAfterScriptEncoding
 
 " ファイルのエンコードを左から順に解決していく
 set fileencodings=utf8,euc-jp,iso-2022-jp,shift_jis

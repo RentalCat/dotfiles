@@ -1,16 +1,28 @@
+scriptencoding utf-8
+
+augroup augroup_my_denite
+  autocmd!
+  autocmd FileType denite call s:denite_my_settings()
+augroup END
+
+" mapping in Denite buffer
+function! s:denite_my_settings() abort
+  nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
+endfunction
+
 " 見た目変更
 call denite#custom#option('default', 'prompt', '>')
 " PreProc
 
-call denite#custom#map('insert', "<C-t>", '<denite:nop>')
-call denite#custom#map('insert', "<C-g>", '<denite:nop>')
-call denite#custom#map('insert', "<C-j>", '<denite:move_to_next_line>')
-call denite#custom#map('insert', "<C-k>", '<denite:move_to_previous_line>')
-call denite#custom#map('insert', "<Down>", '<denite:move_to_next_line>')
-call denite#custom#map('insert', "<Up>", '<denite:move_to_previous_line>')
-call denite#custom#map('insert', "<C-d>", '<denite:scroll_window_downwards>')
-call denite#custom#map('insert', "<C-u>", '<denite:scroll_page_forwards>')
-call denite#custom#map('insert', "<C-a>", '<denite:move_caret_to_head>')
+call denite#custom#map('insert', '<C-t>', '<denite:nop>')
+call denite#custom#map('insert', '<C-g>', '<denite:nop>')
+call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>')
+call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>')
+call denite#custom#map('insert', '<Down>', '<denite:move_to_next_line>')
+call denite#custom#map('insert', '<Up>', '<denite:move_to_previous_line>')
+call denite#custom#map('insert', '<C-d>', '<denite:scroll_window_downwards>')
+call denite#custom#map('insert', '<C-u>', '<denite:scroll_page_forwards>')
+call denite#custom#map('insert', '<C-a>', '<denite:move_caret_to_head>')
 
 " greper tools settings
 if executable('pt')

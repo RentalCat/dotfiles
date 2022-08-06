@@ -1,3 +1,4 @@
+scriptencoding utf-8
 "let g:NERDTreeShowHidden=1
 let g:NERDTreeWinPos = 'left'
 "let g:NERDTreeDirArrows=0
@@ -8,14 +9,14 @@ let g:NERDTreeAutoDeleteBuffer = 1
 " if called vim without filename, open nardtree.
 augroup augroup_nerd_tree
   autocmd!
-  autocmd VimEnter * if !argc() | NERDTree | endif
+  " autocmd VimEnter * if !argc() | NERDTree | endif
   autocmd BufEnter * if (winnr('$') == 1 && exists('b:NERDTreeType') &&
         \                b:NERDTreeType == 'primary') | q | endif
 augroup END
 
 function! s:IsNerdTreeOpenInCurrentTab() abort
   for i in tabpagebuflist()
-    if getbufvar(i, '&filetype') =~ 'nerdtree'
+    if getbufvar(i, '&filetype') =~? 'nerdtree'
       return 1
     endif
   endfor

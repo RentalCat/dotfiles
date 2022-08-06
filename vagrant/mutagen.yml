@@ -1,0 +1,26 @@
+# mutagen: sync with speedy! `brew install mutagen-io/mutagen/mutagen`
+
+beforeCreate:
+  - vagrant up
+
+# afterTerminate:
+#   - vagrant halt
+
+afterPause:
+  - vagrant suspend
+
+commands:
+  reload: mutagen project terminate && mutagen project create
+
+sync:
+  defaults:
+    ignore:
+      vcs: true
+  dotfiles:
+    mode: 'two-way-resolved'
+    alpha: '../'
+    beta: 'vagrant:/home/vagrant/dotfiles'
+  workspace:
+    mode: 'two-way-resolved'
+    alpha: '~/workspace'
+    beta: 'vagrant:/home/vagrant/workspace'

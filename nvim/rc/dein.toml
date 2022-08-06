@@ -1,26 +1,10 @@
-[[plugins]]
-repo = 'freeo/vim-kalisi'
+[[plugins]]  # プロジェクトルート探索関数 FindRootDirectory を提供
+repo = 'airblade/vim-rooter'
 
-[[plugins]]
+[[plugins]]  # colorscheme
 repo = 'tomasr/molokai'
 
-[[plugins]]
-repo = 'KKPMW/moonshine-vim'
-
-[[plugins]]
-repo = 'romainl/Apprentice'
-
-[[plugins]]
-repo = 'jacoborus/tender.vim'
-
-[[plugins]]
-repo = 'altercation/vim-colors-solarized'
-hook_add = '''
-  let g:solarized_termcolors=256
-  let g:solarized_termtrans=1
-'''
-
-[[plugins]]
+[[plugins]]  # 単語検索拡張
 repo = 'easymotion/vim-easymotion'
 hook_add = '''
   let g:EasyMotion_do_mapping = 0
@@ -30,9 +14,12 @@ hook_add = '''
   nmap F <Plug>(easymotion-Fl)
 '''
 
-[[plugins]]
+[[plugins]]  # status bar, tab bar のUIカスタマイズ
 repo = 'itchyny/lightline.vim'
 hook_add = 'execute "source " . GetNvimrcDir() . "/plugins/lightline.rc.vim"'
+
+[[plugins]]  # Jenkinsfile syntax
+repo = 'martinda/Jenkinsfile-vim-syntax'
 
 [[plugins]]  # Gist
 repo = 'lambdalisue/vim-gista'
@@ -43,7 +30,7 @@ hook_add = '''
   set diffexpr=unified_diff#diffexpr()
 '''
 
-[[plugins]]
+[[plugins]]  # カーソル下の同じ単語をハイライトしてくれる
 repo = 'osyo-manga/vim-brightest'
 hook_add = '''
   " ハイライトタイプはアンダーライン
@@ -69,16 +56,20 @@ hook_add = '''
 [[plugins]]  # ページ内検索時に現在の 検索件数 & 検索位置 を表示するよ
 repo = 'osyo-manga/vim-anzu'
 hook_add = '''
-  nmap n <Plug>(anzu-n-with-echo)
-  nmap N <Plug>(anzu-N-with-echo)
-  nmap * <Plug>(anzu-star-with-echo)
-  nmap # <Plug>(anzu-sharp-with-echo)
+  nmap n <Plug>(anzu-n-with-echo)zz
+  nmap N <Plug>(anzu-N-with-echo)zz
+  nmap * <Plug>(anzu-star-with-echo)zz
+  nmap # <Plug>(anzu-sharp-with-echo)zz
 '''
+
+# [[plugins]]  # スペルチェック強化プラグイン
+# repo = 'kamykn/spelunker.vim'
+# hook_add = 'execute "source " . GetNvimrcDir() . "/plugins/spelunker.rc.vim"'
 
 [[plugins]]  # git 編集業に +-? を付ける
 repo = 'sgur/vim-gitgutter'
 
-[[plugins]]
+[[plugins]]  # プラグイン管理ツール
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
@@ -87,16 +78,15 @@ build = 'make'
 
 [[plugins]]  # git wrapper
 repo = 'tpope/vim-fugitive'
-#on_cmd = ['Gcommit', 'Gblame', 'Gdiff', 'Ggrep', 'Gstatus']
 hook_add = '''
   nnoremap [fugitive]    <Nop>
   nmap <Leader>g  [fugitive]
   nnoremap <silent> [fugitive]c :<C-u>Gcommit<CR>
-  nnoremap <silent> [fugitive]b :<C-u>Gblame<CR>
-  nnoremap <silent> [fugitive]d :<C-u>Gdiff<CR>
-  nnoremap <silent> [fugitive]D :<C-u>Gdiff origin/develop<CR>
+  nnoremap <silent> [fugitive]b :<C-u>Git blame<CR>
+  nnoremap <silent> [fugitive]d :<C-u>Gdiffsplit<CR>
+  nnoremap <silent> [fugitive]D :<C-u>Gdiffsplit origin/develop<CR>
   nnoremap <silent> [fugitive]g :<C-u>Ggrep<CR>
-  nnoremap <silent> [fugitive]s :<C-u>Gstatus<CR>
+  nnoremap <silent> [fugitive]s :<C-u>Git<CR>
 '''
 
 [[plugins]]  # .local.vimrc 読み込み
@@ -129,3 +119,6 @@ repo = 'tpope/vim-surround'
 
 # [[plugins]]  # 自作プラグイン
 # repo = 'git@bitbucket.org:RentalCat/greview.vim.git'
+
+# [[plugins]]
+# repo = 'RentalCat/eumetopias.nvim'

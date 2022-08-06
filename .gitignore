@@ -2,6 +2,8 @@
 nvim/.cache/*
 nvim/.tmp/*
 nvim/rc/.local.rc.vim
+nvim/spell/.tmp.*.add
+nvim/spell/*.spl
 
 # tmux
 tmux/env.conf
@@ -16,7 +18,7 @@ vim/.netrwhist
 vim/personal.vim
 
 # zsh
-zsh/.zplug
+zsh/.zinit
 zsh/.zcompdump*
 zsh/cmd_history
 
@@ -29,3 +31,13 @@ htop/htoprc
 
 # anyenv
 anyenv
+
+# mycli
+mycli/.mycli-history
+mycli/.mycli.log
+
+# npm
+configstore/update-notifier-npm.json
+
+# gh
+gh/hosts.yml

@@ -6,51 +6,51 @@ if !exists('g:lightline')
 endif
 
 let g:lightline = {
-      \   'colorscheme': 'powerline',
-      \   'active': {
-      \     'left': [
-      \       ['mode', 'paste'],
-      \       ['gitbranch', 'readonly', 'myfilename'],
-      \       ['funcname'],
-      \     ],
-      \     'right': [
-      \       ['linter_checking', 'linter_warnings', 'linter_errors', 'linter_ok', 'lineinfo', 'charvaluehex'],
-      \       ['percent'],
-      \       ['fileformat', 'fileencoding', 'filetype'],
-      \     ],
-      \   },
-      \   'inactive': {
-      \     'left': [
-      \       ['filename'],
-      \     ],
-      \     'right': [
-      \       ['lineinfo'],
-      \       ['percent'],
-      \     ],
-      \   },
-      \   'component': {
-      \     'paste': '%{&paste ? "PST" : ""}',
-      \     'charvaluehex': '0x%04B',
-      \     'lineinfo': "\u2b61 %2l:%-2v",
-      \   },
-      \   'component_function': {
-      \     'gitbranch'   : 'g:mylightline.getGitBranch',
-      \     'readonly'    : 'g:mylightline.getReadonly',
-      \     'myfilename'  : 'g:mylightline.getFilename',
-      \     'funcname'    : 'g:mylightline.getFuncname',
-      \     'debug'       : 'g:mylightline.getDebugText',
-      \     'fileformat'  : 'g:mylightline.getFileFormat',
-      \     'filetype'    : 'g:mylightline.getFileType',
-      \     'fileencoding': 'g:mylightline.getFileEncoding',
-      \   },
-      \   'separator': {'left': "\u2b80", 'right': "\u2b82"},
-      \   'subseparator': {'left': "\u2b81", 'right': "\u2b83"},
-      \   'mode_map': {
-      \     'n': 'NOR',     'i': 'INS', 'R': 'REP', 'v': 'VIS', 'V': 'V-L',
-      \     "\<C-v>": 'V-B','c': 'COM', 's': 'SEL', 'S': 'S-L', "\<C-s>": 'S-B',
-      \     't': 'TER',
-      \   },
-      \ }
+\   'colorscheme': 'molokai',
+\   'active': {
+\     'left': [
+\       ['mode', 'paste'],
+\       ['gitbranch', 'filemark', 'myfilename'],
+\       ['funcname'],
+\     ],
+\     'right': [
+\       ['linter_checking', 'linter_warnings', 'linter_errors', 'linter_ok', 'lineinfo', 'charvaluehex'],
+\       ['percent'],
+\       ['fileformat', 'fileencoding', 'filetype'],
+\     ],
+\   },
+\   'inactive': {
+\     'left': [
+\       ['filename'],
+\     ],
+\     'right': [
+\       ['lineinfo'],
+\       ['percent'],
+\     ],
+\   },
+\   'component': {
+\     'paste': '%{&paste ? "PST" : ""}',
+\     'charvaluehex': '0x%04B',
+\     'lineinfo': "\ue0a1 %2l:%-2v",
+\   },
+\   'component_function': {
+\     'gitbranch'   : 'g:mylightline.getGitBranch',
+\     'filemark'    : 'g:mylightline.getFilemark',
+\     'myfilename'  : 'g:mylightline.getFilename',
+\     'funcname'    : 'g:mylightline.getFuncname',
+\     'debug'       : 'g:mylightline.getDebugText',
+\     'fileformat'  : 'g:mylightline.getFileFormat',
+\     'filetype'    : 'g:mylightline.getFileType',
+\     'fileencoding': 'g:mylightline.getFileEncoding',
+\   },
+\   'separator': {'left': "\ue0b0", 'right': "\ue0b2"},
+\   'subseparator': {'left': "\ue0b1", 'right': "\ue0b3"},
+\   'mode_map': {
+\     'n': 'NOR',     'i': 'INS', 'R': 'REP', 'v': 'VIS', 'V': 'V-L',
+\     "\<C-v>": 'V-B','c': 'COM', 's': 'SEL', 'S': 'S-L', "\<C-s>": 'S-B',
+\     't': 'TER',
+\   },
+\ }
 
 let s:displayable_components = {}
 let s:margin = 4
@@ -67,20 +67,30 @@ function! s:lineInfoLen() abort
   return l:line_num + l:col_num + 6
 endfunction
 
-function! s:readonly() abort
+function! s:filemark() abort
   " 読込専用 & 編集状態 の文字列
-  return (!&modifiable || &readonly) ? "\u2b64" : &modified ? '+' : ''
+  if !&modifiable || &readonly
+    " 読込専用
+    return "\ue0a2"
+  elseif expand('%') =~? '^fugitive://'
+    return "\uf440"
+  elseif &modified
+    " 編集済み
+    return '+'
+  endif
+  " それ以外
+  return ''
 endfunction
 
 function! s:gitBranchName() abort
   " Git branch名
-  if exists('*fugitive#head')
+  try
     let l:head = fugitive#head()
-    if l:head != ''
-      return "\u2b60 ". l:head
+    if l:head !=# ''
+      return "\ue0a0 ". l:head
     endif
-  endif
-
+  catch /E117.*/
+  endtry
   return ''
 endfunction
 
@@ -99,12 +109,24 @@ endfunction
 
 function! s:relPath() abort
   " 相対パス
-  return substitute(expand('%'), s:filename(), '', 'g')
+  let l:filepath = expand('%')
+  if l:filepath =~? '^fugitive://'
+    let l:filepath = substitute(
+    \   l:filepath, '^fugitive:\/\/\(.*\)\.git\/\/[a-zA-Z0-9]*\/\(.*\)', '\2', 'g'
+    \ )
+  endif
+  return substitute(l:filepath, s:filename(), '', 'g')
 endfunction
 
 function! s:absPath() abort
   " 絶対パス
-  return substitute(expand('%:p'), s:relPath() . s:filename(), '', 'g')
+  let l:filepath = expand('%:p')
+  if l:filepath =~? '^fugitive://'
+    let l:filepath = substitute(
+    \   l:filepath, '^fugitive:\/\/\(.*\)\.git\/\/[a-zA-Z0-9]*\/\(.*\)', '\1\2', 'g'
+    \ )
+  endif
+  return substitute(l:filepath, s:relPath() . s:filename(), '', 'g')
 endfunction
 
 function! s:fileformat() abort
@@ -114,12 +136,12 @@ endfunction
 
 function! s:filetype() abort
   " ファイルタイプ
-  return &filetype == '' ? 'no ft' : &filetype
+  return &filetype ==# '' ? 'no ft' : &filetype
 endfunction
 
 function! s:fileencoding() abort
   " ファイルエンコーディング
-  return &fileencoding == '' ? &fileencoding : &encoding
+  return &fileencoding ==# '' ? &fileencoding : &encoding
 endfunction
 
 function! s:updateDisplayableComponents() abort
@@ -129,8 +151,8 @@ function! s:updateDisplayableComponents() abort
   let l:rlen -= s:mode_len + (&paste ? s:paste_len : 0) + s:lineInfoLen() +
         \       s:persent_len + s:charvalue_len + s:ale_len
 
-  " readonly
-  let l:rlen = s:setDisplayableComponents('readonly', s:readonly(), l:rlen, 3)
+  " filemark
+  let l:rlen = s:setDisplayableComponents('filemark', s:filemark(), l:rlen, 3)
 
   " ファイル名
   let l:rlen = s:setDisplayableComponents('filename', s:filename(), l:rlen, 3)
@@ -140,12 +162,12 @@ function! s:updateDisplayableComponents() abort
   let l:rlen = s:setDisplayableComponents('funcname', s:funcname(), l:rlen, 3)
   if l:rlen <= 0 | return | endif  " 表示枠足りなかったらここで終了
 
-  " 相対パス (カレントディテクトリから該当ファイルのあるディレクトリパスまで)
-  let l:rlen = s:setDisplayableComponents('relpath', s:relPath(), l:rlen, 0)
-  if l:rlen <= 0 | return | endif  " 表示枠足りなかったらここで終了
-
   " git 情報
   let l:rlen = s:setDisplayableComponents('git', s:gitBranchName(), l:rlen, 3)
+  if l:rlen <= 0 | return | endif  " 表示枠足りなかったらここで終了
+
+  " 相対パス (カレントディテクトリから該当ファイルのあるディレクトリパスまで)
+  let l:rlen = s:setDisplayableComponents('relpath', s:relPath(), l:rlen, 0)
   if l:rlen <= 0 | return | endif  " 表示枠足りなかったらここで終了
 
   " ファイルタイプ
@@ -185,8 +207,8 @@ function! g:mylightline.getGitBranch() abort
   return s:getDisplayableComponents('git')
 endfunction
 
-function! g:mylightline.getReadonly() abort
-  return s:getDisplayableComponents('readonly')
+function! g:mylightline.getFilemark() abort
+  return s:getDisplayableComponents('filemark')
 endfunction
 
 function! g:mylightline.getFilename() abort

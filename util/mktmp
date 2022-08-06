@@ -1,0 +1,67 @@
+#!/bin/bash
+set -eu
+
+MYTMPDIR=${HOME}/tmp
+DATESTAMP=$(date +%Y%m%d)
+XXXX=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 4 | head -n 1)
+
+function show_help () {
+    echo "mktmp: 1.0.0"
+    echo "like mktemp but more simply"
+    echo
+    echo "USAGE:"
+    echo "    mktmp [FLAGS] <filename>"
+    echo
+    echo "        make temporary file in ${MYTMPDIR}"
+    echo "        according to 'YYYYmmdd_%FILENAME%_XXXX.%EXTENSION%'."
+    echo
+    echo "FLAGS:"
+    echo "    -h, --help    Prints this document."
+    echo
+    echo "ARGS:"
+    echo "    <filename>    Tmpfile name (default: 'tmp')"
+    echo
+    echo "EXAMPLE:"
+    echo "    mktmp hoge.txt"
+    echo "        => create '${DATESTAMP}_hoge_${XXXX}.txt' in ${MYTMPDIR}"
+}
+function invalid () {
+    echo "$1" >&2
+    echo "" >&2
+    echo "USAGE:" >&2
+    echo "    mktmp [FLAGS] <filename>" >&2
+    echo "" >&2
+    echo "For more information try --help" >&2
+}
+
+FILENAME=""
+EXTENSION=""
+
+for FLAG in $*
+do
+    case $FLAG in
+        -h | --help)
+            show_help
+            exit 0
+            ;;
+        -* | --*)
+            invalid "Found argument '$1' which wasn't expected, or isn't valid in this context."
+            exit 1
+            ;;
+        *)
+            if [ "$FILENAME" ]; then
+                invalid "Invalid argument: Only one <filename> can be accepted."
+                exit 1
+            fi
+
+            FILENAME=$(echo $FLAG | rev | cut -d '.' -f '2-' |rev)
+            _ext=$(echo $FLAG | rev | cut -d '.' -f '1' | rev)
+            EXTENSION=$([ "$FILENAME" = "$_ext" ] && echo "" || echo ".${_ext}")
+            ;;
+    esac
+done
+
+TMPFILENAME="${MYTMPDIR}/${DATESTAMP}_${FILENAME:-tmp}_${XXXX}${EXTENSION}"
+touch $TMPFILENAME
+echo "$TMPFILENAME"
+echo "[mktmp] created tmpfile: $TMPFILENAME" >&2

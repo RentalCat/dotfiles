@@ -1,5 +1,6 @@
-let s:save_cpo = &cpo
-set cpo&vim
+scriptencoding utf-8
+let s:save_cpo = &cpoptions
+set cpoptions&vim
 
 " 80 文字目に色を付ける
 setlocal colorcolumn=80
@@ -16,4 +17,4 @@ setlocal softtabstop=2
 " 区切り文字追加
 setlocal iskeyword+=:,#
 
-let &cpo = s:save_cpo
+let &cpoptions = s:save_cpo
