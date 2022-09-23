@@ -3,3 +3,4 @@
 .local
 *.orig
 .DS_Store
+.secrets

@@ -159,6 +159,12 @@ nnoremap [tab]h       :<C-u>tabprev<CR>
 nnoremap [tab]l       :<C-u>tabnext<CR>
 nnoremap [tab]q       :<C-u>tabclose<CR>
 
+" ウィンドウ関係
+nnoremap <C-w><C-l>   :<C-u>vertical resize +5<CR>
+nnoremap <C-w><C-h>   :<C-u>vertical resize -5<CR>
+nnoremap <C-w><C-k>   :<C-u>resize +5<CR>
+nnoremap <C-w><C-j>   :<C-u>resize -5<CR>
+
 " コマンドモード: カレントファイルパス・ディレクトリ補完
 cmap <C-X> <C-r>=expand('%:p:h')<cr>/
 cmap <C-Z> <C-r>=expand('%:p')<cr>
