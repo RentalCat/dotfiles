@@ -28,15 +28,16 @@
     # cmd = echo "MERGED: $MERGED" && echo "LOCAL: $LOCAL" && echo "BASE: $BASE" && echo "REMOTE: $REMOTE" && nvim -R -d $MERGED $LOCAL $BASE $REMOTE
     cmd = nvim -R -d $MERGED $LOCAL $BASE $REMOTE -c 'wincmd J' -c 'set noro'
 
-# vim: set ft=gitconfig:
 [init]
     templatedir = ~/dotfiles/git_template
 [pull]
     rebase = false
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
 [fetch]
     prune = true
+
+# vim: set ft=gitconfig:

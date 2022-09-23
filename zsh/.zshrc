@@ -1,3 +1,4 @@
+[[ -n $ZSH_DEBUG ]] && zmodload zsh/zprof && zprof
 # keybind
 bindkey -d  # キーバインドリセット
 bindkey -e  # キーバインドをemacsモードで
