@@ -7,6 +7,9 @@ scriptencoding utf-8
 " 描画関係 (全域に影響あるもの) -----------------------------------------------
 " シンタックスハイライト ON
 syntax on
+" ドキュメント内に長い文字列があっても正しく表示できるように
+" 常に先頭行からパースを実施 (注意: 巨大なファイルを開く時に処理が重たくなるよ)
+syntax sync fromstart
 
 " True Color
 set termguicolors
@@ -31,6 +34,9 @@ augroup END
 
 " 100 文字目に色を付ける
 set colorcolumn=100
+
+" 500文字目以降のテキストは強調表示しない (負荷軽減)
+set synmaxcol=500
 
 " list モードをオンにして見えない文字を可視化
 set list
@@ -58,6 +64,9 @@ set display+=lastline
 augroup vimrcFileType
   autocmd!
   autocmd BufRead,BufNewFile *.html set filetype=htmldjango
+  autocmd BufRead,BufNewFile Brewfile,.Brewfile set filetype=brewfile
+  autocmd BufRead,BufNewFile *.template.py set filetype=python_jinja2template
+  autocmd BufRead,BufNewFile *.template.cs set filetype=cs_jinja2template
   autocmd BufRead,BufNewFile *.ffxivmacro set filetype=ffxivmacro
 augroup END
 " コマンドライン・ステータスライン --------------------------------------------

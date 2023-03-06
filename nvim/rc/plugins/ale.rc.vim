@@ -6,7 +6,7 @@ let g:ale_command_wrapper = 'nice -n5'
 let g:ale_linters = {
   \   'go': ['gometalinter'],
   \   'html': ['tidy'],
-  \   'python': ['flake8', 'mypy'],
+  \   'python': ['flake8'],
   \   'rust': ['rustc'],
   \   'typescript': ['tsserver'],
   \   'vim': ['vint'],

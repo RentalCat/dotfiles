@@ -1,7 +1,5 @@
-#!/bin/bash
-set -Ceuo pipefail
-
-REPOSITORY_ROOT=$(cd $(dirname $0)/../../ && pwd)
+#!/usr/bin/env bash
+REPOSITORY_ROOT=$(cd $(dirname $0)/../ && pwd)
 
 # zsh
 ln -fsv $REPOSITORY_ROOT/zsh/.zshrc $HOME/.zshrc

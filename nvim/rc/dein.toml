@@ -117,6 +117,12 @@ hook_add = '''
 [[plugins]]  # テキストオブジェクト強化 (囲う系強化)
 repo = 'tpope/vim-surround'
 
+[[plugins]]  # todo.text
+repo = '~/workspace/eumetopias.nvim'
+hook_add = '''
+  let g:eumetopias_todo_file_path = $HOME . '/Documents/TODO.txt'
+'''
+
 # [[plugins]]  # 自作プラグイン
 # repo = 'git@bitbucket.org:RentalCat/greview.vim.git'
 

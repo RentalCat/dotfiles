@@ -84,6 +84,10 @@ hook_add = '''
   nmap <silent> <C-j> <Plug>(ale_next_wrap)
 '''
 
+[[plugins]]  # vim.help 自動生成ツール (vimプラグイン開発用)
+repo = 'LeafCage/vimhelpgenerator'
+on_ft = ['vim']
+
 [[plugins]]
 repo = 'osyo-manga/shabadou.vim'
 depends = 'vim-quickrun'

@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  dotfiles-vm:
+    image: "dotfiles-vm"
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    tty: true
+    volumes:
+      - ./:/vm_user/dotfiles
+    working_dir: /vm_user/dotfiles
+    ports:
+      - "2222:22"
